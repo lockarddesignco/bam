@@ -114,15 +114,96 @@ export type Page =
   | 'estimator'
   | 'iaq-risk-tool';
 
+const PAGE_VALUES: Page[] = [
+  'home',
+  'services',
+  'industries',
+  'tools',
+  'cooling-tower',
+  'chiller',
+  'ahu',
+  'ducts',
+  'iaq',
+  'mold',
+  'pm',
+  'epoxy',
+  'tubes',
+  'basin',
+  'hepa',
+  'uvc',
+  'dampers',
+  'contact',
+  'about-hub',
+  'about-company',
+  'about-method',
+  'about-compliance',
+  'about-safety',
+  'about-coverage',
+  'about-leadership',
+  'about-documentation',
+  'careers',
+  'healthcare',
+  'k12',
+  'higher-ed',
+  'government',
+  'industrial',
+  'commercial',
+  'senior-care',
+  'retail',
+  'cold-storage',
+  'locations',
+  'pennsylvania',
+  'new-jersey',
+  'maryland',
+  'delaware',
+  'new-york',
+  'philadelphia',
+  'baltimore',
+  'wilmington',
+  'south-jersey',
+  'harrisburg-york',
+  'estimator',
+  'iaq-risk-tool'
+];
+
+const PAGE_SET = new Set<Page>(PAGE_VALUES);
+
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [exitModalOpen, setExitModalOpen] = useState(false);
   const [exitModalDismissed, setExitModalDismissed] = useState(false);
 
+  const getPageFromHash = () => {
+    const hash = window.location.hash.replace('#', '').trim();
+    if (!hash) return null;
+    return PAGE_SET.has(hash as Page) ? (hash as Page) : null;
+  };
+
   const navigateTo = (page: Page) => {
     setCurrentPage(page);
+    window.history.pushState({ page }, '', `#${page}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    const initialPage = getPageFromHash();
+    if (initialPage) {
+      setCurrentPage(initialPage);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const statePage = event.state?.page;
+      const hashPage = getPageFromHash();
+      const nextPage = PAGE_SET.has(statePage) ? (statePage as Page) : hashPage || 'home';
+      setCurrentPage(nextPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem(EXIT_MODAL_STORAGE_KEY)) {
