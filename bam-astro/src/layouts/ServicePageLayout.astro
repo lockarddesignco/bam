@@ -1,0 +1,276 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface DiagnosticItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface ProtocolStep {
+  title: string;
+  description: string;
+  details: string[];
+}
+
+interface Props {
+  title: string;
+  slug: string;
+  category: 'core' | 'specialty';
+  shortDescription: string;
+  icon: string;
+  diagnostics: {
+    title: string;
+    description: string;
+    items: DiagnosticItem[];
+  };
+  protocol: {
+    title: string;
+    description: string;
+    steps: ProtocolStep[];
+  };
+  roi: {
+    stat1: { label: string; value: string };
+    stat2: { label: string; value: string };
+    description: string;
+  };
+  faq: Array<{ question: string; answer: string }>;
+}
+
+const {
+  title,
+  category,
+  shortDescription,
+  diagnostics,
+  protocol,
+  roi,
+  faq,
+} = Astro.props;
+
+const categoryLabel = category === 'core' ? 'Core Service' : 'Specialty Service';
+---
+
+<BaseLayout
+  title={`${title} | BAM — Building & Air Maintenance`}
+  description={shortDescription}
+  serviceData={{ name: title, description: shortDescription }}
+  faqData={faq}
+>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="relative w-full py-28 md:py-36 flex flex-col items-center justify-center bg-dark overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+    <div
+      class="absolute inset-0 opacity-[0.04] pointer-events-none"
+      style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 60px 60px;"
+    ></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">
+        {categoryLabel}
+      </span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8 animate-fade-in-up opacity-0" style="animation-delay:100ms;">
+        {title}
+      </h1>
+      <p class="text-lg md:text-xl text-light-grey max-w-2xl mx-auto leading-relaxed font-light opacity-0 animate-fade-in-up" style="animation-delay:200ms;">
+        {shortDescription}
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ DIAGNOSTICS ════════════════════ -->
+  <section class="relative py-24 bg-ice">
+    <div
+      class="absolute inset-0 pointer-events-none opacity-[0.03]"
+      style="background-image: linear-gradient(#5E7A86 1px, transparent 1px), linear-gradient(90deg, #5E7A86 1px, transparent 1px); background-size: 40px 40px;"
+    ></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="max-w-3xl mb-16">
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          {diagnostics.title}
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20 mb-6"></div>
+        <p class="text-slate text-lg leading-relaxed font-light">
+          {diagnostics.description}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {diagnostics.items.map((item: DiagnosticItem) => (
+          <div class="bg-white border border-light-grey rounded-sm p-8 transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.04)]">
+            <div class="mb-5 text-primary" set:html={item.icon} />
+            <h3 class="text-lg font-bold text-primary mb-3 uppercase tracking-tight">
+              {item.title}
+            </h3>
+            <p class="text-sm text-slate leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ PROTOCOL ════════════════════ -->
+  <section class="relative py-24 bg-white border-y border-light-grey">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="max-w-3xl mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">The BAM Protocol</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          {protocol.title}
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20 mb-6"></div>
+        <p class="text-slate text-lg leading-relaxed font-light">
+          {protocol.description}
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        {protocol.steps.map((step: ProtocolStep, i: number) => (
+          <div class="flex gap-6 md:gap-10 items-start">
+            <div class="w-14 h-14 md:w-16 md:h-16 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-xl rounded-sm">
+              {String(i + 1).padStart(2, '0')}
+            </div>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-primary mb-2">{step.title}</h3>
+              <p class="text-slate text-sm leading-relaxed mb-4">{step.description}</p>
+              <ul class="flex flex-wrap gap-2">
+                {step.details.map((detail: string) => (
+                  <li class="px-3 py-1.5 bg-ice border border-light-grey text-[11px] font-semibold text-slate uppercase tracking-widest rounded-sm">
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ ROI ════════════════════ -->
+  <section class="relative py-24 bg-dark overflow-hidden">
+    <div
+      class="absolute inset-0 opacity-[0.05] pointer-events-none"
+      style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 48px 48px;"
+    ></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+        <div class="lg:col-span-1 flex flex-col sm:flex-row lg:flex-col gap-8">
+          <div class="flex-1 bg-white/5 border border-white/10 rounded-sm p-8 text-center">
+            <p class="text-4xl md:text-5xl font-black text-mint mb-2">{roi.stat1.value}</p>
+            <p class="text-sm text-light-grey font-bold uppercase tracking-widest">{roi.stat1.label}</p>
+          </div>
+          <div class="flex-1 bg-white/5 border border-white/10 rounded-sm p-8 text-center">
+            <p class="text-4xl md:text-5xl font-black text-mint mb-2">{roi.stat2.value}</p>
+            <p class="text-sm text-light-grey font-bold uppercase tracking-widest">{roi.stat2.label}</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Return on Investment</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6 leading-tight">
+            Measurable Performance Recovery
+          </h2>
+          <p class="text-slate text-lg leading-relaxed font-light max-w-xl">
+            {roi.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FAQ ════════════════════ -->
+  <section class="relative py-24 bg-ice">
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          Frequently Asked Questions
+        </h2>
+        <div class="w-20 h-1.5 bg-primary mx-auto opacity-20"></div>
+      </div>
+
+      <div class="space-y-4" id="faq-accordion">
+        {faq.map((item: { question: string; answer: string }, i: number) => (
+          <div class="bg-white border border-light-grey rounded-sm overflow-hidden" data-faq>
+            <button
+              class="w-full flex items-center justify-between px-6 py-5 text-left text-primary font-bold text-sm md:text-base uppercase tracking-tight hover:bg-ice/50 transition-colors"
+              data-faq-trigger
+              aria-expanded={i === 0 ? 'true' : 'false'}
+            >
+              <span>{item.question}</span>
+              <svg
+                class="w-5 h-5 shrink-0 ml-4 transition-transform duration-300"
+                data-faq-icon
+                style={i === 0 ? 'transform:rotate(180deg)' : ''}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </button>
+            <div
+              class="px-6 overflow-hidden transition-all duration-300"
+              data-faq-panel
+              style={i === 0 ? 'max-height:200px;padding-bottom:1.25rem;' : 'max-height:0;'}
+            >
+              <p class="text-slate text-sm leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ BOTTOM CTA ════════════════════ -->
+  <section class="bg-primary py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        Ready to Restore Performance?
+      </h2>
+      <p class="text-mint/80 text-base md:text-lg mb-8 max-w-xl mx-auto">
+        Our restoration engineers are ready to evaluate your facility and provide a documented assessment.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center px-10 py-5 bg-white text-primary font-bold text-sm uppercase tracking-widest rounded-sm shadow-lg hover:bg-mint hover:text-dark transition-colors"
+      >
+        Request a Site Visit
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-3"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('[data-faq-trigger]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('[data-faq]')!;
+      const panel = parent.querySelector('[data-faq-panel]') as HTMLElement;
+      const icon = parent.querySelector('[data-faq-icon]') as HTMLElement;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      if (isOpen) {
+        panel.style.maxHeight = '0';
+        panel.style.paddingBottom = '0';
+        icon.style.transform = 'rotate(0deg)';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.style.paddingBottom = '1.25rem';
+        icon.style.transform = 'rotate(180deg)';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

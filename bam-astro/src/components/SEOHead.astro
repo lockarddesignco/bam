@@ -1,0 +1,218 @@
+---
+import { siteConfig } from '../config/site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  locationData?: {
+    city: string;
+    state: string;
+    address?: string;
+    zip: string;
+    lat: number;
+    lng: number;
+    phone?: string;
+    intro?: string;
+  };
+  serviceData?: {
+    name: string;
+    description: string;
+  };
+  faqData?: Array<{ question: string; answer: string }>;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).toString(),
+  type = 'website',
+  locationData,
+  serviceData,
+  faqData,
+} = Astro.props;
+
+const sameAsLinks = [
+  ...siteConfig.socialLinks,
+  siteConfig.gbpReviewLink,
+  siteConfig.googleBusinessUrl,
+];
+
+const graphEntities: Record<string, unknown>[] = [
+  {
+    '@type': 'Organization',
+    '@id': `${Astro.site}#organization`,
+    name: siteConfig.businessName,
+    url: Astro.site,
+    logo: new URL(siteConfig.logo, Astro.site).toString(),
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    sameAs: sameAsLinks,
+  },
+  {
+    '@type': 'WebSite',
+    '@id': `${Astro.site}#website`,
+    url: Astro.site,
+    name: siteConfig.businessName,
+    publisher: { '@id': `${Astro.site}#organization` },
+  },
+];
+
+if (locationData) {
+  graphEntities.push({
+    '@type': 'ServiceAreaBusiness',
+    '@id': `${canonicalURL}#localbusiness`,
+    name: siteConfig.businessName,
+    alternateName: `${siteConfig.businessName} — ${locationData.city}, ${locationData.state}`,
+    description: locationData.intro || description,
+    url: canonicalURL,
+    telephone: locationData.phone || siteConfig.phone,
+    email: siteConfig.email,
+    sameAs: sameAsLinks,
+    parentOrganization: { '@id': `${Astro.site}#organization` },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: locationData.address || '',
+      addressLocality: locationData.city,
+      addressRegion: locationData.state,
+      postalCode: locationData.zip,
+      addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: locationData.lat,
+      longitude: locationData.lng,
+    },
+    areaServed: {
+      '@type': 'City',
+      name: locationData.city,
+      containedInPlace: {
+        '@type': 'State',
+        name: locationData.state,
+      },
+    },
+    priceRange: '$$',
+    image: new URL(siteConfig.ogImage, Astro.site).toString(),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'HVAC Services',
+      itemListElement: siteConfig.services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: s.title,
+          url: new URL(`/services/${s.slug}/`, Astro.site).toString(),
+        },
+      })),
+    },
+  });
+} else {
+  graphEntities.push({
+    '@type': 'ServiceAreaBusiness',
+    '@id': `${Astro.site}#localbusiness`,
+    name: siteConfig.businessName,
+    description: siteConfig.description,
+    url: Astro.site,
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    sameAs: sameAsLinks,
+    parentOrganization: { '@id': `${Astro.site}#organization` },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: siteConfig.mainAddress.city,
+      addressRegion: siteConfig.mainAddress.state,
+      postalCode: siteConfig.mainAddress.zip,
+      addressCountry: siteConfig.mainAddress.country,
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: siteConfig.geo.lat,
+      longitude: siteConfig.geo.lng,
+    },
+    areaServed: siteConfig.serviceAreas.map((area) => ({
+      '@type': 'AdministrativeArea',
+      name: area,
+    })),
+    priceRange: '$$',
+    image: new URL(siteConfig.ogImage, Astro.site).toString(),
+    founder: {
+      '@type': 'Person',
+      name: siteConfig.owner,
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'HVAC Services',
+      itemListElement: siteConfig.services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: s.title,
+          url: new URL(`/services/${s.slug}/`, Astro.site).toString(),
+        },
+      })),
+    },
+  });
+}
+
+if (serviceData) {
+  graphEntities.push({
+    '@type': 'Service',
+    '@id': `${canonicalURL}#service`,
+    name: serviceData.name,
+    description: serviceData.description,
+    provider: { '@id': `${Astro.site}#localbusiness` },
+    areaServed: siteConfig.serviceAreas.map((area) => ({
+      '@type': 'AdministrativeArea',
+      name: area,
+    })),
+  });
+}
+
+if (faqData && faqData.length > 0) {
+  graphEntities.push({
+    '@type': 'FAQPage',
+    '@id': `${canonicalURL}#faq`,
+    mainEntity: faqData.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  });
+}
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': graphEntities,
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="canonical" href={canonicalURL} />
+
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.site).toString()} />
+<meta property="og:site_name" content={siteConfig.businessName} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(image, Astro.site).toString()} />
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

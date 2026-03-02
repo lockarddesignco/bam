@@ -1,0 +1,87 @@
+---
+import '@fontsource-variable/inter';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import '../styles/global.css';
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBottomBar from '../components/MobileBottomBar.astro';
+import { siteConfig } from '../config/site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  locationData?: {
+    city: string;
+    state: string;
+    address?: string;
+    zip: string;
+    lat: number;
+    lng: number;
+    phone?: string;
+    intro?: string;
+  };
+  serviceData?: {
+    name: string;
+    description: string;
+  };
+  faqData?: Array<{ question: string; answer: string }>;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <SEOHead {...props} />
+  </head>
+  <body class="flex flex-col min-h-screen bg-offwhite font-sans pb-20 lg:pb-0">
+    {siteConfig.gtmId && (
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.gtmId}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+        ></iframe>
+      </noscript>
+    )}
+
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+    <MobileBottomBar />
+    <script is:inline>
+      window.addEventListener('load',function(){var s=document.createElement('script');s.src='/scripts/marquee-drag.js';s.defer=true;document.body.appendChild(s);});
+    </script>
+    <script>
+      document.querySelectorAll('.mask-btn-layer').forEach(layer => {
+        const parent = layer.parentElement;
+        if (!parent) return;
+        parent.addEventListener('mouseenter', () => {
+          layer.classList.add('has-interacted');
+        }, { once: true });
+      });
+    </script>
+    {siteConfig.gtmId && (
+      <script set:html={`
+        (function(){var gtm=function(){var w=window,d=document,s='script',l='dataLayer',i='${siteConfig.gtmId}';
+        w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;
+        f.parentNode.insertBefore(j,f);};
+        if('requestIdleCallback' in window){requestIdleCallback(gtm,{timeout:3000});}
+        else{window.addEventListener('load',function(){setTimeout(gtm,0);});}
+        })();
+      `} />
+    )}
+  </body>
+</html>

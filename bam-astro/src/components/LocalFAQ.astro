@@ -1,0 +1,57 @@
+---
+interface Props {
+  cityName: string;
+}
+
+const { cityName } = Astro.props;
+
+const faqs = [
+  {
+    question: `Do you offer HVAC restoration and IAQ services in ${cityName}?`,
+    answer: `Yes. BAM provides commercial HVAC restoration, duct cleaning, indoor air quality services, and preventive maintenance throughout ${cityName} and the surrounding region.`,
+  },
+  {
+    question: `What types of facilities do you serve in ${cityName}?`,
+    answer: `We serve healthcare, K-12 and higher education, government, industrial, commercial, retail, senior care, and cold storage facilities in ${cityName} and across PA, NJ, MD, DE, and Southern NY.`,
+  },
+  {
+    question: `Are you NADCA and ASHRAE aligned for work in ${cityName}?`,
+    answer: `Yes. BAM is a NADCA member and follows ASHRAE standards. Our teams are OSHA-30 trained and work to compliance-ready documentation for facilities in ${cityName} and the region.`,
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<section class="py-16 md:py-20 bg-ice border-t border-light-grey">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-10 md:mb-14">
+      <span class="text-mint font-black tracking-[0.3em] uppercase text-xs">Common Questions</span>
+      <h2 class="text-2xl md:text-3xl font-black text-primary tracking-tighter uppercase leading-[0.95] mt-3">
+        HVAC Services in {cityName}
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+      {faqs.map((faq) => (
+        <div class="bg-white rounded-xl p-6 lg:p-7 shadow-sm border border-light-grey">
+          <h3 class="text-primary font-bold text-sm md:text-base mb-3 leading-snug">{faq.question}</h3>
+          <p class="text-slate text-sm leading-relaxed">{faq.answer}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

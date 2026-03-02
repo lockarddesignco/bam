@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cedgepainting.com/sitemap-index.xml

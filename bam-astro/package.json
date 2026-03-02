@@ -1,0 +1,23 @@
+{
+  "name": "bam-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "seo:gate": "node scripts/seo-uniqueness-gate.mjs",
+    "seo:gate:verbose": "node scripts/seo-uniqueness-gate.mjs --verbose",
+    "prebuild": "node scripts/seo-uniqueness-gate.mjs"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^6.6.4",
+    "@astrojs/sitemap": "^3.7.0",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^5.17.1",
+    "tailwindcss": "^4.2.1"
+  }
+}
