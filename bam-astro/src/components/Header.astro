@@ -417,13 +417,57 @@ const industryIconMap: Record<string, string> = {
   <div id="mobile-menu" class="lg:hidden hidden absolute top-full left-0 w-full bg-primary border-t border-[#1e483b] overflow-y-auto max-h-[calc(100vh-64px)]">
     <div class="flex flex-col p-6 pb-24 space-y-2">
       {navItems.map((item) => (
-        <a
-          href={item.href}
-          class="flex items-center justify-between py-4 text-lg font-bold text-white uppercase tracking-wider no-underline border-b border-[#1e483b]/50"
-        >
-          {item.label}
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
+        item.hasDropdown ? (
+          <div class="border-b border-[#1e483b]/50">
+            <button
+              type="button"
+              class="w-full flex items-center justify-between py-4 text-lg font-bold text-white uppercase tracking-wider"
+              data-mobile-dropdown-btn={item.label.toLowerCase()}
+              aria-expanded="false"
+              aria-controls={`mobile-submenu-${item.label.toLowerCase()}`}
+            >
+              <span>{item.label}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint transition-transform duration-200" data-mobile-dropdown-icon={item.label.toLowerCase()}><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div id={`mobile-submenu-${item.label.toLowerCase()}`} class="hidden pb-4 -mt-1" data-mobile-dropdown-panel={item.label.toLowerCase()}>
+              <a href={item.href} class="block text-[12px] font-bold uppercase tracking-[0.16em] text-mint no-underline mb-3">View All {item.label}</a>
+              <div class="grid grid-cols-1 gap-1.5">
+                {item.label === 'Services' && siteConfig.services.map((s) => (
+                  <a href={`/services/${s.slug}/`} class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">{s.title}</a>
+                ))}
+                {item.label === 'Industries' && siteConfig.industries.map((ind) => (
+                  <a href={`/industries/${ind.slug}/`} class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">{ind.title}</a>
+                ))}
+                {item.label === 'Locations' && (
+                  <>
+                    {siteConfig.locationStates.map((loc) => (
+                      <a href={`/locations/${loc.slug}/`} class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">{loc.title}</a>
+                    ))}
+                    {siteConfig.locationMetros.map((loc) => (
+                      <a href={`/locations/${loc.slug}/`} class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">{loc.title}</a>
+                    ))}
+                  </>
+                )}
+                {item.label === 'About' && (
+                  <>
+                    <a href="/about/" class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">About Overview</a>
+                    <a href="/pilot-program/" class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">Pilot Program</a>
+                    <a href="/blog/" class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">Blog & Insights</a>
+                    <a href="/tools/" class="text-[14px] text-light-grey hover:text-white no-underline py-1.5">Tools & Calculators</a>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            class="flex items-center justify-between py-4 text-lg font-bold text-white uppercase tracking-wider no-underline border-b border-[#1e483b]/50"
+          >
+            {item.label}
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        )
       ))}
       <div class="pt-8 space-y-4">
         <a href={`tel:${siteConfig.phoneRaw}`} class="flex items-center justify-center gap-3 text-white font-bold text-base bg-[#1e483b] py-3.5 rounded-sm border border-mint/20 no-underline">
@@ -450,6 +494,35 @@ const industryIconMap: Record<string, string> = {
     menu?.classList.toggle('hidden');
     iconOpen?.classList.toggle('hidden');
     iconClose?.classList.toggle('hidden');
+  });
+
+  const mobileDropdownButtons = document.querySelectorAll<HTMLButtonElement>('[data-mobile-dropdown-btn]');
+
+  mobileDropdownButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.mobileDropdownBtn;
+      if (!key) return;
+
+      const panel = document.querySelector<HTMLElement>(`[data-mobile-dropdown-panel="${key}"]`);
+      const icon = document.querySelector<HTMLElement>(`[data-mobile-dropdown-icon="${key}"]`);
+      const isOpen = panel ? !panel.classList.contains('hidden') : false;
+
+      mobileDropdownButtons.forEach((otherButton) => {
+        const otherKey = otherButton.dataset.mobileDropdownBtn;
+        if (!otherKey) return;
+        const otherPanel = document.querySelector<HTMLElement>(`[data-mobile-dropdown-panel="${otherKey}"]`);
+        const otherIcon = document.querySelector<HTMLElement>(`[data-mobile-dropdown-icon="${otherKey}"]`);
+        otherPanel?.classList.add('hidden');
+        otherIcon?.classList.remove('rotate-180');
+        otherButton.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        panel?.classList.remove('hidden');
+        icon?.classList.add('rotate-180');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
 
   window.addEventListener('scroll', () => {
