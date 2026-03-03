@@ -5,7 +5,7 @@ import netlify from '@astrojs/netlify';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://www.buildingandair.com',
+  site: 'https://bam.lockard.sites.com',
   output: 'static',
   trailingSlash: 'always',
 
@@ -34,7 +34,6 @@ export default defineConfig({
   },
 
   adapter: netlify({
-    edgeMiddleware: true,
     imageCDN: true,
   }),
 
