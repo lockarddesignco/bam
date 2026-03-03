@@ -30,7 +30,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <!-- Tool Cards -->
 <section class="py-20 md:py-28 bg-offwhite">
   <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
 
       <!-- IAQ Risk Score -->
       <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10 flex flex-col">
@@ -67,6 +67,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </p>
         <a href="/tools/restoration-value-estimator/" class="inline-flex items-center justify-center w-full px-6 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors no-underline gap-2">
           Launch Estimator
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Filter Match Wizard -->
+      <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10 flex flex-col">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-sm border border-light-grey/60 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-bold text-primary">Filter Match Wizard</h3>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-mint/20 text-primary px-2 py-0.5 rounded-full">New</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-slate text-sm leading-relaxed mb-8 flex-grow">
+          Dial in the right MERV rating for your facility. Answer a few questions about your building type, fan motor, and constraints to get a pressure-drop-aware filter specification you can act on today.
+        </p>
+        <a href="/tools/filter-match-wizard/" class="inline-flex items-center justify-center w-full px-6 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors no-underline gap-2">
+          Launch Wizard
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
       </div>

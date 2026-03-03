@@ -1,0 +1,556 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Filter Match Wizard | BAM — MERV Rating & Pressure Drop Calculator"
+  description="Dial in the right MERV rating for your facility. Answer a few questions about your building, system, and constraints to receive a pressure-drop-aware filter recommendation."
+>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 40px 40px;"></div>
+  <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl">
+      <a href="/tools/" class="inline-flex items-center gap-2 text-mint mb-4 no-underline hover:opacity-80 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Tools</span>
+      </a>
+      <div class="inline-flex items-center gap-2 text-mint mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Diagnostic Tool</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8 uppercase">
+        Filter Match<br/>
+        <span class="text-mint">Wizard</span>
+      </h1>
+      <p class="text-light-grey text-lg md:text-xl font-light leading-relaxed border-l-2 border-primary pl-8 opacity-90 max-w-2xl">
+        Dial in the right MERV rating, understand pressure drop risk, and stop changing filters on guesswork — answer a few questions and get a spec you can act on today.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ WIZARD ════════════════════ -->
+<section class="py-16 md:py-24 bg-offwhite">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Progress -->
+      <div class="mb-10">
+        <div class="flex items-center justify-between mb-3">
+          <p id="progressLabel" class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate">Step 1 of 3 — Building Profile</p>
+          <p id="progressPct" class="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">33%</p>
+        </div>
+        <div class="flex gap-1.5">
+          <div id="ps1" class="flex-1 h-1 rounded-full bg-primary transition-colors duration-300"></div>
+          <div id="ps2" class="flex-1 h-1 rounded-full bg-light-grey/40 transition-colors duration-300"></div>
+          <div id="ps3" class="flex-1 h-1 rounded-full bg-light-grey/40 transition-colors duration-300"></div>
+        </div>
+      </div>
+
+      <!-- ── STEP 1 ── -->
+      <div id="step1" class="wizard-step">
+        <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10">
+          <div class="h-1 w-12 bg-primary rounded-full mb-5"></div>
+          <h2 class="text-primary text-2xl font-black uppercase tracking-tight mb-1">Building Profile</h2>
+          <p class="text-slate text-sm leading-relaxed mb-8">Tell us about your facility so we can tailor the recommendation to your actual load and occupancy.</p>
+
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="buildingType" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Building Type *</label>
+                <select id="buildingType" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select&hellip;</option>
+                  <option value="office">Office / Commercial</option>
+                  <option value="school">School / University</option>
+                  <option value="medical">Medical / Healthcare</option>
+                  <option value="warehouse">Warehouse / Light Industrial</option>
+                  <option value="retail">Retail / Restaurant</option>
+                  <option value="multifamily">Multi-Family Residential</option>
+                  <option value="manufacturing">Manufacturing / Heavy Industrial</option>
+                  <option value="datacenter">Data Center / Server Room</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label for="occupancy" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Typical Occupancy *</label>
+                <select id="occupancy" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select&hellip;</option>
+                  <option value="low">Low (under 25 people)</option>
+                  <option value="medium">Medium (25–100 people)</option>
+                  <option value="high">High (100–500 people)</option>
+                  <option value="very-high">Very High (500+ / public)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <p class="text-slate text-[10px] font-semibold uppercase tracking-widest">Known Air Quality Issues (select all that apply)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="issuesGroup">
+                <label class="issue-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="dust" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Excessive dust / particulates on surfaces</span>
+                </label>
+                <label class="issue-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="odors" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Odors or VOCs (chemical smells, off-gassing)</span>
+                </label>
+                <label class="issue-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="allergies" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Allergy or asthma complaints from occupants</span>
+                </label>
+                <label class="issue-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="mold" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Visible mold / high humidity issues</span>
+                </label>
+                <label class="issue-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group sm:col-span-2">
+                  <input type="checkbox" value="virus" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Airborne pathogen concerns</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end mt-8">
+            <button id="btn-step1" class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors">
+              Continue
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 2 ── -->
+      <div id="step2" class="wizard-step hidden">
+        <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10">
+          <div class="h-1 w-12 bg-primary rounded-full mb-5"></div>
+          <h2 class="text-primary text-2xl font-black uppercase tracking-tight mb-1">System Details</h2>
+          <p class="text-slate text-sm leading-relaxed mb-8">Your equipment setup directly determines how aggressive we can go on MERV without sacrificing airflow.</p>
+
+          <div class="space-y-6">
+            <div class="grid grid-cols-3 gap-5">
+              <div class="space-y-1.5">
+                <label for="filterL" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Length (in)</label>
+                <input type="number" id="filterL" placeholder="e.g. 24" min="8" max="36" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="filterW" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Width (in)</label>
+                <input type="number" id="filterW" placeholder="e.g. 24" min="8" max="36" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="filterD" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Depth (in)</label>
+                <select id="filterD" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">—</option>
+                  <option value="1">1"</option>
+                  <option value="2">2"</option>
+                  <option value="4">4"</option>
+                  <option value="6">6"</option>
+                  <option value="12">12"</option>
+                </select>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate leading-relaxed -mt-2">Dimensions are usually printed on the edge of the current filter frame.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="currentMerv" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Current MERV Rating</label>
+                <select id="currentMerv" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="0">Unknown / Not sure</option>
+                  <option value="4">MERV 4 or below (fiberglass)</option>
+                  <option value="6">MERV 6</option>
+                  <option value="8">MERV 8</option>
+                  <option value="11">MERV 11</option>
+                  <option value="13">MERV 13</option>
+                  <option value="16">MERV 16+</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label for="fanType" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Fan / Motor Type *</label>
+                <select id="fanType" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select&hellip;</option>
+                  <option value="ecm">ECM (variable speed / brushless)</option>
+                  <option value="belt">Belt-drive / PSC motor (fixed speed)</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="space-y-3">
+              <p class="text-slate text-[10px] font-semibold uppercase tracking-widest">Comfort Complaints (select all that apply)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="complaintsGroup">
+                <label class="complaint-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="stuffy" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Stuffy, stale, or poorly ventilated air</span>
+                </label>
+                <label class="complaint-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="hotcold" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Hot and cold spots throughout the building</span>
+                </label>
+                <label class="complaint-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="lowflow" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Weak airflow from registers / vents</span>
+                </label>
+                <label class="complaint-check flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" value="noise" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary leading-snug">Whistling, rattling, or excessive HVAC noise</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between mt-8">
+            <button id="btn-back1" class="inline-flex items-center gap-2 px-6 py-3.5 border border-light-grey/60 text-slate font-bold text-xs uppercase tracking-widest rounded-sm hover:border-primary hover:text-primary transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              Back
+            </button>
+            <button id="btn-step2" class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors">
+              Continue
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 3 ── -->
+      <div id="step3" class="wizard-step hidden">
+        <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10">
+          <div class="h-1 w-12 bg-primary rounded-full mb-5"></div>
+          <h2 class="text-primary text-2xl font-black uppercase tracking-tight mb-1">System Constraints</h2>
+          <p class="text-slate text-sm leading-relaxed mb-8">A few final inputs to calibrate pressure drop risk and change interval with precision.</p>
+
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="systemAge" class="text-slate text-[10px] font-semibold uppercase tracking-widest">System Age *</label>
+                <select id="systemAge" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select&hellip;</option>
+                  <option value="new">0–5 years (newer)</option>
+                  <option value="mid">5–15 years</option>
+                  <option value="old">15+ years (older)</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label for="staticIssue" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Known Static Pressure Issues?</label>
+                <select id="staticIssue" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="no">No / Unknown</option>
+                  <option value="yes">Yes — already running high static</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="filterCount" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Number of Filter Slots</label>
+                <input type="number" id="filterCount" value="1" min="1" max="50" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="priority" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Priority</label>
+                <select id="priority" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="balanced">Balanced (performance + cost)</option>
+                  <option value="cost">Cost-first</option>
+                  <option value="performance">Performance / IAQ-first</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between mt-8">
+            <button id="btn-back2" class="inline-flex items-center gap-2 px-6 py-3.5 border border-light-grey/60 text-slate font-bold text-xs uppercase tracking-widest rounded-sm hover:border-primary hover:text-primary transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+              Back
+            </button>
+            <button id="btn-generate" class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors">
+              Generate Recommendations
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RESULTS ── -->
+      <div id="results" class="hidden space-y-6">
+
+        <!-- Summary bar -->
+        <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-6 flex items-center gap-5">
+          <div class="w-10 h-10 rounded-sm border border-light-grey/60 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-primary font-black text-lg uppercase tracking-tight leading-none">Your Filter Spec</p>
+            <p id="resultsSub" class="text-slate text-xs mt-1"></p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-slate">Analysis Complete</span>
+          </div>
+        </div>
+
+        <!-- Info note -->
+        <div id="infoBox" class="bg-white border-l-4 border-primary rounded-sm shadow-sm px-6 py-4 text-sm text-slate leading-relaxed"></div>
+
+        <!-- Tier cards -->
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">Good · Better · Best</p>
+          <div id="tierGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
+        </div>
+
+        <!-- Verification checklist -->
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">On-Site Verification Checklist</p>
+          <div id="checklist" class="bg-white border border-light-grey/60 rounded-sm shadow-sm overflow-hidden divide-y divide-light-grey/40"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-primary rounded-sm shadow-lg shadow-primary/20 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <p class="text-white font-black text-xl uppercase tracking-tight mb-2">Want BAM to verify static pressure &amp; confirm filter compatibility?</p>
+            <p class="text-light-grey/80 text-sm leading-relaxed max-w-lg">Our technicians measure actual static pressure drop, inspect ductwork for bypass gaps, and confirm your recommended filter fits your specific AHU — before you commit to a change.</p>
+          </div>
+          <a href="tel:5709005827" class="shrink-0 inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-light-grey/20 transition-colors no-underline">
+            Book 30-Min Site Check
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Restart -->
+        <div class="text-center pt-2">
+          <button id="btn-restart" class="inline-flex items-center gap-2 px-6 py-3 border border-light-grey/60 text-slate font-bold text-xs uppercase tracking-widest rounded-sm hover:border-primary hover:text-primary transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Start Over / New Building
+          </button>
+        </div>
+
+      </div><!-- /results -->
+
+    </div>
+  </div>
+</section>
+
+<script>
+  // ── Helpers ──────────────────────────────────────────────────────────
+  function getChecked(groupId: string): string[] {
+    return [...document.querySelectorAll<HTMLInputElement>(`#${groupId} input[type="checkbox"]:checked`)].map(el => el.value);
+  }
+
+  function showStep(n: number) {
+    [1, 2, 3].forEach(i => {
+      document.getElementById(`step${i}`)!.classList.toggle('hidden', i !== n);
+      const ps = document.getElementById(`ps${i}`)!;
+      ps.className = `flex-1 h-1 rounded-full transition-colors duration-300 ${i < n ? 'bg-primary/40' : i === n ? 'bg-primary' : 'bg-light-grey/40'}`;
+    });
+    const labels = ['', 'Building Profile', 'System Details', 'System Constraints'];
+    const pcts = ['', '33%', '66%', '100%'];
+    document.getElementById('progressLabel')!.textContent = `Step ${n} of 3 — ${labels[n]}`;
+    document.getElementById('progressPct')!.textContent = pcts[n];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Navigation ───────────────────────────────────────────────────────
+  document.getElementById('btn-step1')!.addEventListener('click', () => {
+    const bldg = (document.getElementById('buildingType') as HTMLSelectElement).value;
+    const occ = (document.getElementById('occupancy') as HTMLSelectElement).value;
+    if (!bldg || !occ) { alert('Please select a building type and occupancy level.'); return; }
+    showStep(2);
+  });
+
+  document.getElementById('btn-back1')!.addEventListener('click', () => showStep(1));
+
+  document.getElementById('btn-step2')!.addEventListener('click', () => {
+    const fan = (document.getElementById('fanType') as HTMLSelectElement).value;
+    if (!fan) { alert('Please select a fan / motor type.'); return; }
+    showStep(3);
+  });
+
+  document.getElementById('btn-back2')!.addEventListener('click', () => showStep(2));
+
+  document.getElementById('btn-restart')!.addEventListener('click', () => {
+    document.querySelectorAll<HTMLSelectElement>('select').forEach(el => el.selectedIndex = 0);
+    document.querySelectorAll<HTMLInputElement>('input[type="number"]').forEach(el => {
+      el.value = el.id === 'filterCount' ? '1' : '';
+    });
+    document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach(el => { el.checked = false; });
+    document.getElementById('results')!.classList.add('hidden');
+    showStep(1);
+  });
+
+  // ── Calculation logic ────────────────────────────────────────────────
+  document.getElementById('btn-generate')!.addEventListener('click', () => {
+    const systemAge = (document.getElementById('systemAge') as HTMLSelectElement).value;
+    if (!systemAge) { alert('Please select a system age.'); return; }
+    generate();
+  });
+
+  function generate() {
+    const bldg = (document.getElementById('buildingType') as HTMLSelectElement).value || 'office';
+    const occ = (document.getElementById('occupancy') as HTMLSelectElement).value || 'medium';
+    const fan = (document.getElementById('fanType') as HTMLSelectElement).value || 'unknown';
+    const depth = parseInt((document.getElementById('filterD') as HTMLSelectElement).value || '1');
+    const filterL = parseInt((document.getElementById('filterL') as HTMLInputElement).value || '20');
+    const filterW = parseInt((document.getElementById('filterW') as HTMLInputElement).value || '20');
+    const staticHigh = (document.getElementById('staticIssue') as HTMLSelectElement).value === 'yes';
+    const priority = (document.getElementById('priority') as HTMLSelectElement).value;
+    const filterCount = parseInt((document.getElementById('filterCount') as HTMLInputElement).value || '1');
+    const issues = getChecked('issuesGroup');
+    const complaints = getChecked('complaintsGroup');
+
+    // Base MERV tiers by building type
+    const bases: Record<string, [number, number, number]> = {
+      office: [8, 11, 13], school: [8, 11, 13], medical: [11, 13, 14],
+      warehouse: [6, 8, 10], retail: [8, 10, 11], multifamily: [6, 8, 11],
+      manufacturing: [6, 8, 10], datacenter: [11, 13, 14],
+    };
+    let [g, bt, bs] = bases[bldg] || [8, 11, 13];
+
+    if (issues.includes('virus') || issues.includes('mold')) { g = Math.max(g, 11); bt = Math.max(bt, 13); bs = Math.max(bs, 14); }
+    if (issues.includes('allergies')) { bt = Math.max(bt, 11); bs = Math.max(bs, 13); }
+    if (issues.includes('dust')) { g = Math.max(g, 8); }
+    if (occ === 'very-high') { g = Math.max(g, 8); bt = Math.max(bt, 11); }
+
+    const fanMult = fan === 'ecm' ? 0.7 : fan === 'belt' ? 1.1 : 1.25;
+    const staticMult = staticHigh ? 1.3 : 1.0;
+    const depthFactor = depth >= 4 ? 0.6 : depth >= 2 ? 0.8 : 1.0;
+    const airflowIssue = (complaints.includes('lowflow') || complaints.includes('noise')) ? 1.2 : 1.0;
+
+    function pd(merv: number): number {
+      const base: Record<number, number> = { 4: 0.05, 6: 0.08, 8: 0.12, 10: 0.16, 11: 0.20, 13: 0.27, 14: 0.32, 16: 0.45 };
+      return +((base[merv] || 0.15) * fanMult * staticMult * depthFactor * airflowIssue).toFixed(2);
+    }
+
+    function interval(merv: number): number {
+      const base = merv >= 14 ? 2 : merv >= 11 ? 3 : merv >= 8 ? 3 : 6;
+      const occF = occ === 'very-high' ? 0.6 : occ === 'high' ? 0.75 : occ === 'low' ? 1.4 : 1;
+      const dustF = issues.includes('dust') ? 0.75 : 1;
+      return Math.max(1, Math.min(Math.round(base * occF * dustF), 12));
+    }
+
+    function riskLevel(v: number) {
+      if (v < 0.15) return { label: 'Low', cls: 'text-emerald-600', bar: 'bg-emerald-500' };
+      if (v < 0.27) return { label: 'Moderate', cls: 'text-amber-600', bar: 'bg-amber-400' };
+      return { label: 'High', cls: 'text-red-500', bar: 'bg-red-400' };
+    }
+
+    function capture(m: number): string {
+      if (m >= 16) return '≥95% of PM1';
+      if (m >= 14) return '≥90% of PM1';
+      if (m >= 13) return '≥85% of PM1';
+      if (m >= 11) return '≥65% of PM2.5';
+      if (m >= 8) return '≥70% of PM3–10';
+      return '≥35% of PM3–10';
+    }
+
+    const mervNames: Record<number, string> = {
+      4: 'Fiberglass Panel', 6: 'Basic Pleated', 8: 'Standard Pleated',
+      10: 'Mid-Grade Pleated', 11: 'Enhanced Pleated', 13: 'High-Efficiency Pleated',
+      14: 'Superior Efficiency', 16: 'HEPA-Adjacent',
+    };
+
+    // Determine recommendation tier
+    let rec = 'better';
+    if (priority === 'cost') rec = 'good';
+    if (priority === 'performance') rec = 'best';
+    if (bldg === 'medical' || bldg === 'datacenter') rec = 'best';
+    if (fan === 'belt' && bs >= 14 && rec === 'best') rec = 'better';
+    if (staticHigh && rec === 'best') rec = 'better';
+
+    const tiers = [
+      { key: 'good', label: 'Good', merv: g },
+      { key: 'better', label: 'Better', merv: bt },
+      { key: 'best', label: 'Best', merv: bs },
+    ];
+
+    // ── Render tier cards ──
+    document.getElementById('tierGrid')!.innerHTML = tiers.map(t => {
+      const v = pd(t.merv);
+      const pct = Math.min(v / 0.5 * 100, 100);
+      const risk = riskLevel(v);
+      const isRec = t.key === rec;
+      return `
+        <div class="bg-white border ${isRec ? 'border-primary' : 'border-light-grey/60'} rounded-sm shadow-sm overflow-hidden relative">
+          <div class="h-1 ${isRec ? 'bg-primary' : 'bg-light-grey/40'}"></div>
+          ${isRec ? `<div class="absolute top-3 right-3"><span class="text-[9px] font-bold uppercase tracking-widest px-2 py-1 bg-primary text-white rounded-full">Recommended</span></div>` : ''}
+          <div class="p-6">
+            <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-2">${t.label}</p>
+            <p class="text-5xl font-black text-primary leading-none mb-0.5">MERV ${t.merv}</p>
+            <p class="text-[10px] text-slate mb-5">${mervNames[t.merv] || 'Pleated Filter'}</p>
+            <div class="space-y-3 text-xs">
+              <div>
+                <div class="flex justify-between mb-1">
+                  <span class="text-slate font-semibold uppercase tracking-wider text-[10px]">Pressure Drop</span>
+                  <span class="font-bold ${risk.cls}">${v}" WC · ${risk.label}</span>
+                </div>
+                <div class="w-full h-1.5 bg-light-grey/30 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full ${risk.bar}" style="width:${pct}%"></div>
+                </div>
+              </div>
+              <div class="flex justify-between pt-1 border-t border-light-grey/40">
+                <span class="text-slate font-semibold uppercase tracking-wider text-[10px]">Change Interval</span>
+                <span class="font-bold text-primary">Every ${interval(t.merv)} mo.</span>
+              </div>
+              <div class="flex justify-between border-t border-light-grey/40 pt-1">
+                <span class="text-slate font-semibold uppercase tracking-wider text-[10px]">Annual Units</span>
+                <span class="font-bold text-primary">${Math.ceil(12 / interval(t.merv)) * filterCount} filters</span>
+              </div>
+              <div class="flex justify-between border-t border-light-grey/40 pt-1">
+                <span class="text-slate font-semibold uppercase tracking-wider text-[10px]">Captures</span>
+                <span class="font-bold text-primary">${capture(t.merv)}</span>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    // ── Info box ──
+    const recTier = tiers.find(t => t.key === rec)!;
+    const fanExplain: Record<string, string> = {
+      ecm: '<strong class="text-primary">ECM motor:</strong> Variable-speed ECMs automatically compensate for added static pressure — you have more flexibility to upgrade MERV safely.',
+      belt: '<strong class="text-primary">Belt-drive motor:</strong> Fixed-speed motors can\'t compensate for higher static. Monitor amp draw after any MERV upgrade and consider staying within one pressure class.',
+      unknown: '<strong class="text-primary">Fan type unknown:</strong> Confirm whether your motor compensates for increased static before upgrading MERV.',
+    };
+    const bldgNames: Record<string, string> = { office: 'Office', school: 'School', medical: 'Medical', warehouse: 'Warehouse', retail: 'Retail', multifamily: 'Multifamily', manufacturing: 'Manufacturing', datacenter: 'Data Center' };
+    document.getElementById('infoBox')!.innerHTML = `${fanExplain[fan] || fanExplain.unknown} Recommended: <strong class="text-primary">MERV ${recTier.merv}</strong> at ${filterL}×${filterW}×${depth}", changed every ${interval(recTier.merv)} months.`;
+    document.getElementById('resultsSub')!.textContent = `${bldgNames[bldg] || bldg} · ${fan.toUpperCase()} fan · ${depth}" depth · ${filterCount} slot${filterCount > 1 ? 's' : ''}`;
+
+    // ── Checklist ──
+    const checks: { type: 'verify' | 'warn' | 'critical'; heading: string; sub: string }[] = [
+      { type: 'verify', heading: `Confirm slot dimensions: ${filterL}×${filterW}×${depth}"`, sub: 'Measure the actual rack — filter labels can be nominal, not exact.' },
+      { type: 'verify', heading: 'Inspect filter track / rails for warping or bypass gaps', sub: 'Air bypassing the filter defeats the entire MERV upgrade.' },
+      ...(fan !== 'ecm' ? [{ type: 'warn' as const, heading: 'Measure blower motor amps before and after swap', sub: 'Higher MERV = more static = risk of motor overload on fixed-speed systems.' }] : []),
+      ...(staticHigh ? [{ type: 'critical' as const, heading: 'Measure static pressure with existing filter first', sub: "Establish baseline before upgrading — don't compound existing problems." }] : []),
+      { type: 'verify', heading: `Set ${interval(recTier.merv)}-month replacement schedule for all ${filterCount} slot${filterCount > 1 ? 's' : ''}`, sub: 'Log install date on a label on the filter rack itself.' },
+      ...(issues.includes('mold') ? [{ type: 'critical' as const, heading: 'Inspect drain pan and coil for biological growth', sub: 'Filtration alone cannot fix a mold source inside the air handler.' }] : []),
+      ...(issues.includes('odors') ? [{ type: 'warn' as const, heading: 'Consider activated carbon module for odor/VOC control', sub: 'MERV-rated particulate filters do not capture gaseous contaminants.' }] : []),
+      { type: 'verify', heading: 'Photograph existing filter at removal', sub: 'Loading pattern reveals bypass channels and true loading rate.' },
+      ...(complaints.includes('noise') ? [{ type: 'warn' as const, heading: 'Check face velocity — whistling means filter area is too small', sub: 'Add filter surface area or slow fan speed before upgrading MERV.' }] : []),
+      { type: 'verify', heading: 'Confirm MERV rating uses ASHRAE 52.2 test standard', sub: 'Not all labeled MERV ratings use the same test methodology.' },
+    ];
+
+    const iconStyles = {
+      verify: { dot: 'bg-emerald-500/10 text-emerald-600 border-emerald-200', label: '✓' },
+      warn: { dot: 'bg-amber-50 text-amber-600 border-amber-200', label: '!' },
+      critical: { dot: 'bg-red-50 text-red-500 border-red-200', label: '✕' },
+    };
+
+    document.getElementById('checklist')!.innerHTML = checks.map(c => {
+      const s = iconStyles[c.type];
+      return `<div class="flex items-start gap-4 p-4 hover:bg-ice/50 transition-colors cursor-pointer" onclick="this.classList.toggle('opacity-40')">
+        <div class="w-7 h-7 rounded-full border flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${s.dot}">${s.label}</div>
+        <div>
+          <p class="text-sm font-semibold text-primary leading-snug">${c.heading}</p>
+          <p class="text-[11px] text-slate mt-0.5 leading-relaxed">${c.sub}</p>
+        </div>
+      </div>`;
+    }).join('');
+
+    // ── Show results ──
+    [1, 2, 3].forEach(i => document.getElementById(`step${i}`)!.classList.add('hidden'));
+    document.getElementById('results')!.classList.remove('hidden');
+    document.getElementById('progressLabel')!.textContent = 'Analysis Complete';
+    document.getElementById('progressPct')!.textContent = '100%';
+    [1, 2, 3].forEach(i => {
+      document.getElementById(`ps${i}`)!.className = 'flex-1 h-1 rounded-full transition-colors duration-300 bg-primary/40';
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</BaseLayout>
