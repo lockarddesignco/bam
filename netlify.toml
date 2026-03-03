@@ -1,0 +1,7 @@
+[build]
+  base = "bam-astro"
+  command = "npm run build"
+  publish = "bam-astro/dist"
+
+[build.environment]
+  NODE_VERSION = "20"
