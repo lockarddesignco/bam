@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+
+const coverageStates = ['PA', 'NJ', 'MD', 'DE', 'NY'];
+---
+
+<BaseLayout
+  title="Contact BAM | Request a Site Visit — Building & Air Maintenance"
+  description="Contact BAM to schedule an institutional HVAC assessment, request a site visit, or discuss restoration services for your facility. Serving PA, NJ, MD, DE, and Southern NY."
+>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="relative w-full py-24 md:py-32 flex flex-col items-center justify-center bg-dark overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dark"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">
+        Get In Touch
+      </span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+        Contact BAM
+      </h1>
+      <p class="text-lg md:text-xl text-light-grey max-w-2xl mx-auto leading-relaxed font-light">
+        Schedule an on-site assessment, request restoration services, or speak directly with our commercial team.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ MAIN CONTENT ════════════════════ -->
+  <section class="relative py-20 md:py-28 bg-ice">
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+
+        <!-- LEFT COLUMN: Info -->
+        <div class="lg:col-span-2 flex flex-col gap-10">
+
+          <!-- Emergency Card -->
+          <div class="bg-dark rounded-lg border border-mint/20 p-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 rounded-full bg-mint/[0.06] blur-[60px] pointer-events-none"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-red-400">Emergency Support</span>
+              </div>
+              <h3 class="text-white text-xl font-bold mb-2">24/7 Emergency Line</h3>
+              <p class="text-light-grey/70 text-sm leading-relaxed mb-5">
+                Critical HVAC failures don't wait for business hours. Call our emergency line for immediate triage.
+              </p>
+              <a
+                href={`tel:${siteConfig.phoneRaw}`}
+                class="inline-flex items-center gap-3 px-6 py-3.5 bg-mint text-primary font-bold text-sm uppercase tracking-widest rounded-sm transition-all hover:shadow-[0_10px_30px_-10px_rgba(167,215,197,0.5)] hover:-translate-y-0.5"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                {siteConfig.phone}
+              </a>
+            </div>
+          </div>
+
+          <!-- Direct Channels -->
+          <div>
+            <h3 class="text-primary text-lg font-bold uppercase tracking-tight mb-6">Direct Channels</h3>
+            <div class="space-y-5">
+              <div class="flex items-start gap-4">
+                <div class="p-2.5 bg-primary/[0.07] rounded-lg border border-primary/10 text-primary shrink-0 mt-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <p class="text-primary text-sm font-bold uppercase tracking-wide">Headquarters</p>
+                  <p class="text-slate text-sm leading-relaxed mt-1">
+                    {siteConfig.mainAddress.street}<br />
+                    {siteConfig.mainAddress.city}, {siteConfig.mainAddress.state} {siteConfig.mainAddress.zip}
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="p-2.5 bg-primary/[0.07] rounded-lg border border-primary/10 text-primary shrink-0 mt-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <div>
+                  <p class="text-primary text-sm font-bold uppercase tracking-wide">Email</p>
+                  <a href={`mailto:${siteConfig.email}`} class="text-slate text-sm hover:text-primary transition-colors no-underline mt-1 block">{siteConfig.email}</a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="p-2.5 bg-primary/[0.07] rounded-lg border border-primary/10 text-primary shrink-0 mt-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <p class="text-primary text-sm font-bold uppercase tracking-wide">Phone</p>
+                  <a href={`tel:${siteConfig.phoneRaw}`} class="text-slate text-sm hover:text-primary transition-colors no-underline mt-1 block">{siteConfig.phone}</a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="p-2.5 bg-primary/[0.07] rounded-lg border border-primary/10 text-primary shrink-0 mt-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <p class="text-primary text-sm font-bold uppercase tracking-wide">Office Hours</p>
+                  <p class="text-slate text-sm leading-relaxed mt-1">
+                    Mon – Fri: 7:00 AM – 5:00 PM EST<br />
+                    Emergency: 24/7
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coverage Territory -->
+          <div>
+            <h3 class="text-primary text-lg font-bold uppercase tracking-tight mb-5">Core Coverage Territory</h3>
+            <div class="flex flex-wrap gap-2">
+              {coverageStates.map(state => (
+                <span class="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-light-grey rounded-sm text-primary font-bold text-xs uppercase tracking-widest">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  {state}
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Form -->
+        <div class="lg:col-span-3">
+          <div class="bg-white border border-light-grey rounded-lg p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+            <div class="h-1 w-16 bg-primary rounded-full mb-5"></div>
+            <h2 class="text-primary text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">
+              Facility Support Intake
+            </h2>
+            <p class="text-slate text-sm leading-relaxed mb-8">
+              Complete the form below and our commercial team will reach out within one business day to coordinate next steps.
+            </p>
+
+            <form name="contact" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+              <input type="hidden" name="form-name" value="contact" />
+              <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="space-y-1.5">
+                  <label for="contact-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Full Name *</label>
+                  <input type="text" id="contact-name" name="name" placeholder="John Smith" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+                <div class="space-y-1.5">
+                  <label for="contact-title" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Title / Role</label>
+                  <input type="text" id="contact-title" name="title" placeholder="Director of Facilities" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="space-y-1.5">
+                  <label for="contact-email" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Email Address *</label>
+                  <input type="email" id="contact-email" name="email" placeholder="john@facility.org" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+                <div class="space-y-1.5">
+                  <label for="contact-phone" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Phone Number</label>
+                  <input type="tel" id="contact-phone" name="phone" placeholder="(555) 123-4567" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="space-y-1.5">
+                  <label for="contact-org" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Organization / Facility</label>
+                  <input type="text" id="contact-org" name="organization" placeholder="Memorial Regional Hospital" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+                <div class="space-y-1.5">
+                  <label for="contact-facility-type" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Type</label>
+                  <select id="contact-facility-type" name="facility-type" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                    <option value="">Select facility type</option>
+                    <option value="healthcare">Healthcare / Hospital</option>
+                    <option value="education">Education (K-12 / Higher Ed)</option>
+                    <option value="government">Government / Secure Facility</option>
+                    <option value="industrial">Industrial / Manufacturing</option>
+                    <option value="commercial">Commercial Real Estate</option>
+                    <option value="data-center">Data Center</option>
+                    <option value="senior-care">Senior Living / Assisted Living</option>
+                    <option value="food-processing">Food Processing</option>
+                    <option value="cold-storage">Cold Storage / Refrigeration</option>
+                    <option value="lab">Lab / Life Sciences</option>
+                    <option value="retail">Retail / Multi-Site</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <p class="text-slate text-[10px] font-semibold uppercase tracking-widest">Inquiry Type</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {[
+                    { value: 'site-visit', label: 'Request a Site Visit' },
+                    { value: 'quote', label: 'Request a Quote' },
+                    { value: 'emergency', label: 'Emergency Service' },
+                    { value: 'general', label: 'General Inquiry' },
+                  ].map(option => (
+                    <label class="flex items-center gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                      <input type="radio" name="inquiry-type" value={option.value} class="w-4 h-4 text-primary accent-primary" />
+                      <span class="text-sm font-semibold text-primary group-hover:text-primary/80">{option.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="contact-description" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Describe Your Needs</label>
+                <textarea id="contact-description" name="description" rows="5" placeholder="Describe your current HVAC challenges, compliance concerns, equipment issues, or what you're looking for from BAM..." class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA] resize-none"></textarea>
+              </div>
+
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" name="on-site-auditor" value="yes" class="mt-1 w-4 h-4 accent-primary" />
+                <span class="text-sm text-slate leading-relaxed">I'd like an on-site auditor to assess my facility's HVAC systems and provide a documented report.</span>
+              </label>
+
+              <button type="submit" class="relative group w-full px-8 py-4.5 bg-primary text-white font-bold tracking-[0.22em] uppercase shadow-lg shadow-primary/10 rounded-sm transition-all text-sm overflow-hidden">
+                <span class="relative z-10">Submit Inquiry</span>
+                <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-white text-primary font-bold tracking-[0.22em] uppercase text-sm w-[101%]">Submit Inquiry</span>
+              </button>
+
+              <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-slate font-semibold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                Restricted Data Transmission Protocol Active
+              </div>
+              <p class="text-[10px] text-[#8BA1AA] leading-relaxed">
+                All submissions are reviewed under institutional confidentiality guidelines. We typically respond within one business day.
+              </p>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

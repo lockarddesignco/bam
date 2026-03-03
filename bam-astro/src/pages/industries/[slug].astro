@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import IndustryPageLayout from '../../layouts/IndustryPageLayout.astro';
+
+export async function getStaticPaths() {
+  const industries = await getCollection('industries');
+  return industries.map((entry) => {
+    const slug = entry.id.replace(/\.md$/, '');
+    return {
+      params: { slug },
+      props: { entry, slug },
+    };
+  });
+}
+
+const { entry, slug } = Astro.props;
+const { data } = entry;
+---
+
+<IndustryPageLayout
+  title={data.title}
+  slug={slug}
+  shortDescription={data.shortDescription}
+  icon={data.icon}
+  heroImage={data.heroImage}
+  challenges={data.challenges}
+  capabilities={data.capabilities}
+  faq={data.faq}
+/>

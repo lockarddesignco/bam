@@ -61,10 +61,18 @@ roi:
   description: "Resolving IAQ issues reduces liability, improves tenant retention, and increases employee productivity."
 
 faq:
-  - question: "What do you test for?"
-    answer: "Standard panels include Temperature, Humidity, CO2, CO, VOCs, and Particulates. Biological sampling is added based on initial findings."
-  - question: "Do you provide the remediation?"
-    answer: "Yes. Unlike consulting-only firms, BAM can execute the cleaning, duct restoration, or filtration upgrades required to solve the problem."
+  - question: "What does a commercial indoor air quality assessment test for?"
+    answer: "BAM's standard IAQ panel measures temperature, relative humidity, CO2, CO, VOCs, and particulate matter (PM2.5/PM10). Biological sampling—spore traps and surface lifts—is added when mold or bacterial contamination is suspected. All data is logged over 24–72 hours to capture peak-load conditions per ASHRAE 62.1 methodology."
+  - question: "Does BAM perform IAQ remediation or just consulting?"
+    answer: "Both. Unlike consulting-only firms, BAM executes the physical remediation—duct cleaning, coil restoration, filtration upgrades, and mold removal—required to resolve the findings. This eliminates the coordination gap between the assessor and the contractor, compressing your timeline from diagnosis to resolution."
+  - question: "How does poor indoor air quality affect ASHRAE 62.1 compliance?"
+    answer: "Elevated CO2 above 1,000 ppm or inadequate outdoor air ventilation rates directly violate ASHRAE 62.1 minimum requirements. Non-compliance exposes facility operators to tenant complaints, liability claims, and accreditation deficiencies. BAM's IAQ investigation quantifies the gap and delivers an actionable engineering correction plan."
+  - question: "Can indoor air quality testing identify the source of Sick Building Syndrome?"
+    answer: "Yes. BAM's data-driven process maps occupant symptoms to specific zones, then deploys environmental monitors to isolate the root cause—whether it is inadequate ventilation, off-gassing materials, biological growth in HVAC systems, or pressure imbalances. Symptom mapping combined with instrumented testing eliminates guesswork."
+  - question: "How long does a commercial IAQ investigation take?"
+    answer: "A typical investigation spans 3–5 business days: one day for the occupant interview and walkthrough, 1–3 days of continuous data logging, and a final day for sample collection if biologicals are suspected. BAM delivers the engineering report with corrective recommendations within two weeks of testing completion."
+  - question: "What industries require formal indoor air quality testing?"
+    answer: "Healthcare facilities must meet Joint Commission and CMS ventilation standards. Schools fall under state IAQ mandates and EPA Tools for Schools guidance. Federal buildings follow GSA P100 requirements. Manufacturing plants with process chemicals need OSHA PEL monitoring. BAM serves all four sectors with documentation calibrated to each regulatory framework."
 ---
 
 Commercial Indoor Air Quality services from Building & Air Maintenance.

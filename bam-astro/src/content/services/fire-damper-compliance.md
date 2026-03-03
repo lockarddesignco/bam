@@ -61,10 +61,18 @@ roi:
   description: "Compliant damper programs protect occupants, satisfy fire marshals, and maintain accreditation for healthcare and educational facilities."
 
 faq:
-  - question: "How often do fire dampers need to be inspected?"
-    answer: "NFPA 80 requires inspection and testing within one year of installation and every four years thereafter (every six years for hospitals with continuous monitoring)."
-  - question: "Can you repair dampers that fail inspection?"
-    answer: "Yes. Our teams carry common replacement parts and can perform most repairs on the same visit, minimizing the need for return trips."
+  - question: "How often are fire damper inspections required by code?"
+    answer: "NFPA 80 requires inspection and testing within one year of installation and every four years thereafter. Hospitals under Joint Commission accreditation must comply with the same NFPA cycle, though continuous monitoring programs may extend intervals to six years. BAM delivers audit-ready documentation that satisfies fire marshals and accreditation surveyors."
+  - question: "Can fire and smoke dampers be repaired on the same visit as the inspection?"
+    answer: "Yes. BAM technicians carry common replacement parts—fusible links, blades, actuators, and linkage hardware—and perform most repairs during the initial inspection visit. This eliminates costly return trips and accelerates your path to full compliance. Dampers requiring specialty parts are flagged with a documented deficiency and prioritized for follow-up."
+  - question: "What happens if fire dampers fail inspection in a hospital?"
+    answer: "Failed dampers are a life-safety deficiency that can trigger Joint Commission findings, CMS citations, and fire marshal orders. Unremediated failures compromise the passive fire protection compartmentalization your building relies on during evacuation. BAM documents each failure with photos and repair recommendations, then executes corrections to restore full code compliance."
+  - question: "How are fire dampers tested during an NFPA 80 inspection?"
+    answer: "Each damper is physically cycled—the drop test—to verify that the blade travels to full closure and latches securely. BAM technicians verify fusible link integrity, actuator function for smoke dampers, blade condition, and frame-to-duct seal. Every damper receives a unique tag, GPS or floor-plan location, and a pass/fail record with photographic evidence."
+  - question: "What makes fire damper access difficult in existing buildings?"
+    answer: "Most fire dampers are concealed above hard-lid ceilings, inside shaft walls, or behind mechanical equipment with no permanent access points. BAM's teams are experienced in above-ceiling navigation, temporary access panel installation, and confined-space protocols. We inventory and map every damper location during the first inspection cycle to streamline future visits."
+  - question: "What documentation does BAM provide after a fire damper compliance program?"
+    answer: "BAM delivers a complete audit-ready package: a master damper inventory with tagged locations, individual pass/fail inspection records with photographs, a deficiency summary with repair status, and a compliance certificate for the facility. This documentation satisfies NFPA 80, NFPA 105, Joint Commission, and local fire authority requirements."
 ---
 
 Fire Damper Compliance services from Building & Air Maintenance.

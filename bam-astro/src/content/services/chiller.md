@@ -61,10 +61,18 @@ roi:
   description: "Restoring a chiller's tubes and water boxes costs a fraction of a re-tube or replacement and immediately lowers electrical demand."
 
 faq:
-  - question: "Can you coat tube sheets without blocking tubes?"
-    answer: "Yes. We use specialized corks or plugs to mask the tube openings during the epoxy application process, ensuring zero flow restriction."
-  - question: "Do you handle both centrifugal and screw chillers?"
-    answer: "Yes. Our protocols cover water-cooled condensers on all major OEM equipment including Trane, York, Carrier, and Daikin."
+  - question: "How often should commercial chiller tubes be cleaned?"
+    answer: "Annual tube brushing is the industry standard for water-cooled chillers. Even a thin layer of scale increases energy consumption by 15–20% and elevates head pressure. BAM recommends pre-season cleaning before peak cooling load to restore design approach temperatures and prevent compressor trips."
+  - question: "Does chiller restoration require a full system shutdown?"
+    answer: "Yes, the individual chiller must be isolated and drained for tube brushing and tube sheet work. However, BAM schedules restoration during swing seasons or sequences work across multiple machines so your facility retains cooling capacity throughout the project."
+  - question: "Can you coat chiller tube sheets without blocking the tubes?"
+    answer: "Yes. BAM uses precision-machined plugs to mask every tube opening during epoxy application, ensuring zero flow restriction after reassembly. We verify each plug placement before coating and perform holiday testing post-cure to confirm a continuous, pinhole-free barrier against galvanic corrosion."
+  - question: "What is the ROI on chiller tube cleaning and refurbishment?"
+    answer: "Most facilities recover the cost within the first cooling season through reduced kW/ton consumption. A chiller operating with fouled tubes can waste 20–30% more electricity. BAM's restoration—tube brushing, tube sheet resurfacing, and epoxy cladding—costs a fraction of a re-tube and delivers measurable efficiency gains immediately."
+  - question: "Do you service both centrifugal and screw chiller condensers?"
+    answer: "Yes. BAM's protocols cover water-cooled condensers and evaporators on all major OEM platforms including Trane, York, Carrier, and Daikin. Our technicians carry brush sizes and tooling for standard and enhanced-surface tubes, and we perform borescope inspection to verify cleaning effectiveness."
+  - question: "What happens if chiller tube scale cannot be removed by brushing alone?"
+    answer: "BAM implements a chemical descaling circulation prior to mechanical brushing for hardite or calcium carbonate deposits. We use inhibited acid solutions sized to the tube metallurgy—copper, cupronickel, or stainless—to dissolve scale without damaging the substrate. This two-stage approach recovers tubes that brushing alone cannot."
 ---
 
 Chiller Restoration services from Building & Air Maintenance.

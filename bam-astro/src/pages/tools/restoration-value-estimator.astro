@@ -1,0 +1,472 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Restoration Value Estimator | BAM — HVAC ROI Calculator"
+  description="Model the financial case for mechanical restoration versus replacement. Calculate potential energy savings, deferred capital costs, and simple payback periods based on ASHRAE degradation curves."
+>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] site-grid-dark"></div>
+  <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl">
+      <a href="/tools/" class="inline-flex items-center gap-2 text-mint mb-4 no-underline hover:opacity-80 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Tools</span>
+      </a>
+      <div class="inline-flex items-center gap-2 text-mint mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Institutional Tool</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8">
+        Restoration Value<br/>
+        <span class="text-mint">Estimator Model</span>
+      </h1>
+      <p class="text-light-grey text-lg md:text-xl font-light leading-relaxed border-l-2 border-primary pl-8 opacity-90 max-w-2xl">
+        Model the potential operational savings and capital cost avoidance for your specific facility profile. This tool uses ASHRAE degradation curves to estimate the financial impact of mechanical restoration.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CALCULATOR ════════════════════ -->
+<section class="py-20 md:py-28 bg-offwhite">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+
+      <!-- LEFT: Form Inputs -->
+      <div class="lg:col-span-3">
+        <div class="bg-white border border-light-grey/60 rounded-sm p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+          <div class="h-1 w-16 bg-primary rounded-full mb-5"></div>
+          <h2 class="text-primary text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">Facility Parameters</h2>
+          <p class="text-slate text-sm leading-relaxed mb-8">Provide details about your facility and mechanical assets. The estimator uses ASHRAE-referenced degradation curves to model potential savings.</p>
+
+          <form id="roi-form" class="space-y-6">
+
+            <!-- Row 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="facilityType" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Type *</label>
+                <select id="facilityType" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select facility type</option>
+                  <option value="healthcare">Healthcare</option>
+                  <option value="education">Education (K-12 &amp; Higher Ed)</option>
+                  <option value="government">Government &amp; Secure</option>
+                  <option value="industrial">Industrial &amp; Manufacturing</option>
+                  <option value="commercial">Commercial Properties</option>
+                  <option value="senior-care">Senior Care / Assisted Living</option>
+                  <option value="retail">Retail Chains</option>
+                  <option value="cold-storage">Cold Storage</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label for="sqFt" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Square Footage *</label>
+                <select id="sqFt" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select range</option>
+                  <option value="under-50k">Under 50,000 sq ft</option>
+                  <option value="50k-150k">50,000 – 150,000 sq ft</option>
+                  <option value="150k-500k">150,000 – 500,000 sq ft</option>
+                  <option value="500k+">500,000+ sq ft</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="assetFocus" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Asset Focus *</label>
+                <select id="assetFocus" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select asset type</option>
+                  <option value="cooling-tower">Cooling Tower</option>
+                  <option value="chiller">Chiller</option>
+                  <option value="both">Both (System-wide)</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label for="assetCount" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Number of Units *</label>
+                <select id="assetCount" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select count</option>
+                  <option value="1">1</option>
+                  <option value="2-3">2 – 3</option>
+                  <option value="4-6">4 – 6</option>
+                  <option value="7+">7+</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="equipmentAge" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Equipment Age *</label>
+                <select id="equipmentAge" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select age range</option>
+                  <option value="0-5">0 – 5 Years</option>
+                  <option value="5-10">5 – 10 Years</option>
+                  <option value="10-15">10 – 15 Years</option>
+                  <option value="15-20+">15 – 20+ Years</option>
+                </select>
+              </div>
+              <div class="space-y-1.5">
+                <label for="energySpend" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Annual Energy Spend *</label>
+                <select id="energySpend" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                  <option value="">Select range</option>
+                  <option value="under-50k">Under $50k</option>
+                  <option value="50k-150k">$50k – $150k</option>
+                  <option value="150k-500k">$150k – $500k</option>
+                  <option value="500k-1m">$500k – $1M</option>
+                  <option value="1m+">$1M+</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Known Issues -->
+            <div class="space-y-3">
+              <p class="text-slate text-[10px] font-semibold uppercase tracking-widest">Known Issues (select all that apply)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label class="flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" name="issues" value="scale-corrosion" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary group-hover:text-primary/80">Visible scale or corrosion</span>
+                </label>
+                <label class="flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" name="issues" value="head-pressure" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary group-hover:text-primary/80">High head pressure / Approach temp issues</span>
+                </label>
+                <label class="flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" name="issues" value="biofilm" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary group-hover:text-primary/80">Visible biological growth / biofilm</span>
+                </label>
+                <label class="flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                  <input type="checkbox" name="issues" value="airflow" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary group-hover:text-primary/80">Airflow restrictions / Static pressure alarms</span>
+                </label>
+                <label class="flex items-start gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group sm:col-span-2">
+                  <input type="checkbox" name="issues" value="audit" class="mt-0.5 w-4 h-4 accent-primary shrink-0" />
+                  <span class="text-sm text-primary group-hover:text-primary/80">Recent audit deficiencies</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" id="calc-btn" class="relative group w-full px-8 py-4.5 bg-primary text-white font-bold tracking-[0.22em] uppercase shadow-lg shadow-primary/10 rounded-sm transition-all text-sm overflow-hidden cursor-pointer">
+              <span class="relative z-10">Calculate Restoration Value</span>
+              <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-white text-primary font-bold tracking-[0.22em] uppercase text-sm w-[101%]">Calculate Restoration Value</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sticky Results -->
+      <div class="lg:col-span-2 lg:sticky lg:top-8">
+        <div id="results-panel" class="hidden">
+          <div class="space-y-5">
+            <p class="text-slate text-[10px] font-semibold uppercase tracking-[0.2em]">Estimated Results</p>
+
+            <!-- Energy Savings Card -->
+            <div class="bg-white border border-light-grey/60 rounded-sm shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div class="h-1 bg-emerald-500"></div>
+              <div class="p-6">
+                <p class="text-slate text-[10px] font-semibold uppercase tracking-widest mb-1">Potential Utility Savings</p>
+                <p id="energy-savings" class="text-primary text-2xl md:text-3xl font-black tracking-tight">—</p>
+                <p class="text-slate text-xs mt-1">per year</p>
+              </div>
+            </div>
+
+            <!-- Capital Avoidance Card -->
+            <div class="bg-white border border-light-grey/60 rounded-sm shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div class="h-1 bg-blue-500"></div>
+              <div class="p-6">
+                <p class="text-slate text-[10px] font-semibold uppercase tracking-widest mb-1">Deferred Replacement Value</p>
+                <p id="capital-avoidance" class="text-primary text-2xl md:text-3xl font-black tracking-tight">—</p>
+                <p class="text-slate text-xs mt-1">capital expenditure deferred</p>
+              </div>
+            </div>
+
+            <!-- Payback Card -->
+            <div class="bg-white border border-light-grey/60 rounded-sm shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+              <div class="h-1 bg-amber-500"></div>
+              <div class="p-6">
+                <p class="text-slate text-[10px] font-semibold uppercase tracking-widest mb-1">Simple ROI Horizon</p>
+                <p id="payback-period" class="text-primary text-2xl md:text-3xl font-black tracking-tight">—</p>
+                <p class="text-slate text-xs mt-1">estimated payback period</p>
+              </div>
+            </div>
+
+            <p class="text-[10px] text-slate leading-relaxed">
+              These estimates are modeled from ASHRAE-referenced degradation curves and industry benchmarks. Actual results depend on site-specific conditions. Request an engineering validation for precise figures.
+            </p>
+
+            <!-- CTA: Get Detailed Validation -->
+            <a
+              href="#roi-validation-section"
+              class="group flex items-center gap-4 mt-6 p-5 bg-primary rounded-sm no-underline hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+            >
+              <div class="w-10 h-10 rounded-full bg-mint/20 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-white text-xs font-bold uppercase tracking-wide leading-tight">Get a Detailed Accounting</p>
+                <p class="text-light-grey/70 text-[10px] mt-0.5 leading-snug">Request an on-site engineering validation with precise, audit-ready figures.</p>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Placeholder before calculation -->
+        <div id="results-placeholder" class="bg-white border border-dashed border-light-grey rounded-sm p-8 md:p-10 text-center">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-full border border-light-grey/60 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-slate/50"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+          </div>
+          <p class="text-primary font-bold text-sm uppercase tracking-wide mb-1">Results will appear here</p>
+          <p class="text-slate text-xs leading-relaxed">Complete the facility parameters and click calculate to model your restoration ROI.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ METHODOLOGY ════════════════════ -->
+<section class="py-20 md:py-28 bg-dark relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] site-grid-dark"></div>
+  <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Left: Checklist -->
+      <div>
+        <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">Methodology</span>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-[0.95] mb-10">
+          Why Restoration Yields<br/><span class="text-mint">Defensible ROI</span>
+        </h2>
+        <ul class="space-y-5">
+          <li class="flex items-start gap-4">
+            <div class="w-6 h-6 rounded-full bg-mint/20 flex items-center justify-center shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <p class="text-light-grey text-sm leading-relaxed">ASHRAE degradation curves confirm <strong class="text-white">10–30% efficiency loss</strong> in aging mechanical systems</p>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="w-6 h-6 rounded-full bg-mint/20 flex items-center justify-center shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <p class="text-light-grey text-sm leading-relaxed">Restoration recovers <strong class="text-white">85–95% of original equipment performance</strong></p>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="w-6 h-6 rounded-full bg-mint/20 flex items-center justify-center shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <p class="text-light-grey text-sm leading-relaxed">Typical restoration cost is <strong class="text-white">10–20% of full replacement</strong></p>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="w-6 h-6 rounded-full bg-mint/20 flex items-center justify-center shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <p class="text-light-grey text-sm leading-relaxed">Energy savings <strong class="text-white">compound year over year</strong> with proper maintenance</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: Capital Planning Visual -->
+      <div>
+        <h3 class="text-white text-lg font-bold uppercase tracking-tight mb-8">Capital Planning Impact</h3>
+        <div class="space-y-6">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-light-grey text-xs font-semibold uppercase tracking-wider">Restoration Cost</span>
+              <span class="text-mint text-xs font-bold">~15%</span>
+            </div>
+            <div class="w-full h-4 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-emerald-500 rounded-full" style="width: 15%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-light-grey text-xs font-semibold uppercase tracking-wider">Full Replacement</span>
+              <span class="text-light-grey/60 text-xs font-bold">100%</span>
+            </div>
+            <div class="w-full h-4 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-white/50 rounded-full" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-14 p-6 border border-mint/20 rounded-sm bg-mint/[0.04]">
+          <p class="text-mint text-xs font-bold uppercase tracking-widest mb-2">Net Savings</p>
+          <p class="text-white text-sm leading-relaxed">
+            Facilities that choose restoration over replacement typically redirect <strong class="text-mint">85% of the capital budget</strong> toward other deferred maintenance, upgrades, or operational reserves.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ LEAD CAPTURE ════════════════════ -->
+<section id="roi-validation-section" class="py-20 md:py-28 bg-offwhite">
+  <div class="max-w-3xl mx-auto px-6 md:px-12">
+    <div class="bg-white border border-light-grey/60 rounded-sm p-8 md:p-12 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+      <div class="h-1 w-16 bg-primary rounded-full mb-5"></div>
+      <h2 class="text-primary text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">Validate These Numbers On-Site</h2>
+      <p class="text-slate text-sm leading-relaxed mb-8">
+        Our engineering team can perform an on-site assessment to validate these estimates against your actual equipment conditions. Complete the form below to request a walkthrough.
+      </p>
+
+      <form name="roi-validation" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+        <input type="hidden" name="form-name" value="roi-validation" />
+        <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+        <!-- Hidden calculator context -->
+        <input type="hidden" name="calculator-facility-type" id="lead-facility-type" />
+        <input type="hidden" name="calculator-asset-focus" id="lead-asset-focus" />
+        <input type="hidden" name="calculator-estimated-savings" id="lead-estimated-savings" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-1.5">
+            <label for="lead-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Full Name *</label>
+            <input type="text" id="lead-name" name="name" placeholder="John Smith" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="lead-email" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Work Email *</label>
+            <input type="email" id="lead-email" name="email" placeholder="john@facility.org" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-1.5">
+            <label for="lead-phone" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Phone Number</label>
+            <input type="tel" id="lead-phone" name="phone" placeholder="(555) 123-4567" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="lead-title" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Job Title</label>
+            <input type="text" id="lead-title" name="title" placeholder="Director of Facilities" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-1.5">
+            <label for="lead-company" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility / Company Name</label>
+            <input type="text" id="lead-company" name="company" placeholder="Memorial Regional Hospital" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+          </div>
+          <div class="space-y-1.5">
+            <label for="lead-location" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Location</label>
+            <input type="text" id="lead-location" name="location" placeholder="Philadelphia, PA" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+          </div>
+        </div>
+
+        <button type="submit" class="relative group w-full px-8 py-4.5 bg-primary text-white font-bold tracking-[0.22em] uppercase shadow-lg shadow-primary/10 rounded-sm transition-all text-sm overflow-hidden cursor-pointer">
+          <span class="relative z-10">Request Engineering Validation</span>
+          <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-white text-primary font-bold tracking-[0.22em] uppercase text-sm w-[101%]">Request Engineering Validation</span>
+        </button>
+
+        <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-slate font-semibold">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          Restricted Data Transmission Protocol Active
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ CALCULATOR LOGIC ════════════════════ -->
+<script>
+  const AGE_MULTIPLIERS: Record<string, number> = {
+    '0-5': 0.02,
+    '5-10': 0.05,
+    '10-15': 0.10,
+    '15-20+': 0.15,
+  };
+
+  const BASE_ENERGY_SPEND: Record<string, number> = {
+    'under-50k': 35000,
+    '50k-150k': 100000,
+    '150k-500k': 325000,
+    '500k-1m': 750000,
+    '1m+': 1200000,
+  };
+
+  const ASSET_COUNTS: Record<string, number> = {
+    '1': 1,
+    '2-3': 2.5,
+    '4-6': 5,
+    '7+': 8,
+  };
+
+  const UNIT_REPLACEMENT_COST: Record<string, number> = {
+    'cooling-tower': 125000,
+    'chiller': 200000,
+    'both': 325000,
+  };
+
+  function formatCurrency(n: number): string {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calculate() {
+    const age = (document.getElementById('equipmentAge') as HTMLSelectElement).value;
+    const spend = (document.getElementById('energySpend') as HTMLSelectElement).value;
+    const asset = (document.getElementById('assetFocus') as HTMLSelectElement).value;
+    const count = (document.getElementById('assetCount') as HTMLSelectElement).value;
+    const facilityType = (document.getElementById('facilityType') as HTMLSelectElement).value;
+
+    if (!age || !spend || !asset || !count || !facilityType) return;
+
+    const issueCheckboxes = document.querySelectorAll<HTMLInputElement>('input[name="issues"]:checked');
+    const numIssues = issueCheckboxes.length;
+
+    const ageMultiplier = AGE_MULTIPLIERS[age] ?? 0;
+    const baseSpend = BASE_ENERGY_SPEND[spend] ?? 0;
+    const assetCount = ASSET_COUNTS[count] ?? 1;
+    const unitCost = UNIT_REPLACEMENT_COST[asset] ?? 0;
+
+    const issuePenalty = Math.min(numIssues * 0.015, 0.08);
+    const lowSavings = baseSpend * ageMultiplier * 0.8;
+    const highSavings = baseSpend * (ageMultiplier + issuePenalty) * 1.0;
+    const avgSavings = (lowSavings + highSavings) / 2;
+
+    const totalReplacement = assetCount * unitCost;
+    const lowAvoidance = totalReplacement * 0.85;
+    const highAvoidance = totalReplacement * 0.90;
+
+    const estRestorationCost = totalReplacement * 0.15;
+    const monthlyBenefit = avgSavings / 12;
+    const paybackMonths = monthlyBenefit > 0 ? estRestorationCost / monthlyBenefit : Infinity;
+
+    let paybackText: string;
+    if (paybackMonths < 6) {
+      paybackText = 'Immediate (<6 months)';
+    } else if (paybackMonths > 24) {
+      paybackText = '18–24+ Months';
+    } else {
+      paybackText = `${Math.floor(paybackMonths)}–${Math.ceil(paybackMonths)} Months`;
+    }
+
+    (document.getElementById('energy-savings') as HTMLElement).textContent =
+      `${formatCurrency(lowSavings)} – ${formatCurrency(highSavings)} / year`;
+
+    (document.getElementById('capital-avoidance') as HTMLElement).textContent =
+      `${formatCurrency(lowAvoidance)} – ${formatCurrency(highAvoidance)}`;
+
+    (document.getElementById('payback-period') as HTMLElement).textContent = paybackText;
+
+    (document.getElementById('results-panel') as HTMLElement).classList.remove('hidden');
+    (document.getElementById('results-placeholder') as HTMLElement).classList.add('hidden');
+
+    const leadFacility = document.getElementById('lead-facility-type') as HTMLInputElement;
+    const leadAsset = document.getElementById('lead-asset-focus') as HTMLInputElement;
+    const leadSavings = document.getElementById('lead-estimated-savings') as HTMLInputElement;
+    if (leadFacility) leadFacility.value = facilityType;
+    if (leadAsset) leadAsset.value = asset;
+    if (leadSavings) leadSavings.value = `${formatCurrency(lowSavings)} – ${formatCurrency(highSavings)}`;
+  }
+
+  document.getElementById('roi-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    calculate();
+
+    document.getElementById('results-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
+
+</BaseLayout>

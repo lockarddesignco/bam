@@ -1,0 +1,89 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+---
+
+<div class="yt-facade group" data-video-id={videoId}>
+  <img
+    src={thumbnailUrl}
+    alt={title}
+    class="yt-facade-thumb"
+    loading="lazy"
+  />
+  <button class="yt-facade-play" aria-label={`Play: ${title}`}>
+    <svg viewBox="0 0 68 48" width="68" height="48">
+      <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#265A4A"/>
+      <path d="M45 24 27 14v20" fill="white"/>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .yt-facade {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    cursor: pointer;
+    background: #0B1110;
+  }
+
+  .yt-facade-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity 0.4s ease, transform 0.6s ease;
+  }
+
+  .yt-facade:hover .yt-facade-thumb {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+
+  .yt-facade-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+    z-index: 2;
+  }
+
+  .yt-facade:hover .yt-facade-play {
+    transform: translate(-50%, -50%) scale(1.12);
+    filter: drop-shadow(0 6px 30px rgba(0, 0, 0, 0.6));
+  }
+
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.yt-facade').forEach((el) => {
+    el.addEventListener('click', function handleClick() {
+      const id = el.dataset.videoId;
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&color=white`;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+      el.innerHTML = '';
+      el.appendChild(iframe);
+      el.style.cursor = 'default';
+      el.removeEventListener('click', handleClick);
+    });
+  });
+</script>

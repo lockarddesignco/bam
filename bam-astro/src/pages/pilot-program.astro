@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout
+  title="Pilot Program | BAM — Prove It Before You Commit"
+  description="BAM's Pilot Program provides at-cost HVAC restoration on a single system so qualified facilities can validate our technical execution, measure results, and make informed decisions."
+>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="relative w-full py-24 md:py-32 flex flex-col items-center justify-center bg-dark overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+  <div class="absolute inset-0 opacity-[0.04] site-grid-dark"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+    <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">
+      Limited Enrollment
+    </span>
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+      Pilot Program
+    </h1>
+    <p class="text-lg md:text-xl text-light-grey max-w-2xl mx-auto leading-relaxed font-light">
+      Prove our value on a single system — at cost — before committing to a full-scope engagement. No risk. Real data.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ WHAT IS THE PILOT ═══════ -->
+<section class="py-20 md:py-28 bg-ice">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <div>
+        <h2 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-4">The Concept</h2>
+        <h3 class="text-3xl md:text-4xl font-black text-primary leading-tight tracking-tight mb-8 uppercase">
+          Prove It Before<br/>You Commit
+        </h3>
+        <div class="space-y-6 text-slate text-base leading-relaxed">
+          <p>
+            Choosing a mechanical contractor for high-stakes institutional work is a significant decision. Vendor claims are easy to make — performance data is harder to fabricate.
+          </p>
+          <p>
+            BAM's Pilot Program is designed for facility directors and procurement teams who need verifiable proof of capability before awarding a master service agreement. We will restore a single system in your facility <strong class="text-primary">at our cost</strong> so you can evaluate our execution firsthand.
+          </p>
+          <p>
+            You get a fully documented restoration with before/after performance metrics. We get the opportunity to demonstrate why institutions across the Mid-Atlantic trust us with their critical mechanical infrastructure.
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white border border-light-grey rounded-sm p-8 shadow-sm">
+          <h4 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-6">What's Included — At Cost</h4>
+          <ul class="space-y-5">
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/[0.07] rounded-md flex items-center justify-center shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+              <div>
+                <p class="text-primary font-bold text-sm">Full Condition Assessment</p>
+                <p class="text-slate text-sm leading-relaxed">Technical evaluation of the selected system — thermal performance, airflow metrics, contamination levels, and structural condition.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/[0.07] rounded-md flex items-center justify-center shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div>
+                <p class="text-primary font-bold text-sm">Standards-Aligned Restoration</p>
+                <p class="text-slate text-sm leading-relaxed">Complete restoration of one system (AHU, chiller, cooling tower, or duct run) using our full protocol — same standards we apply to every institutional project.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/[0.07] rounded-md flex items-center justify-center shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+              </div>
+              <div>
+                <p class="text-primary font-bold text-sm">Audit-Ready Closeout Package</p>
+                <p class="text-slate text-sm leading-relaxed">Photo-documented before/after report with performance recovery metrics, suitable for internal stakeholders, board presentations, or regulatory review.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div class="w-8 h-8 bg-primary/[0.07] rounded-md flex items-center justify-center shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+              </div>
+              <div>
+                <p class="text-primary font-bold text-sm">Energy & Performance Data</p>
+                <p class="text-slate text-sm leading-relaxed">Calculated kWh reduction projections and thermal recovery data you can use to justify maintenance budgets vs. capital replacement.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHY WE DO THIS ═══════ -->
+<section class="py-20 md:py-28 bg-white border-y border-light-grey/40">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-4">Why We Offer This</h2>
+      <h3 class="text-3xl md:text-4xl font-black text-primary leading-tight tracking-tight mb-6 uppercase">
+        Our Work Speaks for Itself
+      </h3>
+      <p class="text-slate text-lg leading-relaxed">
+        We provide this program at cost because we know that once a facility director sees the results — the recovered airflow, the thermal performance data, the documentation quality — the decision to continue becomes straightforward.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="p-8 bg-ice border border-light-grey/60 rounded-sm text-center">
+        <div class="w-14 h-14 bg-primary/[0.07] rounded-lg flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-3">Collect Real Data</h4>
+        <p class="text-sm text-slate leading-relaxed">We use pilot engagements to gather performance recovery data across different system types and facility environments — improving our methodology for every future client.</p>
+      </div>
+      <div class="p-8 bg-ice border border-light-grey/60 rounded-sm text-center">
+        <div class="w-14 h-14 bg-primary/[0.07] rounded-lg flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-3">Build Trust</h4>
+        <p class="text-sm text-slate leading-relaxed">Institutional relationships are earned, not sold. The pilot lets you evaluate our field teams, our safety protocols, and our communication before any long-term commitment.</p>
+      </div>
+      <div class="p-8 bg-ice border border-light-grey/60 rounded-sm text-center">
+        <div class="w-14 h-14 bg-primary/[0.07] rounded-lg flex items-center justify-center mx-auto mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-3">Eliminate Risk</h4>
+        <p class="text-sm text-slate leading-relaxed">You pay only our material and labor costs — no markup, no profit. If the results don't meet your expectations, you've validated that at the lowest possible cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ QUALIFICATION CRITERIA ═══════ -->
+<section class="py-20 md:py-28 bg-ice">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <div>
+        <h2 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-4">Qualification Criteria</h2>
+        <h3 class="text-3xl md:text-4xl font-black text-primary leading-tight tracking-tight mb-8 uppercase">
+          Is Your Facility<br/>a Good Fit?
+        </h3>
+        <p class="text-slate text-base leading-relaxed mb-8">
+          The Pilot Program is designed for large institutional and commercial facilities with multiple mechanical systems. Enrollment is limited to ensure each pilot receives full ownership-level attention.
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 p-5 bg-white border border-light-grey/60 rounded-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            <div>
+              <p class="text-primary font-bold text-sm">Multi-System Facility</p>
+              <p class="text-slate text-sm leading-relaxed">Buildings with 3+ major HVAC assets (AHUs, chillers, cooling towers) that would benefit from a phased restoration approach.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5 bg-white border border-light-grey/60 rounded-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            <div>
+              <p class="text-primary font-bold text-sm">Mid-Atlantic Location</p>
+              <p class="text-slate text-sm leading-relaxed">Facility located within our primary service territory: PA, NJ, MD, DE, or Southern NY.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5 bg-white border border-light-grey/60 rounded-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            <div>
+              <p class="text-primary font-bold text-sm">Institutional or Commercial Classification</p>
+              <p class="text-slate text-sm leading-relaxed">Hospitals, universities, government campuses, large commercial properties, data centers, manufacturing plants, or similar mission-critical environments.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-5 bg-white border border-light-grey/60 rounded-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            <div>
+              <p class="text-primary font-bold text-sm">Decision-Maker Involvement</p>
+              <p class="text-slate text-sm leading-relaxed">A facility director, VP of operations, or procurement lead who can evaluate the pilot results and authorize future engagements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ PILOT PROGRAM FORM ═══════ -->
+      <div>
+        <div class="bg-white border border-light-grey rounded-lg p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+          <div class="h-1 w-16 bg-mint rounded-full mb-5"></div>
+          <h2 class="text-primary text-2xl md:text-3xl font-black uppercase tracking-tight mb-2">
+            Apply for the Pilot Program
+          </h2>
+          <p class="text-slate text-sm leading-relaxed mb-8">
+            Complete the form below. Our team will review your facility profile and respond within two business days with next steps.
+          </p>
+
+          <form name="pilot-program" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" class="space-y-6">
+            <input type="hidden" name="form-name" value="pilot-program" />
+            <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="pilot-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Full Name *</label>
+                <input type="text" id="pilot-name" name="name" placeholder="John Smith" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="pilot-title" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Title / Role *</label>
+                <input type="text" id="pilot-title" name="title" placeholder="Director of Facilities" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="pilot-email" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Email Address *</label>
+                <input type="email" id="pilot-email" name="email" placeholder="john@facility.org" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="pilot-phone" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Phone Number *</label>
+                <input type="tel" id="pilot-phone" name="phone" placeholder="(555) 123-4567" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div class="space-y-1.5">
+                <label for="pilot-org" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Organization / Facility *</label>
+                <input type="text" id="pilot-org" name="organization" placeholder="Memorial Regional Hospital" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+              <div class="space-y-1.5">
+                <label for="pilot-location" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Location (City, State) *</label>
+                <input type="text" id="pilot-location" name="location" placeholder="Philadelphia, PA" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="pilot-facility-type" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Type *</label>
+              <select id="pilot-facility-type" name="facility-type" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                <option value="">Select facility type</option>
+                <option value="healthcare">Healthcare / Hospital</option>
+                <option value="education">Education (K-12 / Higher Ed)</option>
+                <option value="government">Government / Secure Facility</option>
+                <option value="industrial">Industrial / Manufacturing</option>
+                <option value="commercial">Commercial Real Estate</option>
+                <option value="data-center">Data Center</option>
+                <option value="senior-care">Senior Living / Assisted Living</option>
+                <option value="food-processing">Food Processing</option>
+                <option value="cold-storage">Cold Storage / Refrigeration</option>
+                <option value="lab">Lab / Life Sciences</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="pilot-sqft" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Approximate Square Footage</label>
+              <input type="text" id="pilot-sqft" name="square-footage" placeholder="e.g. 250,000 sq ft" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+            </div>
+
+            <div class="space-y-3">
+              <p class="text-slate text-[10px] font-semibold uppercase tracking-widest">Systems of Interest (select all that apply)</p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  { value: 'ahu', label: 'Air Handling Units' },
+                  { value: 'chiller', label: 'Chillers' },
+                  { value: 'cooling-tower', label: 'Cooling Towers' },
+                  { value: 'ductwork', label: 'Ductwork' },
+                  { value: 'coils', label: 'Coils & Heat Exchangers' },
+                  { value: 'other', label: 'Other / Not Sure' },
+                ].map(option => (
+                  <label class="flex items-center gap-3 px-4 py-3 bg-ice border border-light-grey rounded cursor-pointer hover:border-primary/30 transition-colors group">
+                    <input type="checkbox" name="systems" value={option.value} class="w-4 h-4 accent-primary" />
+                    <span class="text-sm font-semibold text-primary group-hover:text-primary/80">{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="pilot-description" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Tell Us About Your Facility & Goals</label>
+              <textarea id="pilot-description" name="description" rows="5" placeholder="Describe your facility, the number of major HVAC systems, any known performance issues, and what you're hoping to evaluate through the pilot..." class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA] resize-none"></textarea>
+            </div>
+
+            <div class="space-y-1.5">
+              <label for="pilot-timeline" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Preferred Timeline</label>
+              <select id="pilot-timeline" name="timeline" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+                <option value="">Select timeline</option>
+                <option value="asap">As soon as possible</option>
+                <option value="1-month">Within 1 month</option>
+                <option value="1-3-months">1 – 3 months</option>
+                <option value="3-6-months">3 – 6 months</option>
+                <option value="planning">Just planning / exploring</option>
+              </select>
+            </div>
+
+            <button type="submit" class="relative group w-full px-8 py-4.5 bg-primary text-white font-bold tracking-[0.22em] uppercase shadow-lg shadow-primary/10 rounded-sm transition-all text-sm overflow-hidden">
+              <span class="relative z-10">Submit Pilot Application</span>
+              <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-mint text-primary font-bold tracking-[0.22em] uppercase text-sm w-[101%]">Submit Pilot Application</span>
+            </button>
+
+            <div class="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-slate font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              Limited Enrollment — Reviewed by BAM Ownership
+            </div>
+            <p class="text-[10px] text-[#8BA1AA] leading-relaxed">
+              All applications are reviewed personally by BAM leadership. We typically respond within two business days. Not all facilities will qualify.
+            </p>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROCESS ═══════ -->
+<section class="py-20 md:py-28 bg-dark text-white">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <h2 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-4">How It Works</h2>
+      <h3 class="text-3xl md:text-4xl font-black leading-tight tracking-tight mb-6 uppercase">
+        From Application to Results
+      </h3>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-10">
+      <div class="flex gap-6 md:gap-8">
+        <div class="w-14 h-14 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm border border-mint/20">01</div>
+        <div>
+          <h4 class="font-bold text-white text-lg mb-2">Apply & Qualify</h4>
+          <p class="text-light-grey text-sm leading-relaxed">Submit the form above with your facility details. Our team reviews every application to confirm fit — multi-system buildings in our service territory with a decision-maker involved.</p>
+        </div>
+      </div>
+      <div class="flex gap-6 md:gap-8">
+        <div class="w-14 h-14 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm border border-mint/20">02</div>
+        <div>
+          <h4 class="font-bold text-white text-lg mb-2">System Selection & Scoping</h4>
+          <p class="text-light-grey text-sm leading-relaxed">We work with your team to identify the best candidate system for the pilot — one that will clearly demonstrate restoration value. A detailed scope is produced and agreed upon.</p>
+        </div>
+      </div>
+      <div class="flex gap-6 md:gap-8">
+        <div class="w-14 h-14 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm border border-mint/20">03</div>
+        <div>
+          <h4 class="font-bold text-white text-lg mb-2">Execution at Cost</h4>
+          <p class="text-light-grey text-sm leading-relaxed">BAM performs the full restoration during a scheduled window. You pay only our direct material and labor costs — zero markup, zero profit on the pilot.</p>
+        </div>
+      </div>
+      <div class="flex gap-6 md:gap-8">
+        <div class="w-14 h-14 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm border border-mint/20">04</div>
+        <div>
+          <h4 class="font-bold text-white text-lg mb-2">Verification & Closeout</h4>
+          <p class="text-light-grey text-sm leading-relaxed">You receive a comprehensive closeout report with before/after metrics, photo documentation, and energy recovery projections. Use it internally however you see fit.</p>
+        </div>
+      </div>
+      <div class="flex gap-6 md:gap-8">
+        <div class="w-14 h-14 bg-mint text-primary flex items-center justify-center shrink-0 font-bold text-lg rounded-sm">05</div>
+        <div>
+          <h4 class="font-bold text-mint text-lg mb-2">Your Decision</h4>
+          <p class="text-light-grey text-sm leading-relaxed">You decide if you want to continue. No obligation, no pressure. The data speaks for itself.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ BOTTOM CTA ═══════ -->
+<section class="py-20 md:py-28 bg-primary text-center">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight uppercase">Let the Results<br/>Make the Case</h2>
+    <p class="text-light-grey text-lg mb-12 font-light max-w-2xl mx-auto opacity-90">
+      No sales pitch can replace a verified closeout report showing 30% thermal recovery on your own equipment. Apply for the Pilot Program today.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+      <a href="#apply" onclick="document.getElementById('pilot-name')?.focus(); return false;" class="inline-flex items-center justify-center px-10 py-4 bg-white text-primary font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-mint transition-colors no-underline">
+        Apply Now
+      </a>
+      <a href={`tel:${siteConfig.phoneRaw}`} class="inline-flex items-center gap-2 text-mint hover:text-white transition-colors font-bold text-lg no-underline">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        {siteConfig.phone}
+      </a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

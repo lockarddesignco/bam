@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout
+  title="Blog | BAM — Institutional HVAC Insights"
+  description="Expert insights on HVAC restoration, IAQ compliance, energy optimization, and mechanical system maintenance for institutional facilities."
+>
+  <section class="relative py-20 md:py-28 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.05] site-grid-dark"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <span class="inline-block text-mint font-bold text-xs tracking-[0.3em] uppercase mb-5">Insights & Expertise</span>
+      <h1 class="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-6">From the Field</h1>
+      <p class="text-light-grey/70 text-lg max-w-2xl mx-auto leading-relaxed">
+        Technical insights, compliance guidance, and restoration expertise from the BAM team.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24 bg-ice">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {allPosts.map((post) => {
+          const dateStr = post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          return (
+            <a
+              href={`/blog/${post.slug}/`}
+              class="flex flex-col bg-white border border-light-grey rounded-xl overflow-hidden transition-all duration-500 group no-underline hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(38,90,74,0.12)]"
+            >
+              {(post.data.video || post.data.image) && (
+                <div class="relative h-[200px] w-full overflow-hidden bg-light-grey">
+                  {post.data.video ? (
+                    <video
+                      src={post.data.video}
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      class="absolute inset-0 w-full h-full object-cover"
+                      style="transform: scaleX(1.24) scaleY(1.08); transform-origin: center center;"
+                    />
+                  ) : (
+                    <img
+                      src={post.data.image}
+                      alt={post.data.title}
+                      class="w-full h-full object-cover grayscale opacity-90 transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                      loading="lazy"
+                    />
+                  )}
+                  <div class="absolute inset-0 bg-primary mix-blend-multiply opacity-30 group-hover:opacity-10 transition-opacity duration-500"></div>
+                </div>
+              )}
+              <div class="flex flex-col flex-grow p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <time class="text-slate/70 text-xs font-semibold tracking-wide uppercase">{dateStr}</time>
+                </div>
+                <h2 class="text-primary text-lg font-bold mb-3 leading-snug group-hover:text-[#1e483b] transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-slate text-sm leading-relaxed mb-6 flex-grow">
+                  {post.data.description}
+                </p>
+                <div class="mt-auto pt-4 border-t border-light-grey/60 flex items-center text-primary text-xs font-bold uppercase tracking-[0.15em]">
+                  <span>Read Article</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto opacity-40 group-hover:opacity-80 group-hover:translate-x-1 transition-all duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

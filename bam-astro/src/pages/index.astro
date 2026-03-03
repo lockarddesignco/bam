@@ -1,34 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
 import { siteConfig } from '../config/site.config';
+import { getCollection } from 'astro:content';
 
 const coreServices = siteConfig.services.filter(s => s.category === 'core');
 const specialtyServices = siteConfig.services.filter(s => s.category === 'specialty');
 const allDisplayServices = [...coreServices, ...specialtyServices.filter(s => s.id === 'dampers')];
 
-const results = [
-  {
-    facility: "Healthcare Facility",
-    metric: "32% Heat-Transfer Recovery",
-    description: "Restored coil performance and reduced static-pressure penalty in a surgical-suite AHU.",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
-    alt: "Medical facility corridor",
-  },
-  {
-    facility: "K–12 School District",
-    metric: "IAQ & Ventilation Compliance Achieved",
-    description: "Coil and duct restoration improved airflow and supported ASHRAE-aligned ventilation in multiple buildings.",
-    image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80",
-    alt: "Clean school hallway",
-  },
-  {
-    facility: "Government Building",
-    metric: "5–10 Years Extended Tower Life",
-    description: "Recovered cooling-tower capacity, reduced biofouling, and avoided major capital replacement.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-    alt: "Industrial facility interior",
-  },
-];
+const allPosts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const serviceIconMap: Record<string, string> = {
   'cooling-tower': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
@@ -60,6 +42,25 @@ const industryIconMap: Record<string, string> = {
   'data-centers': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>`,
   'labs': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>`,
 };
+
+const homeFaqs = [
+  { q: 'Do you provide commercial HVAC restoration for residential properties?', a: 'No. BAM strictly serves mission-critical institutions, including hospitals, K-12 school districts, universities, federal agencies, and large manufacturing plants. Our technicians specialize exclusively in high-stakes commercial environments where catastrophic mechanical failure is not an option. We occupy a space above typical duct cleaners and do not perform residential HVAC repairs or standard home duct cleaning.' },
+  { q: 'How do your HVAC restoration services support Joint Commission compliance for healthcare facilities?', a: 'Our HVAC restoration directly aligns with Joint Commission survey requirements by ensuring sterile environments, proper system pressurization, and the complete elimination of microbial growth. We provide rigorous documentation and post-remediation verification for every project. Our "do no harm" philosophy guarantees that our OSHA-30 certified technicians treat your medical mechanical rooms with the absolute highest level of precision and care.' },
+  { q: "Can commercial coil and chiller refurbishment actually reduce our facility's HVAC energy spend?", a: "Yes. Deep cleaning and structural refurbishment of air handling units, coils, and chillers restores maximum airflow and thermal transfer. This drastically reduces the mechanical load, extending the equipment's lifespan and clawing back significant portions of your HVAC energy budget. Every recommendation BAM makes is tied directly to measurable energy spend reduction and protecting your long-term mechanical assets." },
+  { q: 'Are your technicians cleared to work in high-security federal and government buildings?', a: 'Yes. BAM operates with federal-level discretion and discipline, having successfully executed months of complex restoration work inside highly secure government environments. We bring this exact same standard of zero shortcuts, stringent documentation, and absolute precision to every hospital, school, and manufacturing plant we service.' },
+  { q: 'How does commercial cooling tower restoration impact manufacturing production downtime?', a: 'Our restoration process is engineered to minimize or eliminate operational downtime, actively preventing the catastrophic daily losses associated with sudden process cooling failures. We use specialized epoxy coatings, basin restorations, and precise project management to rebuild your infrastructure efficiently. BAM acts as a long-term maintenance partner, replacing unexpected mechanical emergencies with predictable, budgeted forecasting.' },
+  { q: 'What certifications do BAM technicians hold for commercial duct cleaning and indoor air quality?', a: 'BAM is a NADCA-certified firm, and our technicians hold Universal EPA and OSHA-30 certifications. We execute all indoor air quality testing, mold remediation, and duct cleaning services in strict alignment with ASHRAE standards and LEED Indoor Environmental Quality guidelines. Built by technicians, our leadership prioritizes deep technical competence and ethical long-term stewardship over short-sighted financial gain.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 ---
 <BaseLayout
   title="BAM | Building & Air Maintenance — Commercial HVAC Restoration"
@@ -78,10 +79,7 @@ const industryIconMap: Record<string, string> = {
         loading="eager"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/50 to-dark"></div>
-      <div
-        class="absolute inset-0 opacity-[0.04]"
-        style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 60px 60px;"
-      ></div>
+      <div class="absolute inset-0 opacity-[0.04] site-grid-dark"></div>
       <canvas id="grid-pulse-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
     </div>
 
@@ -92,7 +90,7 @@ const industryIconMap: Record<string, string> = {
       </div>
 
       <h1 class="text-[2rem] md:text-[3.5rem] lg:text-[4.5rem] font-black leading-[0.88] tracking-tighter text-white mb-6 md:mb-10 animate-fade-in-up opacity-0 uppercase drop-shadow-2xl" style="animation-delay: 100ms;">
-        Extending the Life of <br/>
+        Extending the Life&nbsp;of <br class="hidden md:inline" />
         <span class="text-mint">Mission-Critical</span> <br/>
         Clean Air Systems.
       </h1>
@@ -123,6 +121,11 @@ const industryIconMap: Record<string, string> = {
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </a>
       </div>
+
+      <a href="/tools/" class="inline-flex items-center gap-1.5 text-mint/80 hover:text-mint text-xs font-semibold tracking-wider uppercase no-underline transition-colors mt-5 animate-fade-in-up opacity-0" style="animation-delay: 400ms;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        Refurbishment ROI Calculator
+      </a>
     </div>
 
   </section>
@@ -175,13 +178,31 @@ const industryIconMap: Record<string, string> = {
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
+       SEE BAM IN ACTION — VIDEO
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="relative py-20 md:py-28 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dark"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-mint/[0.06] blur-[150px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-10 md:mb-14">
+        <span class="inline-block text-mint font-bold text-xs tracking-[0.3em] uppercase mb-4">See BAM in Action</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.9]">
+          Institutional-Grade Execution
+        </h2>
+      </div>
+
+      <div class="rounded-xl overflow-hidden shadow-2xl shadow-black/30 border border-white/[0.08]">
+        <YouTubeEmbed videoId="eSpw4Bh5qFU" title="BAM — Kline Commercial" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
        CAPABILITIES / SERVICES SECTION
        ═══════════════════════════════════════════════════════════════ -->
   <section id="services" class="relative py-24 bg-ice overflow-hidden">
-    <div
-      class="absolute inset-0 pointer-events-none opacity-[0.03]"
-      style="background-image: linear-gradient(#5E7A86 1px, transparent 1px), linear-gradient(90deg, #5E7A86 1px, transparent 1px); background-size: 40px 40px;"
-    ></div>
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[900px] h-[500px] rounded-full bg-mint/[0.10] blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-primary/[0.05] blur-[100px] pointer-events-none"></div>
 
@@ -193,15 +214,16 @@ const industryIconMap: Record<string, string> = {
         <div class="w-24 h-1.5 bg-primary mx-auto opacity-20"></div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {allDisplayServices.map((service) => (
           <a
             href={`/services/${service.slug}/`}
             class="service-card relative rounded-xl p-6 pt-7 transition-all duration-300 group h-full flex flex-col no-underline overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(38,90,74,0.18)] bg-primary/[0.07] backdrop-blur-xl border border-primary/[0.12] shadow-[0_2px_16px_rgba(38,90,74,0.06)] hover:bg-primary/[0.12] hover:border-primary/20"
           >
-            <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/60 via-white/30 to-mint/10 pointer-events-none"></div>
-            <div class="absolute inset-[1px] rounded-xl bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
-            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/80 to-transparent"></div>
+            <canvas class="wave-card-bg absolute inset-0 w-full h-full pointer-events-none z-0 rounded-xl" aria-hidden="true"></canvas>
+            <div class="absolute inset-0 rounded-xl bg-gradient-to-br from-white/60 via-white/30 to-mint/10 pointer-events-none z-[1]"></div>
+            <div class="absolute inset-[1px] rounded-xl bg-gradient-to-br from-white/40 to-transparent pointer-events-none z-[1]"></div>
+            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/80 to-transparent z-[1]"></div>
 
             <div class="relative z-10 mb-5 w-11 h-11 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/[0.14] transition-colors duration-300">
               <Fragment set:html={serviceIconMap[service.id] || ''} />
@@ -227,7 +249,7 @@ const industryIconMap: Record<string, string> = {
           <span class="relative z-10">Request a Site Visit</span>
           <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-white text-primary font-bold text-sm uppercase tracking-widest w-[101%]">Request a Site Visit</span>
         </a>
-        <a href="/services" class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-primary hover:text-white transition-colors">
+        <a href="/services/" class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-primary hover:text-white transition-colors">
           View All Services
         </a>
       </div>
@@ -238,7 +260,7 @@ const industryIconMap: Record<string, string> = {
        WHY FACILITIES CHOOSE BAM
        ═══════════════════════════════════════════════════════════════ -->
   <section class="relative py-28 md:py-36 bg-dark overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 48px 48px;"></div>
+    <div class="absolute inset-0 opacity-[0.05] site-grid-dark"></div>
     <canvas id="why-bam-pulse-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-[1]"></canvas>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
@@ -273,137 +295,325 @@ const industryIconMap: Record<string, string> = {
   <!-- ═══════════════════════════════════════════════════════════════
        INDUSTRIES SECTION
        ═══════════════════════════════════════════════════════════════ -->
-  <section class="relative py-24 bg-white border-y border-light-grey">
-    <div
-      class="absolute inset-0 pointer-events-none opacity-[0.03]"
-      style="background-image: linear-gradient(#5E7A86 1px, transparent 1px), linear-gradient(90deg, #5E7A86 1px, transparent 1px); background-size: 40px 40px;"
-    ></div>
+  <section id="industries" class="relative py-28 md:py-36 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dots"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-mint/[0.06] blur-[150px] pointer-events-none"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
-      <div class="text-center mb-20">
-        <h2 class="text-4xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+      <div class="text-center mb-16 md:mb-24">
+        <span class="inline-block text-mint font-bold text-xs tracking-[0.3em] uppercase mb-5">Sectors & Specializations</span>
+        <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-6">
           Industries We Serve
         </h2>
-        <p class="text-slate text-lg max-w-3xl mx-auto">
+        <p class="text-light-grey/70 text-lg max-w-3xl mx-auto leading-relaxed">
           Institutional-grade HVAC restoration, indoor air quality, and compliance-driven mechanical services for facilities where uptime, safety, and air quality are mission critical.
         </p>
-        <div class="w-24 h-1.5 bg-primary mx-auto opacity-20 mt-6"></div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-light-grey rounded-sm overflow-hidden">
-        {siteConfig.industries.map((industry, i) => (
-          <a
-            href={`/industries/${industry.slug}`}
-            class:list={[
-              "group flex items-center gap-5 px-8 py-6 no-underline transition-all duration-300 hover:bg-ice",
-              i < siteConfig.industries.length - 2 ? "border-b border-light-grey" : (i < siteConfig.industries.length - 1 ? "border-b md:border-b-0 border-light-grey" : ""),
-              i % 2 === 0 ? "md:border-r border-light-grey" : "",
-            ]}
-          >
-            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/[0.07] flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-              <Fragment set:html={industryIconMap[industry.id] || ''} />
-            </div>
-            <div class="flex flex-col min-w-0">
-              <h3 class="text-base font-bold text-primary uppercase tracking-tight group-hover:text-[#1e483b] transition-colors">{industry.title}</h3>
-              <p class="text-sm text-slate leading-relaxed mt-0.5">{industry.shortDescription}</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 ml-auto text-light-grey group-hover:text-primary transition-all duration-300 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        ))}
+      <!-- Featured Industries — 2×2 large cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 md:mb-10">
+        {(['healthcare', 'education', 'government', 'data-centers'] as const).map(id => {
+          const industry = siteConfig.industries.find(ind => ind.id === id)!;
+          return (
+            <a
+              href={`/industries/${industry.slug}/`}
+              class="group relative flex flex-col justify-between rounded-xl p-8 md:p-10 min-h-[220px] no-underline overflow-hidden border border-white/[0.08] bg-white/[0.04] transition-all duration-500 hover:border-mint/30 hover:bg-white/[0.08] hover:shadow-[0_0_80px_rgba(167,215,197,0.1)]"
+            >
+              <div class="absolute top-0 right-0 w-40 h-40 rounded-full bg-mint/[0.04] blur-[60px] pointer-events-none group-hover:bg-mint/[0.08] transition-all duration-700"></div>
+
+              <div>
+                <div class="flex items-center gap-4 mb-5">
+                  <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-mint/10 border border-mint/20 flex items-center justify-center text-mint group-hover:bg-mint group-hover:text-primary group-hover:border-mint transition-all duration-300">
+                    <Fragment set:html={industryIconMap[industry.id] || ''} />
+                  </div>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-mint transition-colors duration-300 leading-tight uppercase tracking-tight">{industry.title}</h3>
+                <p class="text-light-grey/60 text-sm md:text-base leading-relaxed max-w-md">{industry.shortDescription}</p>
+              </div>
+
+              <div class="flex items-center gap-2 mt-6 text-mint/50 group-hover:text-mint transition-colors duration-300">
+                <span class="text-xs font-bold uppercase tracking-[0.2em]">Learn More</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- Remaining Industries — compact 3+4 row -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-5">
+        {siteConfig.industries
+          .filter(ind => !['healthcare', 'education', 'government', 'data-centers'].includes(ind.id))
+          .map(industry => (
+            <a
+              href={`/industries/${industry.slug}/`}
+              class="group flex flex-col gap-3 rounded-lg p-5 md:p-6 no-underline border border-white/[0.06] bg-white/[0.03] transition-all duration-400 hover:border-mint/25 hover:bg-white/[0.06]"
+            >
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-mint/[0.08] border border-mint/15 flex items-center justify-center text-mint/70 group-hover:text-mint group-hover:border-mint/30 transition-all duration-300">
+                <Fragment set:html={(industryIconMap[industry.id] || '').replace(/width="32" height="32"/g, 'width="22" height="22"')} />
+              </div>
+              <h3 class="text-sm font-bold text-white/90 uppercase tracking-tight leading-snug group-hover:text-mint transition-colors duration-300">{industry.title}</h3>
+              <p class="text-light-grey/50 text-xs leading-relaxed line-clamp-2">{industry.shortDescription}</p>
+            </a>
+          ))}
+
+        <!-- CTA card -->
+        <a
+          href="/contact/"
+          class="group relative flex flex-col items-center justify-center gap-3 rounded-lg p-5 md:p-6 no-underline border-2 border-dashed border-mint/40 bg-gradient-to-br from-mint/[0.12] to-mint/[0.05] transition-all duration-400 hover:border-mint/70 hover:from-mint/[0.20] hover:to-mint/[0.10] hover:shadow-[0_0_50px_rgba(167,215,197,0.15)] text-center"
+        >
+          <div class="w-11 h-11 rounded-full bg-mint/20 flex items-center justify-center text-mint group-hover:bg-mint group-hover:text-primary transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span class="text-sm font-bold text-white uppercase tracking-tight leading-snug group-hover:text-mint transition-colors duration-300">Don't See Your Industry?</span>
+          <span class="text-mint/60 text-xs leading-relaxed">Book a consultation with us</span>
+        </a>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-14 md:mt-16">
+        <a href="/industries/" class="relative group inline-flex items-center justify-center px-8 py-4 bg-mint text-primary font-bold text-sm uppercase tracking-widest rounded-sm shadow-lg shadow-mint/10 transition-all overflow-hidden">
+          <span class="relative z-10">Explore All Industries</span>
+          <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-primary text-mint font-bold text-sm uppercase tracking-widest w-[101%]">Explore All Industries</span>
+        </a>
+        <a href="/contact/" class="relative group inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white font-bold text-sm uppercase tracking-widest rounded-sm transition-all overflow-hidden hover:border-mint hover:text-mint">
+          <span class="relative z-10">Request a Site Visit</span>
+          <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center border-2 border-mint text-mint font-bold text-sm uppercase tracking-widest w-[101%]">Request a Site Visit</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       THE BAM METHOD
+       THE BAM METHOD — Serpentine Path
        ═══════════════════════════════════════════════════════════════ -->
-  <section class="relative py-24 bg-ice overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#5E7A86 1px, transparent 1px), linear-gradient(90deg, #5E7A86 1px, transparent 1px); background-size: 40px 40px;"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
-      <div class="text-center mb-20">
+  <section class="relative py-24 md:py-32 bg-ice overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center mb-20 md:mb-28">
         <span class="inline-block text-mint font-bold text-xs tracking-[0.2em] uppercase mb-4">The BAM Method</span>
-        <h2 class="text-primary text-3xl md:text-4xl lg:text-[42px] font-semibold tracking-tight leading-tight max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-[0.9] max-w-3xl mx-auto">
           Human-Led Service. Compliance-Driven Process.
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 lg:gap-x-10 gap-y-12">
-        {[
-          { step: '01', title: 'Diagnose', description: 'Technicians perform airflow testing, coil inspection, static pressure checks, and IAQ assessments.', image: '/images/method/diagnose.png', alt: 'Technician inspecting HVAC unit interior' },
-          { step: '02', title: 'Document', description: 'We provide detailed before-photos, findings, compliance notes, and transparent reporting.', image: '/images/method/document.png', alt: 'Technician documenting coil before/after with checklist' },
-          { step: '03', title: 'Restore', description: 'Certified technicians restore coils, cooling towers, ducts, and mechanical components.', image: '/images/method/restore.png', alt: 'Technician cleaning coil surface' },
-          { step: '04', title: 'Verify', description: 'After-photos, airflow recovery, and a full compliance closeout package.', image: '/images/method/verify.png', alt: 'Verified HVAC unit with panels removed for inspection' },
-        ].map((item) => (
-          <div class="flex flex-col group h-full cursor-default">
-            <div class="relative w-full h-[220px] mb-6 rounded-lg overflow-hidden bg-ice transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:shadow-[0_8px_30px_rgba(38,90,74,0.15)] border border-light-grey/50">
-              <img src={item.image} alt={item.alt} class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale-[0.2]" loading="lazy" />
-              <div class="absolute inset-0 bg-primary mix-blend-multiply opacity-30 group-hover:opacity-20 transition-opacity duration-500"></div>
-            </div>
-            <div class="flex flex-col flex-grow px-1">
-              <div class="mb-3">
-                <span class="inline-block text-mint font-bold text-sm tracking-wider">{item.step}</span>
-              </div>
-              <h3 class="text-primary text-xl font-bold mb-3 tracking-tight">{item.title}</h3>
-              <p class="text-slate text-sm md:text-base leading-relaxed font-normal opacity-90">{item.description}</p>
+      <div id="method-path-container" class="relative">
+        <!-- Mobile vertical connecting line — positioned by JS between first and last node -->
+        <div id="method-mobile-line" class="lg:hidden absolute left-1/2 -translate-x-1/2 w-px pointer-events-none z-[5]" style="top: 0; bottom: 0;">
+          <div class="absolute inset-0 border-l-2 border-dashed border-light-grey/40"></div>
+          <div id="method-mobile-line-lit" class="absolute top-0 left-0 w-0.5 bg-mint rounded-full" style="height: 0%; transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+        </div>
+
+        <!-- SVG serpentine path (desktop) -->
+        <svg id="method-svg" class="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" preserveAspectRatio="none">
+          <path id="method-path-bg" class="fill-none stroke-light-grey/40" stroke-width="2" stroke-dasharray="8 6" />
+          <path id="method-path-lit" class="fill-none stroke-mint" stroke-width="3" stroke-linecap="round" />
+        </svg>
+
+        <!-- Step 1 — Left -->
+        <div class="method-step relative z-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-14 mb-16 lg:mb-28" data-step="0">
+          <div class="method-step-image relative w-full lg:w-[48%] h-[240px] md:h-[280px] rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-light-grey/50 group">
+            <img src="/images/method/diagnose.png" alt="Technician inspecting HVAC unit interior" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-primary mix-blend-multiply opacity-40 group-hover:opacity-25 transition-opacity duration-500"></div>
+          </div>
+          <div class="method-node mx-auto lg:hidden flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice flex items-center justify-center text-slate font-black text-lg transition-all duration-700">01</div>
+          <div class="flex-1 flex items-start gap-5 text-center lg:text-left">
+            <div class="hidden lg:flex method-node flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice items-center justify-center text-slate font-black text-lg transition-all duration-700">01</div>
+            <div>
+              <h3 class="text-primary text-2xl md:text-3xl font-bold mb-3 tracking-tight">Diagnose</h3>
+              <p class="text-slate text-base leading-relaxed max-w-md">Technicians perform airflow testing, coil inspection, static pressure checks, and IAQ assessments.</p>
             </div>
           </div>
-        ))}
+        </div>
+
+        <!-- Step 2 — Right -->
+        <div class="method-step relative z-10 flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-14 mb-16 lg:mb-28" data-step="1">
+          <div class="method-step-image relative w-full lg:w-[48%] h-[240px] md:h-[280px] rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-light-grey/50 group">
+            <img src="/images/method/document.png" alt="Technician documenting coil before/after with checklist" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-primary mix-blend-multiply opacity-40 group-hover:opacity-25 transition-opacity duration-500"></div>
+          </div>
+          <div class="method-node mx-auto lg:hidden flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice flex items-center justify-center text-slate font-black text-lg transition-all duration-700">02</div>
+          <div class="flex-1 flex items-start gap-5 lg:justify-end text-center lg:text-left">
+            <div class="lg:text-right">
+              <h3 class="text-primary text-2xl md:text-3xl font-bold mb-3 tracking-tight lg:text-right">Document</h3>
+              <p class="text-slate text-base leading-relaxed max-w-md lg:text-right">We provide detailed before-photos, findings, compliance notes, and transparent reporting.</p>
+            </div>
+            <div class="hidden lg:flex method-node flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice items-center justify-center text-slate font-black text-lg transition-all duration-700">02</div>
+          </div>
+        </div>
+
+        <!-- Step 3 — Left -->
+        <div class="method-step relative z-10 flex flex-col lg:flex-row items-center gap-6 lg:gap-14 mb-16 lg:mb-28" data-step="2">
+          <div class="method-step-image relative w-full lg:w-[48%] h-[240px] md:h-[280px] rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-light-grey/50 group">
+            <img src="/images/method/restore.png" alt="Technician cleaning coil surface" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-primary mix-blend-multiply opacity-40 group-hover:opacity-25 transition-opacity duration-500"></div>
+          </div>
+          <div class="method-node mx-auto lg:hidden flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice flex items-center justify-center text-slate font-black text-lg transition-all duration-700">03</div>
+          <div class="flex-1 flex items-start gap-5 text-center lg:text-left">
+            <div class="hidden lg:flex method-node flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice items-center justify-center text-slate font-black text-lg transition-all duration-700">03</div>
+            <div>
+              <h3 class="text-primary text-2xl md:text-3xl font-bold mb-3 tracking-tight">Restore</h3>
+              <p class="text-slate text-base leading-relaxed max-w-md">Certified technicians restore coils, cooling towers, ducts, and mechanical components.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 — Right -->
+        <div class="method-step relative z-10 flex flex-col lg:flex-row-reverse items-center gap-6 lg:gap-14" data-step="3">
+          <div class="method-step-image relative w-full lg:w-[48%] h-[240px] md:h-[280px] rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-light-grey/50 group">
+            <img src="/images/method/verify.png" alt="Verified HVAC unit with panels removed for inspection" class="w-full h-full object-cover brightness-110 transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-transparent"></div>
+          </div>
+          <div class="method-node mx-auto lg:hidden flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice flex items-center justify-center text-slate font-black text-lg transition-all duration-700">04</div>
+          <div class="flex-1 flex items-start gap-5 lg:justify-end text-center lg:text-left">
+            <div class="lg:text-right">
+              <h3 class="text-primary text-2xl md:text-3xl font-bold mb-3 tracking-tight lg:text-right">Verify</h3>
+              <p class="text-slate text-base leading-relaxed max-w-md lg:text-right">After-photos, airflow recovery, and a full compliance closeout package.</p>
+            </div>
+            <div class="hidden lg:flex method-node flex-shrink-0 w-14 h-14 rounded-full border-2 border-light-grey bg-ice items-center justify-center text-slate font-black text-lg transition-all duration-700">04</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       RESULTS / CASE STUDIES SECTION
+       BLOG / INSIGHTS CAROUSEL
        ═══════════════════════════════════════════════════════════════ -->
-  <section class="relative w-full py-24 bg-ice border-b border-light-grey">
-    <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#5E7A86 1px, transparent 1px), linear-gradient(90deg, #5E7A86 1px, transparent 1px); background-size: 48px 48px;"></div>
+  <section class="relative w-full py-24 bg-ice border-b border-light-grey overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
+
     <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-6xl font-black text-primary mb-4 tracking-tighter uppercase leading-[0.9]">
-          Verified Results in <br/>Mission-Critical Facilities
-        </h2>
-        <p class="text-slate text-lg font-normal opacity-90 max-w-3xl mx-auto">
-          Documented improvements across healthcare, education, government, and industrial environments.
-        </p>
+      <div class="mb-14">
+        <span class="inline-block text-primary/60 font-bold text-xs tracking-[0.3em] uppercase mb-4">Insights & Expertise</span>
+        <div class="flex items-end gap-6">
+          <h2 class="text-4xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-[0.9]">
+            From the Field
+          </h2>
+          <div class="flex items-center gap-2 mb-1">
+            <button id="blog-prev" aria-label="Previous articles" class="w-11 h-11 rounded-full border-2 border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button id="blog-next" aria-label="Next articles" class="w-11 h-11 rounded-full border-2 border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-        {results.map((item) => (
-          <div class="flex flex-col bg-white border border-light-grey rounded-lg overflow-hidden transition-shadow hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] group">
-            <div class="relative h-[200px] w-full overflow-hidden bg-light-grey">
-              <img src={item.image} alt={item.alt} class="w-full h-full object-cover grayscale opacity-90 transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-              <div class="absolute inset-0 bg-slate mix-blend-multiply opacity-20"></div>
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60"></div>
-              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-md shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+    </div>
+
+    <div
+      id="blog-carousel-wrapper"
+      class="relative z-10 overflow-hidden cursor-grab select-none"
+      style="mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);"
+    >
+      <div
+        id="blog-carousel"
+        class="flex gap-6"
+      >
+        {[...allPosts, ...allPosts, ...allPosts].map((post, i) => {
+          const dateStr = post.data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          return (
+            <a
+              href={`/blog/${post.slug}/`}
+              class="blog-card flex-shrink-0 w-[320px] md:w-[380px] flex flex-col bg-white border border-light-grey rounded-xl overflow-hidden transition-all duration-500 group no-underline hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(38,90,74,0.12)]"
+              draggable="false"
+            >
+              <div class="relative h-[200px] w-full overflow-hidden bg-light-grey">
+                {post.data.video ? (
+                  <video
+                    src={post.data.video}
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    class="absolute inset-0 w-full h-full object-cover"
+                    style="transform: scaleX(1.24) scaleY(1.08); transform-origin: center center;"
+                    draggable="false"
+                  />
+                ) : post.data.image ? (
+                  <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover grayscale opacity-90 transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                    loading="lazy"
+                    draggable="false"
+                  />
+                ) : null}
+                <div class="absolute inset-0 bg-primary mix-blend-multiply opacity-30 group-hover:opacity-10 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
               </div>
-            </div>
-            <div class="flex flex-col flex-grow p-6 md:p-8">
-              <div class="mb-3">
-                <span class="text-slate text-xs font-bold uppercase tracking-widest border-b border-mint pb-1">{item.facility}</span>
+              <div class="flex flex-col flex-grow p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <time class="text-slate/70 text-xs font-semibold tracking-wide uppercase">{dateStr}</time>
+                  {post.data.author && (
+                    <span class="text-slate/40 text-xs">|</span>
+                    <span class="text-slate/70 text-xs font-medium">{post.data.author}</span>
+                  )}
+                </div>
+                <h3 class="text-primary text-lg font-bold mb-3 leading-snug group-hover:text-[#1e483b] transition-colors line-clamp-2">
+                  {post.data.title}
+                </h3>
+                <p class="text-slate text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+                  {post.data.description}
+                </p>
+                <div class="mt-auto pt-4 border-t border-light-grey/60 flex items-center text-primary text-xs font-bold uppercase tracking-[0.15em] group-hover:text-[#1e483b] transition-colors">
+                  <span>Read Article</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto opacity-40 group-hover:opacity-80 group-hover:translate-x-1 transition-all duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </div>
               </div>
-              <h3 class="text-primary text-2xl font-bold mb-3 leading-tight">{item.metric}</h3>
-              <p class="text-slate text-sm leading-relaxed mb-6 flex-grow">{item.description}</p>
-              <div class="mt-auto pt-4 border-t border-ice">
-                <span class="inline-flex items-center text-primary text-sm font-bold group-hover:text-[#1e483b] transition-colors">
-                  <span class="hover:underline decoration-mint underline-offset-4 decoration-2">View Report</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform transition-transform group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                </span>
-              </div>
-            </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 mt-12">
+      <div id="blog-progress-track" class="w-full max-w-xs mx-auto h-1 bg-light-grey rounded-full overflow-hidden">
+        <div id="blog-progress-bar" class="h-full bg-primary rounded-full transition-all duration-300 ease-out" style="width: 20%"></div>
+      </div>
+    </div>
+
+    <div class="relative z-10 flex justify-center mt-10">
+      <a href="/blog/" class="relative group inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold text-sm uppercase tracking-widest rounded-sm shadow-lg shadow-primary/10 transition-all overflow-hidden">
+        <span class="relative z-10">View All Articles</span>
+        <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-white text-primary font-bold text-sm uppercase tracking-widest w-[101%]">View All Articles</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FAQ SECTION — AEO-OPTIMIZED, STATIC RENDER
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dots"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full bg-mint/[0.05] blur-[180px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center mb-16 md:mb-20">
+        <span class="inline-block text-mint font-bold text-xs tracking-[0.3em] uppercase mb-5">Common Questions</span>
+        <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+          Frequently Asked Questions
+        </h2>
+        <div class="w-24 h-1 bg-mint mx-auto rounded-full opacity-60"></div>
+      </div>
+
+      <div class="space-y-12 md:space-y-16">
+        {homeFaqs.map((faq) => (
+          <div class="border-l-2 border-mint/40 pl-6 md:pl-8">
+            <h3 class="text-lg md:text-xl font-bold text-white leading-snug mb-4">{faq.q}</h3>
+            <p class="text-light-grey text-base md:text-lg leading-relaxed">{faq.a}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <!-- ═══════════════════════════════════════════════════════════════
        SITE VISIT CTA SECTION
        ═══════════════════════════════════════════════════════════════ -->
   <section class="relative w-full bg-dark pt-24 pb-20 border-t border-mint/10 overflow-hidden">
-    <div
-      class="absolute inset-0 opacity-[0.07] pointer-events-none"
-      style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 48px 48px;"
-    ></div>
+    <div class="absolute inset-0 opacity-[0.07] site-grid-dark"></div>
     <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
 
@@ -461,7 +671,7 @@ const industryIconMap: Record<string, string> = {
               </p>
             </div>
 
-            <form name="site-visit" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <form name="site-visit" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="site-visit" />
               <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
 
@@ -529,6 +739,62 @@ const industryIconMap: Record<string, string> = {
   }
   .accreditations-track:hover {
     animation-play-state: paused;
+  }
+
+  /* BAM Method serpentine steps */
+  .method-step {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .method-step.method-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .method-node {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .method-node-lit {
+    border-color: #A7D7C5;
+    background: #265A4A;
+    color: #A7D7C5;
+    box-shadow: 0 0 0 6px rgba(167, 215, 197, 0.15), 0 0 30px rgba(167, 215, 197, 0.2);
+  }
+
+  #method-path-lit {
+    filter: drop-shadow(0 0 6px rgba(167, 215, 197, 0.4));
+  }
+
+  /* Blog carousel — infinite translate loop */
+  #blog-carousel {
+    will-change: transform;
+  }
+  #blog-carousel-wrapper:active {
+    cursor: grabbing;
+  }
+  #blog-carousel-wrapper.is-dragging {
+    cursor: grabbing;
+  }
+  #blog-carousel-wrapper.is-dragging .blog-card {
+    pointer-events: none;
+  }
+  .blog-card {
+    will-change: transform, opacity;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>
 
@@ -613,6 +879,407 @@ const industryIconMap: Record<string, string> = {
     requestAnimationFrame(draw);
   }
 
-  initGridPulse('grid-pulse-canvas', 60, 6, 800);
+  initGridPulse('grid-pulse-canvas', 48, 6, 800);
   initGridPulse('why-bam-pulse-canvas', 48, 4, 1000);
+
+  // One continuous wave field rendered into every service card.
+  // An offscreen canvas covers the full grid; each card canvas copies its
+  // region from the offscreen buffer, so the wave is one seamless surface
+  // visible through each card like windows in a wall.
+  (function initCardWaves() {
+    const grid = document.getElementById('services-grid');
+    if (!grid) return;
+    const cardCanvases = grid.querySelectorAll<HTMLCanvasElement>('.wave-card-bg');
+    if (!cardCanvases.length) return;
+
+    const STEP = 5;
+    const offscreen = document.createElement('canvas');
+    const offCtx = offscreen.getContext('2d')!;
+
+    interface CardInfo {
+      canvas: HTMLCanvasElement;
+      ctx: CanvasRenderingContext2D;
+      ox: number; oy: number; w: number; h: number;
+    }
+
+    const cards: CardInfo[] = [];
+    cardCanvases.forEach(c => {
+      const ctx = c.getContext('2d');
+      if (ctx) cards.push({ canvas: c, ctx, ox: 0, oy: 0, w: 0, h: 0 });
+    });
+
+    function measure() {
+      const gr = grid!.getBoundingClientRect();
+      offscreen.width = Math.ceil(gr.width);
+      offscreen.height = Math.ceil(gr.height);
+      for (const card of cards) {
+        const cr = card.canvas.parentElement!.getBoundingClientRect();
+        card.ox = Math.round(cr.left - gr.left);
+        card.oy = Math.round(cr.top - gr.top);
+        card.w = Math.round(cr.width);
+        card.h = Math.round(cr.height);
+        card.canvas.width = card.w;
+        card.canvas.height = card.h;
+      }
+    }
+
+    measure();
+    window.addEventListener('resize', measure);
+
+    function waveHeight(gx: number, gy: number, t: number): number {
+      const s = 0.007;
+      const v1 = Math.sin(gx * s + gy * s * 0.5 + t * 0.0018);
+      const v2 = Math.sin(gx * s * 0.6 - gy * s * 0.9 + t * 0.0013 + 1.3);
+      const v3 = Math.sin(gx * s * 1.2 + gy * s * 0.3 - t * 0.0015 + 2.7);
+      const v4 = Math.sin((gx + gy) * s * 0.4 + t * 0.001 + 4.1);
+      return (v1 + v2 * 0.8 + v3 * 0.5 + v4 * 0.4) / 2.7 * 0.5 + 0.5;
+    }
+
+    function draw(t: number) {
+      const gw = offscreen.width;
+      const gh = offscreen.height;
+      offCtx.clearRect(0, 0, gw, gh);
+
+      for (let y = 0; y < gh; y += STEP) {
+        for (let x = 0; x < gw; x += STEP) {
+          const val = waveHeight(x, y, t);
+          const r = Math.round(30 + (160 - 30) * val);
+          const g = Math.round(80 + (215 - 80) * val);
+          const b = Math.round(65 + (190 - 65) * val);
+          const alpha = 0.18 + val * 0.22;
+          offCtx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+          offCtx.fillRect(x, y, STEP, STEP);
+        }
+      }
+
+      for (const card of cards) {
+        card.ctx.clearRect(0, 0, card.w, card.h);
+        card.ctx.drawImage(
+          offscreen,
+          card.ox, card.oy, card.w, card.h,
+          0, 0, card.w, card.h
+        );
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(draw);
+  })();
+
+  // BAM Method — serpentine path + scroll activation
+  (function initMethodPath() {
+    const container = document.getElementById('method-path-container');
+    const svg = document.getElementById('method-svg') as SVGSVGElement | null;
+    const pathBg = document.getElementById('method-path-bg') as SVGPathElement | null;
+    const pathLit = document.getElementById('method-path-lit') as SVGPathElement | null;
+    const mobileLine = document.getElementById('method-mobile-line-lit') as HTMLElement | null;
+    const steps = document.querySelectorAll<HTMLElement>('.method-step');
+    const allNodes = document.querySelectorAll<HTMLElement>('.method-node');
+    if (!container || steps.length < 2) return;
+
+    const mobileLineEl = document.getElementById('method-mobile-line') as HTMLElement | null;
+    const isDesktop = () => window.innerWidth >= 1024;
+
+    function positionMobileLine() {
+      if (isDesktop() || !mobileLineEl || !container) return;
+      const firstNode = getVisibleNode(steps[0]);
+      const lastNode = getVisibleNode(steps[steps.length - 1]);
+      if (!firstNode || !lastNode) return;
+      const cr = container.getBoundingClientRect();
+      const fn = firstNode.getBoundingClientRect();
+      const ln = lastNode.getBoundingClientRect();
+      const top = fn.top - cr.top + fn.height / 2;
+      const bottom = ln.top - cr.top + ln.height / 2;
+      mobileLineEl.style.top = `${top}px`;
+      mobileLineEl.style.height = `${bottom - top}px`;
+      mobileLineEl.style.bottom = 'auto';
+    }
+
+    function getVisibleNode(stepEl: HTMLElement): Element | null {
+      const nodes = stepEl.querySelectorAll('.method-node');
+      for (const n of nodes) {
+        if ((n as HTMLElement).offsetParent !== null) return n;
+      }
+      return nodes[0];
+    }
+
+    function getNodeCenter(stepEl: HTMLElement): { x: number; y: number } {
+      const node = getVisibleNode(stepEl);
+      if (!node) return { x: 0, y: 0 };
+      const cr = container!.getBoundingClientRect();
+      const nr = node.getBoundingClientRect();
+      return {
+        x: nr.left - cr.left + nr.width / 2,
+        y: nr.top - cr.top + nr.height / 2,
+      };
+    }
+
+    function buildPath() {
+      if (!isDesktop() || !svg || !pathBg || !pathLit) return;
+      const cr = container!.getBoundingClientRect();
+      svg.setAttribute('viewBox', `0 0 ${cr.width} ${cr.height}`);
+      svg.style.width = cr.width + 'px';
+      svg.style.height = cr.height + 'px';
+
+      const points = Array.from(steps).map(s => getNodeCenter(s));
+      if (points.some(p => p.x === 0 && p.y === 0)) return;
+
+      let d = `M ${points[0].x} ${points[0].y}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const curr = points[i];
+        const next = points[i + 1];
+        const midY = (curr.y + next.y) / 2;
+        d += ` C ${curr.x} ${midY}, ${next.x} ${midY}, ${next.x} ${next.y}`;
+      }
+
+      pathBg.setAttribute('d', d);
+      pathLit.setAttribute('d', d);
+
+      const totalLen = pathLit.getTotalLength();
+      pathLit.style.strokeDasharray = `${totalLen}`;
+      pathLit.style.strokeDashoffset = `${totalLen}`;
+    }
+
+    let resizeTimer: number;
+    function onResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => { buildPath(); positionMobileLine(); }, 150) as unknown as number;
+    }
+
+    setTimeout(() => { buildPath(); positionMobileLine(); }, 200);
+    window.addEventListener('resize', onResize);
+
+    const active = new Set<number>();
+
+    function updateProgress() {
+      const fraction = active.size === 0 ? 0 : (Math.max(...Array.from(active)) + 1) / steps.length;
+
+      if (isDesktop() && pathLit) {
+        const totalLen = pathLit.getTotalLength();
+        if (totalLen > 0) {
+          pathLit.style.transition = 'stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+          pathLit.style.strokeDashoffset = `${totalLen * (1 - fraction)}`;
+        }
+      }
+
+      if (!isDesktop() && mobileLine) {
+        mobileLine.style.height = `${Math.min(fraction * 100, 100)}%`;
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const idx = Number((entry.target as HTMLElement).dataset.step);
+          const stepNodes = entry.target.querySelectorAll('.method-node');
+          if (entry.isIntersecting) {
+            active.add(idx);
+            entry.target.classList.add('method-active');
+            stepNodes.forEach(n => n.classList.add('method-node-lit'));
+          } else {
+            active.delete(idx);
+            entry.target.classList.remove('method-active');
+            stepNodes.forEach(n => n.classList.remove('method-node-lit'));
+          }
+        });
+        updateProgress();
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -30% 0px' }
+    );
+
+    steps.forEach(step => observer.observe(step));
+  })();
+
+  // Blog carousel — infinite translate loop with drag & buttons
+  (function initBlogCarousel() {
+    const wrapper = document.getElementById('blog-carousel-wrapper') as HTMLElement | null;
+    const track = document.getElementById('blog-carousel') as HTMLElement | null;
+    const prevBtn = document.getElementById('blog-prev') as HTMLElement | null;
+    const nextBtn = document.getElementById('blog-next') as HTMLElement | null;
+    const progressBar = document.getElementById('blog-progress-bar') as HTMLElement | null;
+    if (!wrapper || !track) return;
+
+    const cards = track.querySelectorAll<HTMLElement>('.blog-card');
+    const totalCards = cards.length;
+    if (!totalCards) return;
+
+    const CARD_GAP = 24;
+    const AUTO_SPEED = 0.6;
+    const ORIGINAL_COUNT = totalCards / 3;
+
+    let offset = 0;
+    let autoScrollPaused = false;
+    let pauseTimeout: number | undefined;
+    let isDragging = false;
+    let startX = 0;
+    let dragOffset = 0;
+    let hasDragged = false;
+    let smoothTarget: number | null = null;
+    let smoothStart = 0;
+    let smoothStartTime = 0;
+    const SMOOTH_DURATION = 400;
+
+    function getOneSetWidth() {
+      const card = cards[0];
+      if (!card) return 0;
+      return ORIGINAL_COUNT * (card.offsetWidth + CARD_GAP);
+    }
+
+    function wrapOffset() {
+      const oneSet = getOneSetWidth();
+      if (oneSet <= 0) return;
+      while (offset >= oneSet * 2) offset -= oneSet;
+      while (offset < oneSet) offset += oneSet;
+    }
+
+    function applyTransform() {
+      track!.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    }
+
+    function updateProgress() {
+      if (!progressBar) return;
+      const oneSet = getOneSetWidth();
+      if (oneSet <= 0) return;
+      const normalised = ((offset % oneSet) / oneSet) * 100;
+      progressBar.style.width = `${Math.max(8, Math.min(100, normalised))}%`;
+    }
+
+    function updateCardPerspective() {
+      const wrapperRect = wrapper!.getBoundingClientRect();
+      const center = wrapperRect.left + wrapperRect.width / 2;
+      const halfW = wrapperRect.width / 2;
+
+      cards.forEach((card) => {
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+
+        if (cardRect.right < wrapperRect.left - 400 || cardRect.left > wrapperRect.right + 400) {
+          return;
+        }
+
+        const dist = (cardCenter - center) / halfW;
+        const c = Math.max(-1, Math.min(1, dist));
+
+        const rotateY = c * -3;
+        const scale = 1 - Math.abs(c) * 0.05;
+        const alpha = 1 - Math.abs(c) * 0.25;
+
+        card.style.transform = `perspective(1200px) rotateY(${rotateY}deg) scale(${scale})`;
+        card.style.opacity = `${alpha}`;
+      });
+    }
+
+    // Start at the middle set so we can scroll both directions
+    offset = getOneSetWidth();
+    applyTransform();
+
+    function frame() {
+      if (smoothTarget !== null) {
+        const elapsed = performance.now() - smoothStartTime;
+        const t = Math.min(elapsed / SMOOTH_DURATION, 1);
+        const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        offset = smoothStart + (smoothTarget - smoothStart) * ease;
+        if (t >= 1) smoothTarget = null;
+      } else if (!autoScrollPaused && !isDragging) {
+        offset += AUTO_SPEED;
+      }
+
+      wrapOffset();
+      applyTransform();
+      updateProgress();
+      updateCardPerspective();
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    function pauseAuto(ms: number) {
+      autoScrollPaused = true;
+      clearTimeout(pauseTimeout);
+      pauseTimeout = window.setTimeout(() => { autoScrollPaused = false; }, ms);
+    }
+
+    function smoothScrollBy(px: number) {
+      smoothTarget = offset + px;
+      smoothStart = offset;
+      smoothStartTime = performance.now();
+      pauseAuto(4000);
+    }
+
+    function getCardWidth() {
+      return cards[0].offsetWidth + CARD_GAP;
+    }
+
+    prevBtn?.addEventListener('click', () => smoothScrollBy(-getCardWidth()));
+    nextBtn?.addEventListener('click', () => smoothScrollBy(getCardWidth()));
+
+    const DRAG_THRESHOLD = 10;
+
+    // Mouse drag — events on wrapper so overflow:hidden doesn't clip interaction
+    wrapper.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      hasDragged = false;
+      smoothTarget = null;
+      startX = e.pageX;
+      dragOffset = offset;
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.pageX - startX;
+      if (!hasDragged && Math.abs(dx) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        wrapper!.classList.add('is-dragging');
+      }
+      if (hasDragged) offset = dragOffset - dx;
+    });
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        wrapper!.classList.remove('is-dragging');
+        if (hasDragged) pauseAuto(4000);
+      }
+    });
+
+    // Touch drag
+    wrapper.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      hasDragged = false;
+      smoothTarget = null;
+      startX = e.touches[0].pageX;
+      dragOffset = offset;
+    }, { passive: true });
+    wrapper.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const dx = e.touches[0].pageX - startX;
+      if (!hasDragged && Math.abs(dx) > DRAG_THRESHOLD) {
+        hasDragged = true;
+        wrapper!.classList.add('is-dragging');
+      }
+      if (hasDragged) offset = dragOffset - dx;
+    }, { passive: true });
+    wrapper.addEventListener('touchend', () => {
+      isDragging = false;
+      wrapper!.classList.remove('is-dragging');
+      if (hasDragged) pauseAuto(4000);
+    });
+
+    // Pause on hover
+    wrapper.addEventListener('mouseenter', () => { autoScrollPaused = true; });
+    wrapper.addEventListener('mouseleave', () => {
+      if (!autoScrollPaused) return;
+      if (!isDragging) autoScrollPaused = false;
+    });
+
+    // Block link clicks after drag
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          hasDragged = false;
+        }
+      });
+    });
+  })();
+
 </script>

@@ -1,0 +1,43 @@
+---
+import MetroLocationLayout from '../../layouts/MetroLocationLayout.astro';
+---
+
+<MetroLocationLayout
+  title="HVAC Services in Philadelphia | BAM"
+  description="Local field logistics, rapid response staging, and site-specific mechanical execution for Center City and the Greater Philadelphia metropolitan area."
+  metroName="Philadelphia"
+  heroBody="Local field logistics, rapid response staging, and site-specific mechanical execution for Center City and the Greater Philadelphia metropolitan area."
+  ctaBadge="Local Crew Deployment"
+  whoServes="This operational hub is for Site Managers, Plant Engineers, and Local Facility Operators requiring physical execution at a specific address within the Philadelphia Metro area."
+  scenarios={['Center City High-Rise Access', 'University City Lab Work', 'Navy Yard Industrial Support', 'Off-Hours Commercial Cleaning']}
+  facilityTypes={['Commercial Office Towers', 'Higher Ed Campuses', 'Regional Hospital Systems', 'Pharmaceutical R&D']}
+  govRedirectLabel="Go to PA State Governance"
+  govRedirectHref="/locations/pennsylvania/"
+  workflowSteps={[
+    { step: '01', title: 'Intake & Dispatch', desc: 'Digital or phone request routes to the Philadelphia field desk.' },
+    { step: '02', title: 'Site Scout', desc: 'Lead technician deploys (24-48 hrs) for urban access & parking logistics.' },
+    { step: '03', title: 'Mobilization', desc: 'Crew arrival. Coordination with loading docks and freight elevators.' },
+    { step: '04', title: 'Closeout', desc: 'Work completed. Verification report generated for local files.' },
+  ]}
+  capabilitiesTitle="Philadelphia Execution Capabilities"
+  capabilitiesBody="Field crews in this zone are equipped for urban mechanical environments, high-rise logistics, and institutional compliance."
+  capabilities={[
+    { title: 'Mechanical Restoration', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>', items: ['Urban cooling tower refurb', 'High-rise chiller tube cleaning', 'Penthouse AHU steam cleaning'] },
+    { title: 'Air Hygiene & IAQ', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>', items: ['Office tower duct cleaning', 'Lab exhaust hood cleaning', 'Mold remediation (containment)'] },
+    { title: 'Local Compliance', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>', items: ['Fire damper testing (NFPA)', 'Legionella compliance support', 'Philadelphia municipal codes'] },
+  ]}
+  safetyTitle="Site Access & Safety Protocols"
+  safetyBody="Philadelphia crews are trained for density. We manage the logistics of getting gear into urban cores without disrupting tenant flows or street traffic."
+  safetyCards={[
+    { title: 'Off-Hours Capability', body: 'Night and weekend shifts available for occupied commercial buildings.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+    { title: 'Union & Labor Harmony', body: 'Experienced in navigating union-heavy environments and project labor agreements.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>' },
+  ]}
+  serviceArea={[
+    { label: 'Primary Zone', value: 'Philadelphia County, Montgomery County, Delaware County' },
+    { label: 'Extended Zone', value: 'Bucks County, Chester County (Standard trip charges apply)' },
+    { label: 'Lead Time', value: 'Site Scouts: 2-3 days. Emergency response: 4 hours (contract only)' },
+  ]}
+  mapQuery="Philadelphia, Pennsylvania, USA"
+  ctaTitle="Initiate Philadelphia Site Support"
+  ctaBody="Connect with the local field desk to schedule a walk-through or discuss specific site logistics."
+/>

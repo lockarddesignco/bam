@@ -5,7 +5,7 @@ import netlify from '@astrojs/netlify';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://bam.lockardsites.com',
+  site: 'https://www.buildingandair.com',
   output: 'static',
   trailingSlash: 'always',
 

@@ -3,37 +3,64 @@ import { siteConfig } from '../config/site.config';
 
 const navItems = [
   { label: 'Services', href: '/services/', hasDropdown: true },
-  { label: 'Industries', href: '/#industries', hasDropdown: true },
-  { label: 'Locations', href: '/#locations', hasDropdown: true },
+  { label: 'Industries', href: '/industries/', hasDropdown: true },
+  { label: 'Locations', href: '/locations/', hasDropdown: true },
   { label: 'About', href: '/about/', hasDropdown: true },
   { label: 'Contact', href: '/contact/', hasDropdown: false },
 ];
+
+const coreServices = siteConfig.services.filter(s => s.category === 'core');
+const specialtyServices = siteConfig.services.filter(s => s.category === 'specialty');
+
+const serviceIconMap: Record<string, string> = {
+  'cooling-tower': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+  'chiller': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>`,
+  'ahu': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>`,
+  'ducts': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+  'iaq': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  'mold': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+  'pm': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`,
+  'epoxy': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>`,
+  'tubes': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>`,
+  'basin': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>`,
+  'hepa': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>`,
+  'dampers': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`,
+};
+
+const industryIconMap: Record<string, string> = {
+  'healthcare': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><path d="M22 10 A2 2 0 0 1 20 12 A2 2 0 0 1 18 10 A2 2 0 0 1 22 10z"/></svg>`,
+  'education': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+  'industrial': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
+  'food-processing': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg>`,
+  'government': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>`,
+  'commercial': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>`,
+  'retail': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+  'senior-care': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+  'cold-storage': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+  'data-centers': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>`,
+  'labs': `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>`,
+};
 ---
 
 <!-- Mobile utility bar — hides on scroll -->
 <div id="utility-bar" class="w-full bg-[#080E0D] border-b border-white/[0.06] font-sans md:hidden">
-  <div class="flex flex-col items-center py-2 gap-1.5">
-    <div class="flex items-center justify-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span class="text-[10px] font-semibold tracking-[0.15em] text-light-grey/70 uppercase">Serving PA · NJ · MD · DE · NY</span>
+  <div class="flex items-center justify-center py-1.5 gap-3 flex-wrap px-4">
+    <div class="flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span class="text-[9px] font-semibold tracking-[0.12em] text-light-grey/70 uppercase">PA · NJ · MD · DE · NY</span>
     </div>
-    <div class="flex items-center justify-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-      <span class="text-[10px] font-semibold tracking-[0.15em] text-light-grey/70 uppercase">Refurbishment ROI Estimator</span>
+    <div class="w-px h-3 bg-white/10"></div>
+    <div class="flex items-center gap-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint/70 flex-shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span class="text-[8px] font-semibold tracking-[0.1em] text-light-grey/50 uppercase">NADCA</span>
     </div>
-    <div class="flex items-center justify-center gap-4">
-      <div class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint/70 flex-shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-        <span class="text-[9px] font-semibold tracking-[0.1em] text-light-grey/50 uppercase">NADCA Certified</span>
-      </div>
-      <div class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint/70 flex-shrink-0"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
-        <span class="text-[9px] font-semibold tracking-[0.1em] text-light-grey/50 uppercase">ASHRAE Member</span>
-      </div>
-      <div class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint/70 flex-shrink-0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        <span class="text-[9px] font-semibold tracking-[0.1em] text-light-grey/50 uppercase">OSHA-30</span>
-      </div>
+    <div class="flex items-center gap-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint/70 flex-shrink-0"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
+      <span class="text-[8px] font-semibold tracking-[0.1em] text-light-grey/50 uppercase">ASHRAE</span>
+    </div>
+    <div class="flex items-center gap-1">
+      <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint/70 flex-shrink-0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <span class="text-[8px] font-semibold tracking-[0.1em] text-light-grey/50 uppercase">OSHA-30</span>
     </div>
   </div>
 </div>
@@ -45,7 +72,7 @@ const navItems = [
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
       <span class="text-[11px] font-bold tracking-widest text-light-grey uppercase">Serving PA &bull; NJ &bull; MD &bull; DE &bull; NY</span>
       <div class="w-px h-3 bg-primary/50 hidden sm:block"></div>
-      <a href="/tools/" class="hidden sm:flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-light-grey uppercase hover:text-white transition-colors no-underline">
+      <a href="/tools/restoration-value-estimator/" class="hidden sm:flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-light-grey uppercase hover:text-white transition-colors no-underline">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
         Refurbishment ROI Estimator
       </a>
@@ -66,7 +93,33 @@ const navItems = [
         <span class="text-[10px] font-semibold tracking-wider text-slate uppercase">OSHA-30</span>
       </div>
       <div class="w-px h-3 bg-primary/50 hidden lg:block"></div>
-      <span class="text-[10px] font-semibold tracking-wider text-mint uppercase hidden lg:inline">Resources</span>
+      <div class="resources-trigger relative hidden lg:block" data-menu="resources">
+        <button
+          type="button"
+          class="flex items-center gap-1 text-[10px] font-semibold tracking-wider text-mint uppercase hover:text-white transition-colors bg-transparent border-0 cursor-pointer"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="resources-dropdown"
+          id="resources-trigger-btn"
+        >
+          Resources
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="resources-chevron transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div
+          id="resources-dropdown"
+          class="resources-panel absolute left-1/2 -translate-x-1/2 top-full mt-1 pt-1 opacity-0 invisible transition-all duration-200 z-50"
+        >
+          <div class="resources-dropdown-panel rounded-sm w-[210px] overflow-hidden py-1.5">
+            <a href="/pilot-program/" class="resources-link block px-4 py-[5px] text-[11px] no-underline transition-colors">Pilot Program</a>
+            <a href="/about/#documentation" class="resources-link block px-4 py-[5px] text-[11px] no-underline transition-colors">Tech Documentation</a>
+            <a href="/blog/" class="resources-link block px-4 py-[5px] text-[11px] no-underline transition-colors">Blog & Insights</a>
+            <a href="/tools/restoration-value-estimator/" class="resources-link block px-4 py-[5px] text-[11px] no-underline transition-colors">ROI Estimator</a>
+            <a href="/tools/iaq-risk-score/" class="resources-link block px-4 py-[5px] text-[11px] no-underline transition-colors">IAQ Risk Score</a>
+            <div class="resources-separator mx-3 my-1.5"></div>
+            <a href="/tools/" class="resources-link resources-link-all block px-4 py-[5px] text-[11px] no-underline transition-colors">All Tools & Calculators →</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -90,23 +143,255 @@ const navItems = [
         </div>
       </a>
 
-      <!-- Desktop nav -->
-      <nav class="hidden xl:flex items-center gap-0.5">
+      <!-- Desktop nav with mega menus -->
+      <nav class="hidden lg:flex items-center gap-0.5">
         {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="flex items-center gap-1 px-3.5 py-2 text-[13px] font-bold text-light-grey hover:text-white transition-colors uppercase tracking-wide no-underline"
-          >
-            {item.label}
-            {item.hasDropdown && (
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50"><path d="m6 9 6 6 6-6"/></svg>
+          <div class="mega-trigger relative" data-menu={item.label.toLowerCase()}>
+            <a
+              href={item.href}
+              class="flex items-center gap-1 px-2.5 xl:px-3.5 py-2 text-[12px] xl:text-[13px] font-bold text-light-grey hover:text-white transition-colors uppercase tracking-wide no-underline"
+            >
+              {item.label}
+              {item.hasDropdown && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 mega-chevron transition-transform duration-200"><path d="m6 9 6 6 6-6"/></svg>
+              )}
+            </a>
+
+            {/* ── Services Mega Menu ── */}
+            {item.label === 'Services' && (
+              <div class="mega-panel absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible transition-all duration-200 z-50">
+                <div class="bg-white rounded-lg shadow-2xl shadow-black/15 border border-light-grey/60 w-[620px] overflow-hidden">
+                  <div class="grid grid-cols-2 gap-0 divide-x divide-light-grey/40">
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">Core Services</h4>
+                      <div class="space-y-1">
+                        {coreServices.map(s => (
+                          <a href={`/services/${s.slug}/`} class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                              <Fragment set:html={serviceIconMap[s.id] || ''} />
+                            </span>
+                            <span class="text-[13px] font-semibold text-primary">{s.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">Specialty Services</h4>
+                      <div class="space-y-1">
+                        {specialtyServices.map(s => (
+                          <a href={`/services/${s.slug}/`} class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                              <Fragment set:html={serviceIconMap[s.id] || ''} />
+                            </span>
+                            <span class="text-[13px] font-semibold text-primary">{s.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-ice/80 border-t border-light-grey/40 px-6 py-3 flex items-center justify-between">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate">Institutional Grade Service</span>
+                    <a href="/services/" class="text-[11px] font-bold uppercase tracking-widest text-primary hover:text-[#1e483b] no-underline transition-colors flex items-center gap-1">
+                      View All Services
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
             )}
-          </a>
+
+            {/* ── Industries Mega Menu ── */}
+            {item.label === 'Industries' && (
+              <div class="mega-panel absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible transition-all duration-200 z-50">
+                <div class="bg-white rounded-lg shadow-2xl shadow-black/15 border border-light-grey/60 w-[560px] overflow-hidden">
+                  <div class="grid grid-cols-2 gap-0 divide-x divide-light-grey/40">
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">Featured Sectors</h4>
+                      <div class="space-y-1">
+                        {siteConfig.industries.slice(0, 6).map(ind => (
+                          <a href={`/industries/${ind.id}/`} class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                              <Fragment set:html={industryIconMap[ind.id] || ''} />
+                            </span>
+                            <span class="text-[13px] font-semibold text-primary">{ind.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">More Industries</h4>
+                      <div class="space-y-1">
+                        {siteConfig.industries.slice(6).map(ind => (
+                          <a href={`/industries/${ind.id}/`} class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                              <Fragment set:html={industryIconMap[ind.id] || ''} />
+                            </span>
+                            <span class="text-[13px] font-semibold text-primary">{ind.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-ice/80 border-t border-light-grey/40 px-6 py-3 flex items-center justify-between">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate">11 Sectors Served</span>
+                    <a href="/industries/" class="text-[11px] font-bold uppercase tracking-widest text-primary hover:text-[#1e483b] no-underline transition-colors flex items-center gap-1">
+                      View All Industries
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── Locations Mega Menu ── */}
+            {item.label === 'Locations' && (
+              <div class="mega-panel absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible transition-all duration-200 z-50">
+                <div class="bg-white rounded-lg shadow-2xl shadow-black/15 border border-light-grey/60 w-[440px] overflow-hidden">
+                  <div class="grid grid-cols-2 gap-0 divide-x divide-light-grey/40">
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">States</h4>
+                      <div class="space-y-1">
+                        {siteConfig.locationStates.map(loc => (
+                          <a href={`/locations/${loc.slug}/`} class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span class="text-[13px] font-semibold text-primary">{loc.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">Metro Areas</h4>
+                      <div class="space-y-1">
+                        {siteConfig.locationMetros.map(loc => (
+                          <a href={`/locations/${loc.slug}/`} class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span class="text-[13px] font-semibold text-primary">{loc.title}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-ice/80 border-t border-light-grey/40 px-6 py-3 flex items-center justify-between">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate">Mid-Atlantic Coverage</span>
+                    <a href="/locations/" class="text-[11px] font-bold uppercase tracking-widest text-primary hover:text-[#1e483b] no-underline transition-colors flex items-center gap-1">
+                      All Locations
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* ── About Mega Menu ── */}
+            {item.label === 'About' && (
+              <div class="mega-panel absolute top-full right-0 pt-3 opacity-0 invisible transition-all duration-200 z-50">
+                <div class="bg-white rounded-lg shadow-2xl shadow-black/15 border border-light-grey/60 w-[560px] overflow-hidden">
+                  <div class="grid grid-cols-2 gap-0 divide-x divide-light-grey/40">
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">About BAM</h4>
+                      <div class="space-y-1">
+                        <a href="/about/#hub" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">About BAM (Hub)</span>
+                        </a>
+                        <a href="/about/#company" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Our Company</span>
+                        </a>
+                        <a href="/about/#method" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Our Method</span>
+                        </a>
+                        <a href="/about/#compliance" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Compliance & Standards</span>
+                        </a>
+                        <a href="/about/#safety" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Safety & Risk</span>
+                        </a>
+                        <a href="/about/#leadership" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Leadership</span>
+                        </a>
+                        <a href="/about/#careers" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Careers</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">Resources & Tools</h4>
+                      <div class="space-y-1">
+                        <a href="/pilot-program/" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-mint/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Pilot Program</span>
+                        </a>
+                        <a href="/about/#documentation" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Technical Documentation</span>
+                        </a>
+                        <a href="/blog/" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">Blog & Insights</span>
+                        </a>
+                        <a href="/tools/restoration-value-estimator/" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">ROI Estimator</span>
+                        </a>
+                        <a href="/tools/iaq-risk-score/" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">IAQ Risk Score Tool</span>
+                        </a>
+                        <a href="/tools/" class="flex items-center gap-3 px-2 py-2 rounded-md text-primary no-underline hover:bg-mint/15 transition-colors group">
+                          <span class="flex-shrink-0 w-7 h-7 rounded-md bg-primary/[0.07] flex items-center justify-center text-mint group-hover:bg-primary group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                          </span>
+                          <span class="text-[13px] font-semibold text-primary">All Tools & Calculators</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-ice/80 border-t border-light-grey/40 px-6 py-3 flex items-center justify-between">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate">Institutional Grade Service</span>
+                    <a href="/about/" class="text-[11px] font-bold uppercase tracking-widest text-primary hover:text-[#1e483b] no-underline transition-colors flex items-center gap-1">
+                      About Overview
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         ))}
       </nav>
 
       <!-- Desktop CTA -->
-      <div class="hidden xl:flex items-center gap-5 pl-5 ml-1 border-l border-mint/20">
+      <div class="hidden lg:flex items-center gap-5 pl-5 ml-1 border-l border-mint/20">
         <a href={`tel:${siteConfig.phoneRaw}`} class="flex items-center gap-2 text-mint hover:text-white transition-colors font-bold text-sm no-underline">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>{siteConfig.phone}</span>
@@ -119,7 +404,7 @@ const navItems = [
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-btn"
-        class="xl:hidden text-mint p-2 focus:outline-none hover:text-white transition-colors"
+        class="lg:hidden text-mint p-2 focus:outline-none hover:text-white transition-colors"
         aria-label="Toggle menu"
       >
         <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
@@ -129,7 +414,7 @@ const navItems = [
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="xl:hidden hidden absolute top-full left-0 w-full bg-primary border-t border-[#1e483b] overflow-y-auto max-h-[calc(100vh-64px)]">
+  <div id="mobile-menu" class="lg:hidden hidden absolute top-full left-0 w-full bg-primary border-t border-[#1e483b] overflow-y-auto max-h-[calc(100vh-64px)]">
     <div class="flex flex-col p-6 pb-24 space-y-2">
       {navItems.map((item) => (
         <a
@@ -178,6 +463,70 @@ const navItems = [
       utilityBar?.classList.remove('utility-bar-hidden');
     }
   });
+
+  // Mega menu hover logic
+  const triggers = document.querySelectorAll<HTMLElement>('.mega-trigger');
+  let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  triggers.forEach(trigger => {
+    const panel = trigger.querySelector<HTMLElement>('.mega-panel');
+    const chevron = trigger.querySelector<HTMLElement>('.mega-chevron');
+    if (!panel) return;
+
+    function show() {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      triggers.forEach(t => {
+        const p = t.querySelector<HTMLElement>('.mega-panel');
+        const c = t.querySelector<HTMLElement>('.mega-chevron');
+        if (p && p !== panel) { p.classList.remove('mega-open'); p.classList.add('opacity-0', 'invisible'); p.classList.remove('opacity-100', 'visible'); }
+        if (c && c !== chevron) c.classList.remove('rotate-180');
+      });
+      panel!.classList.add('mega-open', 'opacity-100', 'visible');
+      panel!.classList.remove('opacity-0', 'invisible');
+      chevron?.classList.add('rotate-180');
+    }
+
+    function hide() {
+      closeTimer = setTimeout(() => {
+        panel!.classList.remove('mega-open', 'opacity-100', 'visible');
+        panel!.classList.add('opacity-0', 'invisible');
+        chevron?.classList.remove('rotate-180');
+      }, 150);
+    }
+
+    trigger.addEventListener('mouseenter', show);
+    trigger.addEventListener('mouseleave', hide);
+    panel.addEventListener('mouseenter', () => { if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; } });
+    panel.addEventListener('mouseleave', hide);
+  });
+
+  // Resources dropdown (utility bar)
+  const resourcesTrigger = document.querySelector<HTMLElement>('.resources-trigger');
+  const resourcesPanel = document.querySelector<HTMLElement>('.resources-panel');
+  const resourcesChevron = document.querySelector<HTMLElement>('.resources-chevron');
+  let resourcesCloseTimer: ReturnType<typeof setTimeout> | null = null;
+
+  if (resourcesTrigger && resourcesPanel) {
+    function showResources() {
+      if (resourcesCloseTimer) { clearTimeout(resourcesCloseTimer); resourcesCloseTimer = null; }
+      resourcesPanel.classList.add('opacity-100', 'visible');
+      resourcesPanel.classList.remove('opacity-0', 'invisible');
+      resourcesChevron?.classList.add('rotate-180');
+      resourcesTrigger?.querySelector('button')?.setAttribute('aria-expanded', 'true');
+    }
+    function hideResources() {
+      resourcesCloseTimer = setTimeout(() => {
+        resourcesPanel.classList.remove('opacity-100', 'visible');
+        resourcesPanel.classList.add('opacity-0', 'invisible');
+        resourcesChevron?.classList.remove('rotate-180');
+        resourcesTrigger?.querySelector('button')?.setAttribute('aria-expanded', 'false');
+      }, 150);
+    }
+    resourcesTrigger.addEventListener('mouseenter', showResources);
+    resourcesTrigger.addEventListener('mouseleave', hideResources);
+    resourcesPanel.addEventListener('mouseenter', () => { if (resourcesCloseTimer) { clearTimeout(resourcesCloseTimer); resourcesCloseTimer = null; } });
+    resourcesPanel.addEventListener('mouseleave', hideResources);
+  }
 </script>
 
 <style>
@@ -190,5 +539,31 @@ const navItems = [
   #utility-bar.utility-bar-hidden {
     max-height: 0;
     opacity: 0;
+  }
+
+  /* Resources dropdown — minimal text-only */
+  .resources-dropdown-panel {
+    background-color: #0B1110;
+    border: 1px solid rgba(167, 215, 197, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .resources-link {
+    color: #9EABA4;
+  }
+  .resources-link:hover {
+    color: #ffffff;
+    padding-left: 18px;
+  }
+  .resources-link-all {
+    color: #A7D7C5;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .resources-link-all:hover {
+    color: #ffffff;
+  }
+  .resources-separator {
+    height: 1px;
+    background-color: rgba(167, 215, 197, 0.12);
   }
 </style>

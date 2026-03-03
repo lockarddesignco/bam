@@ -61,10 +61,18 @@ roi:
   description: "Clean ducts extend filter life, reduce dusting frequency in occupied spaces, and improve overall HVAC system hygiene."
 
 faq:
-  - question: "Do you use chemical sealants?"
-    answer: "We prioritize source removal. Sealants/sanitizers are only applied if specifically requested or if remediation of non-porous surfaces is required."
-  - question: "Can you clean lined ductwork?"
-    answer: "Yes. We use specialized soft-bristle brushes and air-washing tools to clean fiber-lined ducts without damaging the insulation surface."
+  - question: "What is the difference between NADCA-aligned duct cleaning and standard duct cleaning?"
+    answer: "NADCA ACR (Assessment, Cleaning, and Restoration) requires source removal—physically extracting contaminants using negative air and mechanical agitation—rather than simply blowing debris around. BAM follows this standard on every project, using vacuum trucks and rotary tools to verify measurable cleanliness levels with before-and-after documentation."
+  - question: "Does commercial duct cleaning disrupt building occupancy?"
+    answer: "Typically, no. BAM isolates zones and maintains static pressure in active portions of the system while cleaning proceeds section by section. In hospitals and schools, we schedule work during off-hours or low-occupancy periods to eliminate noise and airflow disruption to occupied spaces."
+  - question: "Do you use chemical sealants or encapsulants inside ductwork?"
+    answer: "BAM prioritizes physical source removal per NADCA standards. Chemical sealants are only applied when specifically requested or when remediation of non-porous interior surfaces is required. Encapsulants are never used as a substitute for removing the actual contaminant load from the duct system."
+  - question: "Can you clean fiber-lined or internally insulated ductwork?"
+    answer: "Yes. BAM uses specialized soft-bristle brushes and controlled air-washing tools designed for fiber-lined ducts. These methods remove particulate without damaging the insulation surface. If the liner is deteriorated beyond cleaning, we document the condition and recommend encapsulation or replacement."
+  - question: "How often should commercial ductwork be professionally cleaned?"
+    answer: "NADCA recommends assessment-driven intervals rather than fixed schedules. Most commercial facilities benefit from cleaning every 3–7 years, but healthcare and manufacturing environments with higher particulate loads may require shorter cycles. BAM performs a visual inspection and surface sampling to determine the appropriate timeline for your facility."
+  - question: "What documentation does BAM provide after a commercial duct cleaning?"
+    answer: "Every project includes a complete closeout package with before-and-after photographs, a NADCA-standard vacuum test report, zone-by-zone scope verification, and a summary of any deficiencies found. This documentation satisfies Joint Commission, accreditation body, and internal audit requirements for healthcare and educational facilities."
 ---
 
 NADCA-Aligned Duct Cleaning services from Building & Air Maintenance.

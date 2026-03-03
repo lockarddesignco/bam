@@ -55,7 +55,6 @@ const industries = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    slug: z.string(),
     shortDescription: z.string(),
     icon: z.string(),
     heroImage: z.string().optional(),
@@ -88,6 +87,13 @@ const industries = defineCollection({
         })
       ),
     }),
+
+    faq: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    ),
   }),
 });
 
@@ -131,6 +137,7 @@ const blog = defineCollection({
     draft: z.boolean().default(false),
     author: z.string().optional(),
     image: z.string().optional(),
+    video: z.string().optional(),
   }),
 });
 

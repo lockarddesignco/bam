@@ -13,7 +13,7 @@ export const siteConfig = {
   title: 'BAM | Building & Air Maintenance — Commercial HVAC Restoration',
   description:
     'Specialized HVAC restoration, indoor air quality, and compliance-focused mechanical services for commercial and institutional facilities. Serving PA, NJ, MD, DE, and Southern NY.',
-  ogImage: '/og-banner.jpg',
+  ogImage: '/bam-logo-v3.svg',
 
   mainAddress: {
     street: '196 Dadburnhams Road',
@@ -28,7 +28,9 @@ export const siteConfig = {
     lng: -76.3853,
   },
 
-  socialLinks: [] as string[],
+  socialLinks: [
+    'https://www.facebook.com/p/Building-and-Air-Maintenance-LLC-61568190331014/',
+  ],
   googleBusinessUrl: '',
   gbpReviewLink: '',
 

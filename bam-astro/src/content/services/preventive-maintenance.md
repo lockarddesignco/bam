@@ -61,10 +61,18 @@ roi:
   description: "A comprehensive PM program pays for itself through energy savings and extended equipment life."
 
 faq:
-  - question: "Is this a full service contract?"
-    answer: "We customize the scope. It can be a hygiene-only supplement to your in-house team, or a full mechanical service agreement."
-  - question: "Do you offer emergency response?"
-    answer: "Yes. Contract clients receive priority dispatch for emergency mechanical failures."
+  - question: "Is BAM's preventive maintenance program a full-service contract or a supplement?"
+    answer: "Both options are available. BAM customizes the scope to your operation—from a hygiene-focused supplement that augments your in-house team to a comprehensive mechanical service agreement covering cooling towers, chillers, AHUs, and ductwork. Every agreement is structured around your facility's asset inventory and criticality ranking."
+  - question: "What does a commercial HVAC preventive maintenance visit include?"
+    answer: "A typical BAM PM visit goes far beyond filter changes. Scope includes cooling tower basin cleaning, coil enzyme washing, belt and drive inspection, condensate drain clearing, drift eliminator checks, motor amp readings, and detailed photographic documentation. We focus on the heat transfer surfaces and biological loading that standard maintenance overlooks."
+  - question: "How does preventive maintenance reduce HVAC emergency repair costs?"
+    answer: "Scheduled deep inspection catches degradation—corroded basins, failing belts, fouled coils—before it becomes a catastrophic failure during peak load. BAM clients replace unpredictable emergency spend with budgeted, forecasted maintenance costs. The ROI compounds annually as equipment life extends and energy efficiency stays within design parameters."
+  - question: "Do BAM preventive maintenance clients receive priority emergency response?"
+    answer: "Yes. Contract clients receive priority dispatch for emergency mechanical failures, with response commitments defined in the service agreement. This ensures your hospital, school, or manufacturing plant receives immediate technical support when an unplanned event threatens patient safety, occupancy, or production uptime."
+  - question: "How often should institutional cooling towers and AHUs receive preventive maintenance?"
+    answer: "Cooling towers require seasonal start-up/shut-down service plus at minimum one mid-season hygiene visit per ASHRAE 188 guidelines. AHU coils should receive annual deep cleaning. BAM builds the cadence around your equipment manufacturer recommendations, local health codes, and the specific biological risk profile of your facility."
+  - question: "What documentation does BAM provide with each preventive maintenance visit?"
+    answer: "Every visit produces a timestamped service report with equipment condition photos, amp readings, static pressure measurements, and a deficiency log. This builds a longitudinal service history that supports capital planning forecasts, satisfies Joint Commission and fire marshal audit requirements, and provides evidence of due diligence for insurance carriers."
 ---
 
 Preventive Maintenance Programs from Building & Air Maintenance.

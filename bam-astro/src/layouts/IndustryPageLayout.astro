@@ -1,0 +1,238 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { siteConfig } from '../config/site.config';
+
+interface ChallengeCard {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface CapabilityCard {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  title: string;
+  slug: string;
+  shortDescription: string;
+  icon: string;
+  heroImage?: string;
+  challenges: {
+    heading: string;
+    introText: string;
+    cards: ChallengeCard[];
+    sidebarQuote: {
+      text: string;
+      author: string;
+      role: string;
+    };
+  };
+  capabilities: {
+    heading: string;
+    subhead: string;
+    cards: CapabilityCard[];
+  };
+  faq: Array<{ question: string; answer: string }>;
+}
+
+const {
+  title,
+  slug,
+  shortDescription,
+  icon,
+  heroImage,
+  challenges,
+  capabilities,
+  faq,
+} = Astro.props;
+
+const relatedServices = siteConfig.services.filter(s => s.category === 'core').slice(0, 4);
+---
+
+<BaseLayout
+  title={`${title} HVAC Services | BAM — Building & Air Maintenance`}
+  description={shortDescription}
+  faqData={faq}
+>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="relative w-full py-28 md:py-36 flex flex-col items-center justify-center bg-dark overflow-hidden">
+    {heroImage && (
+      <div class="absolute inset-0 z-0">
+        <img src={heroImage} alt={title} class="w-full h-full object-cover opacity-20" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/60 to-dark"></div>
+      </div>
+    )}
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dark"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">
+        Industry Specialization
+      </span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8 animate-fade-in-up opacity-0" style="animation-delay:100ms;">
+        {title}
+      </h1>
+      <p class="text-lg md:text-xl text-light-grey max-w-2xl mx-auto leading-relaxed font-light opacity-0 animate-fade-in-up" style="animation-delay:200ms;">
+        {shortDescription}
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CHALLENGES ════════════════════ -->
+  <section class="relative py-24 bg-ice">
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+            {challenges.heading}
+          </h2>
+          <div class="w-20 h-1.5 bg-primary opacity-20 mb-6"></div>
+          <p class="text-slate text-lg leading-relaxed font-light mb-12">
+            {challenges.introText}
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {challenges.cards.map((card: ChallengeCard) => (
+              <div class="bg-white border border-light-grey rounded-sm p-7 transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(0,0,0,0.04)]">
+                <div class="mb-4 text-primary" set:html={card.icon} />
+                <h3 class="text-base font-bold text-primary mb-2 uppercase tracking-tight">
+                  {card.title}
+                </h3>
+                <p class="text-sm text-slate leading-relaxed">
+                  {card.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="lg:col-span-1">
+          <div class="sticky top-28 bg-dark rounded-lg border border-mint/20 p-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 rounded-full bg-mint/[0.06] blur-[60px] pointer-events-none"></div>
+            <div class="relative z-10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-mint/40 mb-4"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+              <p class="text-light-grey text-base leading-relaxed italic mb-6">
+                "{challenges.sidebarQuote.text}"
+              </p>
+              <div>
+                <p class="text-white text-sm font-bold">{challenges.sidebarQuote.author}</p>
+                <p class="text-mint/70 text-xs uppercase tracking-wider mt-1">{challenges.sidebarQuote.role}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CAPABILITIES ════════════════════ -->
+  <section class="relative py-24 bg-white border-y border-light-grey">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="max-w-3xl mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">BAM Capabilities</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          {capabilities.heading}
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20 mb-6"></div>
+        <p class="text-slate text-lg leading-relaxed font-light">
+          {capabilities.subhead}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {capabilities.cards.map((card: CapabilityCard) => (
+          <div class="group bg-ice border border-light-grey rounded-sm p-8 transition-all duration-300 hover:border-primary hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(38,90,74,0.08)]">
+            <div class="mb-5 w-12 h-12 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300" set:html={card.icon} />
+            <h3 class="text-lg font-bold text-primary mb-3 uppercase tracking-tight">
+              {card.title}
+            </h3>
+            <p class="text-sm text-slate leading-relaxed">
+              {card.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ RELATED SERVICES ════════════════════ -->
+  <section class="relative py-24 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.05] site-grid-dark"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="text-center mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Explore Services</span>
+        <h2 class="text-3xl md:text-4xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-4">
+          Relevant Services for {title}
+        </h2>
+        <div class="w-20 h-1 bg-mint mx-auto opacity-40"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {relatedServices.map(service => (
+          <a
+            href={`/services/${service.slug}/`}
+            class="group flex flex-col gap-3 rounded-lg p-6 no-underline border border-white/[0.08] bg-white/[0.04] transition-all duration-400 hover:border-mint/30 hover:bg-white/[0.08]"
+          >
+            <h3 class="text-sm font-bold text-white uppercase tracking-tight leading-snug group-hover:text-mint transition-colors duration-300">{service.title}</h3>
+            <p class="text-light-grey/50 text-xs leading-relaxed line-clamp-3">{service.shortDescription}</p>
+            <div class="mt-auto pt-3 flex items-center text-mint/50 group-hover:text-mint font-bold text-[10px] uppercase tracking-widest transition-colors duration-300">
+              <span>Learn More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FAQ ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dots"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center mb-16 md:mb-20">
+        <span class="inline-block text-mint font-bold text-xs tracking-[0.3em] uppercase mb-5">Common Questions</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+          Frequently Asked Questions
+        </h2>
+        <div class="w-24 h-1 bg-mint mx-auto rounded-full opacity-60"></div>
+      </div>
+
+      <div class="space-y-12 md:space-y-16">
+        {faq.map((item: { question: string; answer: string }) => (
+          <div class="border-l-2 border-mint/40 pl-6 md:pl-8">
+            <h3 class="text-lg md:text-xl font-bold text-white leading-snug mb-4">{item.question}</h3>
+            <p class="text-light-grey text-base md:text-lg leading-relaxed">{item.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ BOTTOM CTA ════════════════════ -->
+  <section class="bg-primary py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        Serving {title} Facilities Across the Mid-Atlantic
+      </h2>
+      <p class="text-mint/80 text-base md:text-lg mb-8 max-w-xl mx-auto">
+        Our team understands the unique mechanical demands and compliance requirements of your sector. Let's discuss your facility.
+      </p>
+      <a
+        href="/contact/"
+        class="inline-flex items-center justify-center px-10 py-5 bg-white text-primary font-bold text-sm uppercase tracking-widest rounded-sm shadow-lg hover:bg-mint hover:text-dark transition-colors"
+      >
+        Request a Site Visit
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-3"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

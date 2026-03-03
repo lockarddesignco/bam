@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site.config';
+
+const coreServices = siteConfig.services.filter(s => s.category === 'core');
+const specialtyServices = siteConfig.services.filter(s => s.category === 'specialty');
+
+const serviceIconMap: Record<string, string> = {
+  'cooling-tower': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>`,
+  'chiller': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/></svg>`,
+  'ahu': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>`,
+  'ducts': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+  'iaq': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  'mold': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+  'pm': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`,
+  'epoxy': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>`,
+  'tubes': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>`,
+  'basin': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></svg>`,
+  'hepa': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/></svg>`,
+  'dampers': `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`,
+};
+
+const engagementSteps = [
+  { num: '01', title: 'Initial Consultation', description: 'We discuss your facility\'s mechanical systems, operational challenges, and compliance requirements.' },
+  { num: '02', title: 'On-Site Assessment', description: 'Our technicians perform hands-on diagnostics — airflow, thermal imaging, pressure testing, and visual inspection.' },
+  { num: '03', title: 'Documented Findings', description: 'You receive a detailed report with photos, measurements, compliance exposure, and prioritized recommendations.' },
+  { num: '04', title: 'Scope & Proposal', description: 'We deliver a transparent scope of work with clear pricing, timelines, and expected performance recovery.' },
+  { num: '05', title: 'Restoration & Closeout', description: 'Certified technicians execute the work, followed by verification testing and audit-ready documentation.' },
+];
+---
+
+<BaseLayout
+  title="HVAC Services | BAM — Building & Air Maintenance"
+  description="Institutional-grade HVAC restoration services: cooling tower restoration, AHU refurbishment, duct cleaning, indoor air quality, and preventive maintenance for commercial facilities."
+>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="relative w-full py-28 md:py-36 flex flex-col items-center justify-center bg-dark overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dark"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">
+        Capabilities
+      </span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+        Specialized HVAC<br />Restoration Services
+      </h1>
+      <p class="text-lg md:text-xl text-light-grey max-w-2xl mx-auto leading-relaxed font-light">
+        Institutional-grade cooling tower, AHU, duct, and IAQ restoration for facilities where uptime, compliance, and air quality are non-negotiable.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ PROBLEM STATEMENT ════════════════════ -->
+  <section class="relative py-20 md:py-28 bg-ice border-b border-light-grey">
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12">
+      <div class="max-w-3xl">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">The Problem</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-8">
+          Most HVAC Contractors Aren't Built For Institutional Environments
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20 mb-8"></div>
+        <div class="space-y-5 text-slate text-lg leading-relaxed font-light">
+          <p>
+            Commercial and institutional facilities — hospitals, schools, government buildings, data centers — operate under compliance pressures, uptime requirements, and air quality standards that general HVAC contractors aren't equipped to handle.
+          </p>
+          <p>
+            The wrong contractor can trigger EPA violations, disrupt sterile surgical environments, shut down production lines, or leave you exposed in a Joint Commission survey. These aren't inconveniences — they're institutional risks.
+          </p>
+          <p>
+            BAM was founded specifically to serve this gap: <strong class="text-primary font-semibold">restoration-first, compliance-driven HVAC services</strong> delivered by technicians who understand institutional environments from the inside.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FACILITIES WORK WITH US WHEN ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-white border-b border-light-grey overflow-hidden">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-mint/[0.05] blur-[120px] pointer-events-none -translate-x-1/3 -translate-y-1/4"></div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
+      <div class="mb-16 max-w-3xl">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Why Facilities Choose BAM</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          Facilities Work With Us When
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20 mb-6"></div>
+        <p class="text-slate text-lg leading-relaxed font-light max-w-2xl">
+          The situations that bring facilities to BAM aren't routine. They're the high-stakes moments when standard contractors create more risk than they solve.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="group relative bg-ice border border-light-grey rounded-sm p-8 transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(38,90,74,0.1)]">
+          <div class="mb-5 w-12 h-12 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="text-[15px] font-extrabold text-primary mb-3 uppercase tracking-tight leading-snug">Operational Continuity</h3>
+          <p class="text-[13px] text-slate leading-relaxed">
+            Your systems can't go offline. BAM performs restoration around live, mission-critical equipment — without forcing shutdowns that disrupt patient care, production lines, or building occupancy.
+          </p>
+        </div>
+
+        <div class="group relative bg-ice border border-light-grey rounded-sm p-8 transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(38,90,74,0.1)]">
+          <div class="mb-5 w-12 h-12 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg>
+          </div>
+          <h3 class="text-[15px] font-extrabold text-primary mb-3 uppercase tracking-tight leading-snug">Compliance Exposure</h3>
+          <p class="text-[13px] text-slate leading-relaxed">
+            A Joint Commission survey, EPA audit, or OSHA inspection is on the horizon — and your mechanical systems need to be defensible. BAM delivers audit-ready documentation with every project.
+          </p>
+        </div>
+
+        <div class="group relative bg-ice border border-light-grey rounded-sm p-8 transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(38,90,74,0.1)]">
+          <div class="mb-5 w-12 h-12 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="text-[15px] font-extrabold text-primary mb-3 uppercase tracking-tight leading-snug">Air Quality Mandates</h3>
+          <p class="text-[13px] text-slate leading-relaxed">
+            Sterile surgical suites, occupied classrooms, or sensitive manufacturing environments demand verified air quality. BAM restores IAQ performance to measurable, documented standards.
+          </p>
+        </div>
+
+        <div class="group relative bg-ice border border-light-grey rounded-sm p-8 transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(38,90,74,0.1)]">
+          <div class="mb-5 w-12 h-12 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m7.5 4.27 9 5.15"/><path d="M3.29 7 12 12l8.71-5"/><path d="M12 22V12"/></svg>
+          </div>
+          <h3 class="text-[15px] font-extrabold text-primary mb-3 uppercase tracking-tight leading-snug">Aging Infrastructure</h3>
+          <p class="text-[13px] text-slate leading-relaxed">
+            Capital replacement isn't in the budget — but failure isn't an option. BAM extends asset lifecycles by 5–10+ years through structural restoration instead of full replacement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CORE SERVICES ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-ice overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[900px] h-[500px] rounded-full bg-mint/[0.08] blur-[120px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
+      <div class="mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Core Capabilities</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          Core Restoration Services
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20 mb-6"></div>
+        <p class="text-slate text-lg leading-relaxed font-light max-w-2xl">
+          These are the high-impact restoration and maintenance services that anchor every BAM engagement. Each is purpose-built for institutional and commercial facilities.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {coreServices.map((service) => (
+          <a
+            href={`/services/${service.slug}/`}
+            class="group relative rounded-xl p-7 transition-all duration-300 h-full flex flex-col no-underline overflow-hidden hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(38,90,74,0.18)] bg-white border border-light-grey hover:border-primary/20"
+          >
+            <div class="mb-5 w-12 h-12 rounded-lg bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <Fragment set:html={serviceIconMap[service.id] || ''} />
+            </div>
+
+            <h3 class="text-[15px] font-extrabold text-primary mb-2.5 uppercase tracking-tight leading-snug">
+              {service.title}
+            </h3>
+            <p class="text-[13px] text-slate leading-relaxed flex-grow">
+              {service.shortDescription}
+            </p>
+
+            <div class="mt-6 pt-4 border-t border-light-grey flex items-center text-primary font-bold text-[11px] uppercase tracking-widest group-hover:text-primary/80 transition-colors duration-300">
+              <span>Learn More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto opacity-40 group-hover:opacity-80 transition-all duration-300 group-hover:translate-x-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ SPECIALTY SERVICES ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.05] site-grid-dark"></div>
+    <div class="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-mint/[0.06] blur-[100px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
+      <div class="mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Specialty Capabilities</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-6">
+          Specialty & Support Services
+        </h2>
+        <div class="w-20 h-1 bg-mint opacity-40 mb-6"></div>
+        <p class="text-light-grey/70 text-lg leading-relaxed font-light max-w-2xl">
+          Targeted restoration and compliance services that complement our core capabilities — often bundled into larger restoration scopes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        {specialtyServices.map((service) => (
+          <a
+            href={`/services/${service.slug}/`}
+            class="group relative rounded-xl p-7 transition-all duration-500 h-full flex flex-col no-underline overflow-hidden hover:-translate-y-1 border border-white/[0.08] bg-white/[0.04] hover:border-mint/30 hover:bg-white/[0.08] hover:shadow-[0_0_60px_rgba(167,215,197,0.08)]"
+          >
+            <div class="mb-5 w-11 h-11 rounded-lg bg-mint/10 border border-mint/20 flex items-center justify-center text-mint group-hover:bg-mint group-hover:text-primary transition-all duration-300">
+              <Fragment set:html={serviceIconMap[service.id] || ''} />
+            </div>
+
+            <h3 class="text-[14px] font-bold text-white mb-2 uppercase tracking-tight leading-snug group-hover:text-mint transition-colors duration-300">
+              {service.title}
+            </h3>
+            <p class="text-[12px] text-light-grey/60 leading-relaxed flex-grow">
+              {service.shortDescription}
+            </p>
+
+            <div class="mt-5 pt-3 border-t border-white/[0.06] flex items-center text-mint/50 group-hover:text-mint font-bold text-[10px] uppercase tracking-widest transition-colors duration-300">
+              <span>Learn More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ ENGAGEMENT PROCESS ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-white border-y border-light-grey">
+    <div class="max-w-5xl mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center mb-16 md:mb-20">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">How It Works</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          Our Engagement Structure
+        </h2>
+        <div class="w-20 h-1.5 bg-primary mx-auto opacity-20 mb-6"></div>
+        <p class="text-slate text-lg leading-relaxed font-light max-w-2xl mx-auto">
+          Every BAM project follows the same disciplined process — from first call to closeout documentation.
+        </p>
+      </div>
+
+      <div class="space-y-10">
+        {engagementSteps.map((step) => (
+          <div class="flex gap-6 md:gap-10 items-start group">
+            <div class="w-14 h-14 md:w-16 md:h-16 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-xl rounded-sm group-hover:bg-mint group-hover:text-primary transition-colors duration-300">
+              {step.num}
+            </div>
+            <div class="flex-1 pb-10 border-b border-light-grey/50 last:border-0">
+              <h3 class="text-xl font-bold text-primary mb-2 tracking-tight">{step.title}</h3>
+              <p class="text-slate text-sm md:text-base leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ BOTTOM CTA ════════════════════ -->
+  <section class="bg-primary py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        Ready to Discuss Your Facility?
+      </h2>
+      <p class="text-mint/80 text-base md:text-lg mb-8 max-w-xl mx-auto">
+        Our restoration engineers are ready to evaluate your systems and provide a documented assessment with transparent recommendations.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/contact/"
+          class="relative group inline-flex items-center justify-center px-10 py-5 bg-white text-primary font-bold text-sm uppercase tracking-widest rounded-sm shadow-lg transition-all overflow-hidden"
+        >
+          <span class="relative z-10">Request a Site Visit</span>
+          <span class="mask-btn-layer absolute inset-0 z-20 flex items-center justify-center bg-mint text-primary font-bold text-sm uppercase tracking-widest w-[101%]">Request a Site Visit</span>
+        </a>
+        <a
+          href={`tel:${siteConfig.phoneRaw}`}
+          class="inline-flex items-center justify-center gap-3 px-10 py-5 border-2 border-white/30 text-white font-bold text-sm uppercase tracking-widest rounded-sm hover:border-white hover:bg-white/10 transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call {siteConfig.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

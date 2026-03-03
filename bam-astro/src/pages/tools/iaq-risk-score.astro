@@ -1,0 +1,549 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="IAQ Risk Score Tool | BAM"
+  description="Evaluate your facility's indoor air quality risk across five critical categories. Receive a weighted score, identify top risk drivers, and get actionable recommendations."
+>
+
+<!-- Hero -->
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 40px 40px;"></div>
+  <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl">
+      <div class="inline-flex items-center gap-2 text-mint mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Tools &mdash; IAQ Assessment</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8 uppercase">
+        IAQ Risk<br/>
+        <span class="text-mint">Score Tool</span>
+      </h1>
+      <p class="text-light-grey text-lg md:text-xl font-light leading-relaxed border-l-2 border-primary pl-8 opacity-90 max-w-2xl">
+        Evaluate your facility&rsquo;s indoor air quality risk across five critical categories. Get a weighted score, identify top risk drivers, and receive actionable recommendations aligned with ASHRAE and NADCA standards.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Main Content -->
+<section class="py-16 md:py-24 bg-offwhite">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="flex flex-col lg:flex-row gap-10">
+
+      <!-- Form Column -->
+      <div class="w-full lg:w-2/3">
+        <form id="iaq-form" class="space-y-10">
+
+          <!-- Group 1 -->
+          <fieldset class="bg-white border border-light-grey/60 rounded-sm p-6 md:p-8 shadow-sm">
+            <legend class="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-1 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-[10px] font-black">1</span>
+              Facility Sensitivity &amp; Occupancy
+            </legend>
+            <p class="text-slate text-xs mb-6">How your building type and occupancy amplify IAQ risk.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="facilityType" class="block text-xs font-semibold text-primary mb-1.5">Facility Type</label>
+                <select id="facilityType" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="4">Healthcare</option>
+                  <option value="4">Senior care</option>
+                  <option value="3">Education (K-12 / University)</option>
+                  <option value="2">Commercial office</option>
+                  <option value="2">Industrial / Warehouse</option>
+                  <option value="1">Retail</option>
+                  <option value="1">Cold storage</option>
+                  <option value="1">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="occupancyLevel" class="block text-xs font-semibold text-primary mb-1.5">Typical Occupancy Level</label>
+                <select id="occupancyLevel" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">High (&gt;75% capacity regularly)</option>
+                  <option value="2">Moderate (50&ndash;75%)</option>
+                  <option value="1">Low (&lt;50%)</option>
+                </select>
+              </div>
+              <div>
+                <label for="sensitivePopulations" class="block text-xs font-semibold text-primary mb-1.5">Sensitive Populations Present?</label>
+                <select id="sensitivePopulations" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Yes (children, elderly, immunocompromised)</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div>
+                <label for="operatingHours" class="block text-xs font-semibold text-primary mb-1.5">Operating Hours</label>
+                <select id="operatingHours" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">24/7 operations</option>
+                  <option value="2">Extended hours (&gt;12 hrs/day)</option>
+                  <option value="1">Standard business hours</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Group 2 -->
+          <fieldset class="bg-white border border-light-grey/60 rounded-sm p-6 md:p-8 shadow-sm">
+            <legend class="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-1 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-[10px] font-black">2</span>
+              Ventilation &amp; Filtration
+            </legend>
+            <p class="text-slate text-xs mb-6">The mechanical backbone of your IAQ defense.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="hvacAge" class="block text-xs font-semibold text-primary mb-1.5">HVAC System Age</label>
+                <select id="hvacAge" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">20+ years</option>
+                  <option value="2">10&ndash;20 years</option>
+                  <option value="1">&lt;10 years</option>
+                </select>
+              </div>
+              <div>
+                <label for="filterLevel" class="block text-xs font-semibold text-primary mb-1.5">Filtration Level</label>
+                <select id="filterLevel" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">MERV 8 or lower</option>
+                  <option value="2">MERV 11&ndash;13</option>
+                  <option value="1">HEPA or equivalent</option>
+                </select>
+              </div>
+              <div>
+                <label for="outdoorAir" class="block text-xs font-semibold text-primary mb-1.5">Outdoor Air Supply</label>
+                <select id="outdoorAir" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Unknown</option>
+                  <option value="3">Minimal / Below code</option>
+                  <option value="2">Code typical</option>
+                  <option value="1">Enhanced / Above code</option>
+                </select>
+              </div>
+              <div>
+                <label for="maintenanceCadence" class="block text-xs font-semibold text-primary mb-1.5">Maintenance Cadence</label>
+                <select id="maintenanceCadence" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Annual or reactive only</option>
+                  <option value="2">Semiannual</option>
+                  <option value="1">Quarterly or more frequent</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Group 3 -->
+          <fieldset class="bg-white border border-light-grey/60 rounded-sm p-6 md:p-8 shadow-sm">
+            <legend class="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-1 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-[10px] font-black">3</span>
+              Moisture &amp; Building Conditions
+            </legend>
+            <p class="text-slate text-xs mb-6">Water and humidity are the #1 drivers of IAQ failure.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="waterIntrusion12mo" class="block text-xs font-semibold text-primary mb-1.5">Water Intrusion (Last 12 Months)</label>
+                <select id="waterIntrusion12mo" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Major event (flooding, roof failure)</option>
+                  <option value="2">Minor event (leak, condensation)</option>
+                  <option value="1">None known</option>
+                </select>
+              </div>
+              <div>
+                <label for="persistentDampness" class="block text-xs font-semibold text-primary mb-1.5">Persistent Dampness or Staining?</label>
+                <select id="persistentDampness" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Yes</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+              <div>
+                <label for="moldHistory" class="block text-xs font-semibold text-primary mb-1.5">Mold History</label>
+                <select id="moldHistory" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Confirmed (testing or visual)</option>
+                  <option value="2">Suspected but unconfirmed</option>
+                  <option value="1">None</option>
+                </select>
+              </div>
+              <div>
+                <label for="humidityTypical" class="block text-xs font-semibold text-primary mb-1.5">Typical Indoor Humidity</label>
+                <select id="humidityTypical" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Often &gt;60% RH</option>
+                  <option value="2">Unknown</option>
+                  <option value="1">Typically &lt;60% RH</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Group 4 -->
+          <fieldset class="bg-white border border-light-grey/60 rounded-sm p-6 md:p-8 shadow-sm">
+            <legend class="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-1 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-[10px] font-black">4</span>
+              Complaints &amp; Symptoms
+            </legend>
+            <p class="text-slate text-xs mb-6">Occupant feedback often surfaces IAQ issues before instruments do.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="odorComplaints" class="block text-xs font-semibold text-primary mb-1.5">Odor Complaints</label>
+                <select id="odorComplaints" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Frequent</option>
+                  <option value="2">Occasional</option>
+                  <option value="1">None / Rare</option>
+                </select>
+              </div>
+              <div>
+                <label for="comfortComplaints" class="block text-xs font-semibold text-primary mb-1.5">Comfort Complaints (temp, stuffiness)</label>
+                <select id="comfortComplaints" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Frequent</option>
+                  <option value="2">Occasional</option>
+                  <option value="1">None / Rare</option>
+                </select>
+              </div>
+              <div>
+                <label for="symptomReports" class="block text-xs font-semibold text-primary mb-1.5">Health Symptom Reports</label>
+                <select id="symptomReports" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Frequent (headaches, irritation, respiratory)</option>
+                  <option value="2">Occasional</option>
+                  <option value="1">None / Rare</option>
+                </select>
+              </div>
+              <div>
+                <label for="absenteeismConcern" class="block text-xs font-semibold text-primary mb-1.5">Absenteeism Concern</label>
+                <select id="absenteeismConcern" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Yes &mdash; above-normal absenteeism</option>
+                  <option value="2">Unknown / Not tracked</option>
+                  <option value="1">No</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Group 5 -->
+          <fieldset class="bg-white border border-light-grey/60 rounded-sm p-6 md:p-8 shadow-sm">
+            <legend class="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-1 flex items-center gap-2">
+              <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-[10px] font-black">5</span>
+              Compliance &amp; Disruption
+            </legend>
+            <p class="text-slate text-xs mb-6">Regulatory exposure and operational disruptions that compound risk.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="complianceExposure" class="block text-xs font-semibold text-primary mb-1.5">Regulatory / Compliance Exposure</label>
+                <select id="complianceExposure" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">High (Joint Commission, OSHA, licensing)</option>
+                  <option value="2">Moderate (general building codes)</option>
+                  <option value="1">None / Minimal</option>
+                </select>
+              </div>
+              <div>
+                <label for="constructionActivity" class="block text-xs font-semibold text-primary mb-1.5">Nearby Construction Activity</label>
+                <select id="constructionActivity" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">Active (on-site or adjacent)</option>
+                  <option value="2">Minor / Planned</option>
+                  <option value="1">None</option>
+                </select>
+              </div>
+              <div>
+                <label for="ductCleaningHistory" class="block text-xs font-semibold text-primary mb-1.5">Last Duct Cleaning</label>
+                <select id="ductCleaningHistory" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">5+ years ago or Unknown</option>
+                  <option value="2">3&ndash;5 years ago</option>
+                  <option value="1">&lt;3 years ago</option>
+                </select>
+              </div>
+              <div>
+                <label for="recentIAQTesting" class="block text-xs font-semibold text-primary mb-1.5">Last IAQ Testing</label>
+                <select id="recentIAQTesting" class="w-full border border-light-grey/60 rounded-sm px-3 py-2.5 text-sm bg-offwhite text-primary focus:outline-none focus:ring-2 focus:ring-primary/30">
+                  <option value="">Select&hellip;</option>
+                  <option value="3">24+ months ago or Never</option>
+                  <option value="2">12&ndash;24 months ago</option>
+                  <option value="1">&lt;12 months ago</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Actions -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button type="button" id="btn-calculate" class="flex-1 inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors gap-2">
+              Calculate Risk Score
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+            <button type="button" id="btn-reset" class="inline-flex items-center justify-center px-8 py-4 border border-light-grey/60 text-slate font-bold text-xs uppercase tracking-widest rounded-sm hover:border-primary hover:text-primary transition-colors gap-2">
+              Reset
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Results Sidebar -->
+      <div class="w-full lg:w-1/3">
+        <div class="lg:sticky lg:top-28 space-y-6">
+
+          <!-- Placeholder (shown by default) -->
+          <div id="results-placeholder" class="bg-white border border-light-grey/60 rounded-sm p-8 shadow-sm text-center">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-dashed border-light-grey flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-light-grey"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <p class="text-slate text-sm font-medium">Complete the assessment to see your IAQ risk score</p>
+            <p class="text-light-grey text-xs mt-2">All 20 fields required</p>
+          </div>
+
+          <!-- Results (hidden by default) -->
+          <div id="results-panel" class="hidden space-y-6">
+
+            <!-- Score Card -->
+            <div class="bg-white border border-light-grey/60 rounded-sm p-8 shadow-sm text-center">
+              <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">IAQ Risk Score</p>
+              <div id="score-display" class="text-7xl font-black leading-none mb-3">—</div>
+              <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate mb-4">out of 100</div>
+              <div id="tier-badge" class="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white"></div>
+            </div>
+
+            <!-- Top Risk Drivers -->
+            <div class="bg-white border border-light-grey/60 rounded-sm p-6 shadow-sm">
+              <p class="text-[10px] font-bold uppercase tracking-[0.15em] text-slate mb-4">Top Risk Drivers</p>
+              <ol id="drivers-list" class="space-y-2 text-sm text-primary list-decimal list-inside"></ol>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="bg-white border border-light-grey/60 rounded-sm p-6 shadow-sm">
+              <p class="text-[10px] font-bold uppercase tracking-[0.15em] text-slate mb-4">Recommendations</p>
+              <ul id="recs-list" class="space-y-3 text-sm text-primary"></ul>
+            </div>
+
+            <!-- Copy Button -->
+            <button type="button" id="btn-copy" class="w-full inline-flex items-center justify-center px-6 py-3.5 border border-light-grey/60 text-primary font-bold text-xs uppercase tracking-widest rounded-sm hover:border-primary transition-colors gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <span id="copy-label">Copy Summary</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const FIELD_IDS = [
+    'facilityType','occupancyLevel','sensitivePopulations','operatingHours',
+    'hvacAge','filterLevel','outdoorAir','maintenanceCadence',
+    'waterIntrusion12mo','persistentDampness','moldHistory','humidityTypical',
+    'odorComplaints','comfortComplaints','symptomReports','absenteeismConcern',
+    'complianceExposure','constructionActivity','ductCleaningHistory','recentIAQTesting',
+  ];
+
+  const GROUPS = [
+    { name: 'Facility Sensitivity & Occupancy', weight: 25, fields: ['facilityType','occupancyLevel','sensitivePopulations','operatingHours'], maxValues: [4,3,3,3] },
+    { name: 'Ventilation & Filtration', weight: 25, fields: ['hvacAge','filterLevel','outdoorAir','maintenanceCadence'], maxValues: [3,3,3,3] },
+    { name: 'Moisture & Building Conditions', weight: 25, fields: ['waterIntrusion12mo','persistentDampness','moldHistory','humidityTypical'], maxValues: [3,3,3,3] },
+    { name: 'Complaints & Symptoms', weight: 15, fields: ['odorComplaints','comfortComplaints','symptomReports','absenteeismConcern'], maxValues: [3,3,3,3] },
+    { name: 'Compliance & Disruption', weight: 10, fields: ['complianceExposure','constructionActivity','ductCleaningHistory','recentIAQTesting'], maxValues: [3,3,3,3] },
+  ];
+
+  const FIELD_LABELS: Record<string, string> = {
+    facilityType: 'Facility Type',
+    occupancyLevel: 'Occupancy Level',
+    sensitivePopulations: 'Sensitive Populations',
+    operatingHours: 'Operating Hours',
+    hvacAge: 'HVAC System Age',
+    filterLevel: 'Filtration Level',
+    outdoorAir: 'Outdoor Air Supply',
+    maintenanceCadence: 'Maintenance Cadence',
+    waterIntrusion12mo: 'Water Intrusion (12 mo)',
+    persistentDampness: 'Persistent Dampness',
+    moldHistory: 'Mold History',
+    humidityTypical: 'Typical Humidity',
+    odorComplaints: 'Odor Complaints',
+    comfortComplaints: 'Comfort Complaints',
+    symptomReports: 'Health Symptom Reports',
+    absenteeismConcern: 'Absenteeism Concern',
+    complianceExposure: 'Compliance Exposure',
+    constructionActivity: 'Construction Activity',
+    ductCleaningHistory: 'Duct Cleaning History',
+    recentIAQTesting: 'Recent IAQ Testing',
+  };
+
+  function getVal(id: string): number {
+    const el = document.getElementById(id) as HTMLSelectElement | null;
+    return el ? Number(el.value) || 0 : 0;
+  }
+
+  function getSelectedText(id: string): string {
+    const el = document.getElementById(id) as HTMLSelectElement | null;
+    if (!el || el.selectedIndex <= 0) return '';
+    return el.options[el.selectedIndex].text;
+  }
+
+  function getTier(score: number) {
+    if (score >= 75) return { label: 'Critical', color: '#EF4444' };
+    if (score >= 50) return { label: 'High', color: '#F97316' };
+    if (score >= 25) return { label: 'Moderate', color: '#F59E0B' };
+    return { label: 'Low', color: '#10B981' };
+  }
+
+  function calculate() {
+    const values: Record<string, number> = {};
+    for (const id of FIELD_IDS) {
+      values[id] = getVal(id);
+      if (values[id] === 0) {
+        alert('Please complete all 20 fields before calculating.');
+        return;
+      }
+    }
+
+    let totalScore = 0;
+    const driverScores: { field: string; score: number }[] = [];
+
+    for (const group of GROUPS) {
+      const catMax = group.maxValues.reduce((a, b) => a + b, 0);
+      let catSum = 0;
+      for (let i = 0; i < group.fields.length; i++) {
+        const fid = group.fields[i];
+        const fval = values[fid];
+        catSum += fval;
+        driverScores.push({
+          field: fid,
+          score: group.weight * (fval / catMax),
+        });
+      }
+      const ratio = catSum / catMax;
+      totalScore += ratio * group.weight;
+    }
+
+    const finalScore = Math.round(Math.min(100, Math.max(0, totalScore)));
+    const tier = getTier(finalScore);
+
+    driverScores.sort((a, b) => b.score - a.score);
+    const topDrivers = driverScores.slice(0, 5);
+
+    const recs: string[] = [];
+
+    if (tier.label === 'Critical' || tier.label === 'High') {
+      recs.push('Immediate containment assessment recommended — contact BAM for emergency evaluation');
+    } else if (tier.label === 'Moderate') {
+      recs.push('Targeted assessment recommended — schedule a BAM site evaluation');
+    } else {
+      recs.push('Continue routine monitoring and scheduled maintenance');
+    }
+
+    if (values.waterIntrusion12mo >= 2 || values.persistentDampness >= 3 || values.moldHistory >= 2) {
+      recs.push('Schedule moisture investigation and remediation assessment');
+    }
+    if (values.filterLevel >= 3 && (values.odorComplaints >= 3 || values.comfortComplaints >= 3)) {
+      recs.push('Review ventilation balance and filtration upgrade options');
+    }
+    if (values.outdoorAir >= 3) {
+      recs.push('Check outdoor air intake measurement and damper operation');
+    }
+    if (values.maintenanceCadence >= 3) {
+      recs.push('Move to preventive maintenance cadence (quarterly minimum)');
+    }
+    if (values.complianceExposure >= 3) {
+      recs.push('Tighten documentation and audit readiness protocols');
+    }
+    if (values.recentIAQTesting >= 3) {
+      recs.push('Schedule independent IAQ testing with third-party verification');
+    }
+
+    render(finalScore, tier, topDrivers, recs);
+  }
+
+  function render(
+    score: number,
+    tier: { label: string; color: string },
+    drivers: { field: string; score: number }[],
+    recs: string[],
+  ) {
+    const placeholder = document.getElementById('results-placeholder')!;
+    const panel = document.getElementById('results-panel')!;
+    placeholder.classList.add('hidden');
+    panel.classList.remove('hidden');
+
+    const scoreDisplay = document.getElementById('score-display')!;
+    scoreDisplay.textContent = String(score);
+    scoreDisplay.style.color = tier.color;
+
+    const badge = document.getElementById('tier-badge')!;
+    badge.textContent = `${tier.label} Risk`;
+    badge.style.backgroundColor = tier.color;
+
+    const driversList = document.getElementById('drivers-list')!;
+    driversList.innerHTML = '';
+    for (const d of drivers) {
+      const li = document.createElement('li');
+      li.className = 'text-sm text-primary';
+      li.textContent = FIELD_LABELS[d.field] || d.field;
+      driversList.appendChild(li);
+    }
+
+    const recsList = document.getElementById('recs-list')!;
+    recsList.innerHTML = '';
+    for (const r of recs) {
+      const li = document.createElement('li');
+      li.className = 'flex gap-2 text-sm text-primary';
+      li.innerHTML = `<span class="text-primary mt-0.5 shrink-0">&bull;</span><span>${r}</span>`;
+      recsList.appendChild(li);
+    }
+  }
+
+  function resetForm() {
+    for (const id of FIELD_IDS) {
+      const el = document.getElementById(id) as HTMLSelectElement | null;
+      if (el) el.selectedIndex = 0;
+    }
+    document.getElementById('results-placeholder')!.classList.remove('hidden');
+    document.getElementById('results-panel')!.classList.add('hidden');
+  }
+
+  function copySummary() {
+    const score = document.getElementById('score-display')!.textContent;
+    const tier = document.getElementById('tier-badge')!.textContent;
+    const driverItems = document.getElementById('drivers-list')!.querySelectorAll('li');
+    const recItems = document.getElementById('recs-list')!.querySelectorAll('li');
+
+    const lines = [
+      `IAQ Risk Score: ${score}/100`,
+      `Risk Tier: ${tier}`,
+      '',
+      'Top Risk Drivers:',
+    ];
+    driverItems.forEach((li, i) => lines.push(`  ${i + 1}. ${li.textContent}`));
+    lines.push('', 'Recommendations:');
+    recItems.forEach(li => lines.push(`  • ${li.textContent}`));
+    lines.push('', 'Inputs:');
+    for (const id of FIELD_IDS) {
+      const label = FIELD_LABELS[id] || id;
+      const text = getSelectedText(id);
+      if (text) lines.push(`  ${label}: ${text}`);
+    }
+    lines.push('', '— Generated by BAM IAQ Risk Score Tool (bamhvac.com/tools/iaq-risk-score)');
+
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const copyLabel = document.getElementById('copy-label')!;
+      copyLabel.textContent = 'Copied!';
+      setTimeout(() => { copyLabel.textContent = 'Copy Summary'; }, 2000);
+    });
+  }
+
+  document.getElementById('btn-calculate')!.addEventListener('click', calculate);
+  document.getElementById('btn-reset')!.addEventListener('click', resetForm);
+  document.getElementById('btn-copy')!.addEventListener('click', copySummary);
+</script>
+
+</BaseLayout>

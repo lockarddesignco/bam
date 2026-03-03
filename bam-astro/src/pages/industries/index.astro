@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site.config';
+
+const industryIconMap: Record<string, string> = {
+  'healthcare': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><path d="M22 10 A2 2 0 0 1 20 12 A2 2 0 0 1 18 10 A2 2 0 0 1 22 10z"/></svg>`,
+  'education': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+  'industrial': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
+  'food-processing': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg>`,
+  'government': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>`,
+  'commercial': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>`,
+  'retail': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+  'senior-care': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>`,
+  'cold-storage': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+  'data-centers': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>`,
+  'labs': `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>`,
+};
+
+const featured = ['healthcare', 'education', 'government', 'data-centers'];
+const featuredIndustries = siteConfig.industries.filter(ind => featured.includes(ind.id));
+const remainingIndustries = siteConfig.industries.filter(ind => !featured.includes(ind.id));
+---
+
+<BaseLayout
+  title="Industries We Serve | BAM — Building & Air Maintenance"
+  description="Institutional-grade HVAC restoration for healthcare, education, government, data centers, industrial, and commercial facilities across the Mid-Atlantic."
+>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="relative w-full py-28 md:py-36 flex flex-col items-center justify-center bg-dark overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/80 to-dark"></div>
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dots"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <span class="inline-block mb-6 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full border border-mint/30 text-mint bg-mint/10">
+        Sectors & Specializations
+      </span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+        Industries We Serve
+      </h1>
+      <p class="text-lg md:text-xl text-light-grey max-w-2xl mx-auto leading-relaxed font-light">
+        Institutional-grade HVAC restoration, indoor air quality, and compliance-driven mechanical services for facilities where uptime, safety, and air quality are mission critical.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FEATURED INDUSTRIES ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-ice">
+    <div class="absolute inset-0 opacity-[0.03] site-grid-light"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Primary Sectors</span>
+        <h2 class="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-[0.9] mb-6">
+          Featured Industry Specializations
+        </h2>
+        <div class="w-20 h-1.5 bg-primary opacity-20"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {featuredIndustries.map(industry => (
+          <a
+            href={`/industries/${industry.slug}/`}
+            class="group relative flex flex-col justify-between rounded-xl p-8 md:p-10 min-h-[240px] no-underline overflow-hidden bg-white border border-light-grey transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(38,90,74,0.12)]"
+          >
+            <div class="absolute top-0 right-0 w-40 h-40 rounded-full bg-mint/[0.06] blur-[60px] pointer-events-none group-hover:bg-mint/[0.12] transition-all duration-700"></div>
+
+            <div>
+              <div class="flex items-center gap-4 mb-5">
+                <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-primary/[0.08] border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <Fragment set:html={industryIconMap[industry.id] || ''} />
+                </div>
+              </div>
+              <h3 class="text-xl md:text-2xl font-bold text-primary mb-3 group-hover:text-primary/80 transition-colors duration-300 leading-tight uppercase tracking-tight">{industry.title}</h3>
+              <p class="text-slate text-sm md:text-base leading-relaxed max-w-md">{industry.shortDescription}</p>
+            </div>
+
+            <div class="flex items-center gap-2 mt-6 text-primary/50 group-hover:text-primary transition-colors duration-300">
+              <span class="text-xs font-bold uppercase tracking-[0.2em]">Learn More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ REMAINING INDUSTRIES ════════════════════ -->
+  <section class="relative py-24 md:py-32 bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.04] site-grid-dots"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-mint/[0.06] blur-[150px] pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+      <div class="mb-16">
+        <span class="text-mint font-bold text-xs tracking-[0.22em] uppercase mb-4 block">Additional Sectors</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-6">
+          More Industries We Serve
+        </h2>
+        <div class="w-20 h-1 bg-mint opacity-40"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        {remainingIndustries.map(industry => (
+          <a
+            href={`/industries/${industry.slug}/`}
+            class="group flex flex-col gap-4 rounded-lg p-6 md:p-7 no-underline border border-white/[0.08] bg-white/[0.04] transition-all duration-400 hover:border-mint/30 hover:bg-white/[0.08] hover:-translate-y-1"
+          >
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-mint/[0.08] border border-mint/15 flex items-center justify-center text-mint/70 group-hover:text-mint group-hover:border-mint/30 transition-all duration-300">
+              <Fragment set:html={industryIconMap[industry.id] || ''} />
+            </div>
+            <h3 class="text-base font-bold text-white uppercase tracking-tight leading-snug group-hover:text-mint transition-colors duration-300">{industry.title}</h3>
+            <p class="text-light-grey/50 text-sm leading-relaxed">{industry.shortDescription}</p>
+            <div class="mt-auto pt-3 flex items-center text-mint/50 group-hover:text-mint font-bold text-[10px] uppercase tracking-widest transition-colors duration-300">
+              <span>Learn More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-auto group-hover:translate-x-1 transition-transform duration-300"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </div>
+          </a>
+        ))}
+
+        <a
+          href="/contact/"
+          class="group relative flex flex-col items-center justify-center gap-3 rounded-lg p-6 md:p-7 no-underline border-2 border-dashed border-mint/40 bg-gradient-to-br from-mint/[0.12] to-mint/[0.05] transition-all duration-400 hover:border-mint/70 hover:from-mint/[0.20] hover:to-mint/[0.10] hover:shadow-[0_0_50px_rgba(167,215,197,0.15)] text-center"
+        >
+          <div class="w-12 h-12 rounded-full bg-mint/20 flex items-center justify-center text-mint group-hover:bg-mint group-hover:text-primary transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span class="text-sm font-bold text-white uppercase tracking-tight leading-snug group-hover:text-mint transition-colors duration-300">Don't See Your Industry?</span>
+          <span class="text-mint/60 text-xs leading-relaxed">Book a consultation with us</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ BOTTOM CTA ════════════════════ -->
+  <section class="bg-primary py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        Your Facility Deserves Institutional-Grade Service
+      </h2>
+      <p class="text-mint/80 text-base md:text-lg mb-8 max-w-xl mx-auto">
+        Regardless of your sector, if your HVAC systems are mission critical, BAM is built for you.
+      </p>
+      <a
+        href="/contact/"
+        class="inline-flex items-center justify-center px-10 py-5 bg-white text-primary font-bold text-sm uppercase tracking-widest rounded-sm shadow-lg hover:bg-mint hover:text-dark transition-colors"
+      >
+        Request a Site Visit
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-3"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

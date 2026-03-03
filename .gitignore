@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright / test artifacts
+.pw-browsers/
+test-results/
+screenshot-*.png
+screenshot-*.mjs
+
+# Netlify
+.netlify/

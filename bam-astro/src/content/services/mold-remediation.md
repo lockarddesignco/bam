@@ -61,10 +61,18 @@ roi:
   description: "Professional remediation mitigates legal liability and restores the asset to a safe, insurable condition."
 
 faq:
-  - question: "Do you just spray chemicals?"
-    answer: "No. The industry standard is physical removal. Chemicals are used for surface sanitization, but they are not a substitute for removing the biomass."
-  - question: "Can we stay in the building?"
-    answer: "In most cases, yes. We design our containment strategies to isolate the work area so normal operations can continue elsewhere."
+  - question: "Does commercial mold remediation require building evacuation?"
+    answer: "In most cases, no. BAM erects critical containment barriers with negative air pressure to isolate the work zone, allowing normal operations to continue in adjacent areas. For healthcare facilities, we coordinate containment protocols with infection control teams to maintain patient safety throughout the remediation process."
+  - question: "Is spraying chemicals an acceptable mold remediation method?"
+    answer: "No. IICRC S520 and industry consensus require physical source removal—not chemical encapsulation—as the primary remediation method. BAM performs HEPA vacuuming, damp wiping, and abrasive cleaning to remove the biomass. EPA-registered biocides are applied only for surface sanitization after the growth has been physically removed."
+  - question: "What standard does commercial mold remediation follow?"
+    answer: "BAM follows the IICRC S520 Standard for Professional Mold Remediation, which governs containment, source removal, and clearance verification. For healthcare environments, we also align with Joint Commission infection control risk assessment (ICRA) protocols. Every project includes documentation sufficient for insurance, legal, and accreditation purposes."
+  - question: "How does mold in HVAC systems spread contamination through a building?"
+    answer: "Growth inside air handling units and ductwork distributes spores through supply air to every connected zone. A single contaminated AHU can amplify spore counts building-wide within hours. BAM's remediation protocol addresses both the HVAC source and the structural surfaces simultaneously to prevent recontamination after cleaning."
+  - question: "Does BAM identify the moisture source that caused the mold growth?"
+    answer: "Yes. Remediation without addressing the root moisture source guarantees regrowth. BAM's protocol includes moisture mapping using infrared thermography and pin-type meters to locate the leak, condensation pathway, or humidity condition that enabled colonization. We document findings and recommend the mechanical or envelope correction required."
+  - question: "What clearance testing is performed after commercial mold remediation?"
+    answer: "BAM recommends post-remediation verification (PRV) air sampling by an independent third-party industrial hygienist. Clearance criteria require that spore counts inside the remediated area are at or below ambient outdoor levels. We also perform a detailed visual inspection confirming no visible growth remains on any treated surface."
 ---
 
 Commercial Mold Remediation services from Building & Air Maintenance.

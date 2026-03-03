@@ -1,0 +1,43 @@
+---
+import MetroLocationLayout from '../../layouts/MetroLocationLayout.astro';
+---
+
+<MetroLocationLayout
+  title="HVAC Services in Baltimore | BAM"
+  description="Field logistics hub for Baltimore City and surrounding counties. Mechanical restoration for port, medical, and municipal facilities."
+  metroName="Baltimore"
+  heroBody="Field logistics hub for Baltimore City and surrounding counties. Coordinating mechanical restoration, site access, and technical crews for port, medical, and municipal facilities."
+  ctaBadge="Local Crew Deployment"
+  whoServes="This operational hub is for Site Managers, Plant Engineers, and Local Facility Operators requiring physical execution within the Baltimore Metropolitan area."
+  scenarios={['Emergency Mechanical Failure', 'Planned Shutdown / Outage', 'Audit Deficiency Correction', 'Post-Construction Cleaning']}
+  facilityTypes={['Port & Industrial Terminals', 'Hospitals (Johns Hopkins Zone)', 'Federal/State Municipal Bldgs', 'Bio-Tech Research Labs']}
+  govRedirectLabel="Go to MD State Governance"
+  govRedirectHref="/locations/maryland/"
+  workflowSteps={[
+    { step: '01', title: 'Intake & Dispatch', desc: 'Digital or phone request routes to the Baltimore field desk.' },
+    { step: '02', title: 'Site Scout', desc: 'Lead technician deploys for industrial access and logistics review.' },
+    { step: '03', title: 'Mobilization', desc: 'Crew arrival with specialized equipment for port and clinical environments.' },
+    { step: '04', title: 'Closeout', desc: 'Work completed. Verification report generated for local files.' },
+  ]}
+  capabilitiesTitle="Baltimore Execution Capabilities"
+  capabilitiesBody="Field crews in this zone are equipped for industrial, clinical, and port-adjacent mechanical environments."
+  capabilities={[
+    { title: 'Industrial Restoration', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>', items: ['High-static coil cleaning', 'Cooling tower basin relining', 'Process chiller descaling'] },
+    { title: 'Clinical Hygiene', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>', items: ['ICRA-compliant duct cleaning', 'AHU surface disinfection', 'Filter bank certification'] },
+    { title: 'Local Compliance', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>', items: ['Fire damper testing (NFPA 80)', 'Local exhaust ventilation checks', 'Confined space entry (Permit)'] },
+  ]}
+  safetyTitle="Site Access & Safety Protocols"
+  safetyBody="Baltimore crews are equipped for both industrial port environments and sensitive clinical facilities with ICRA requirements."
+  safetyCards={[
+    { title: 'Port & Industrial Access', body: 'TWIC cards available for port terminals. Confined Space Entry certified teams.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+    { title: 'Medical & Research', body: 'Vaccination records available. ICRA training for work in occupied clinical zones.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>' },
+  ]}
+  serviceArea={[
+    { label: 'Primary Zone', value: 'Baltimore City, Baltimore County, Anne Arundel County' },
+    { label: 'Extended Zone', value: 'Howard County, Harford County (Trip charge may apply)' },
+    { label: 'Lead Time', value: 'Standard site visits: 3-5 days. Emergency response: < 4 hours (contract only)' },
+  ]}
+  mapQuery="Baltimore, Maryland, USA"
+  ctaTitle="Initiate Baltimore Site Support"
+  ctaBody="Connect with the local field desk to schedule a walk-through or discuss specific site logistics."
+/>

@@ -1,0 +1,50 @@
+---
+import StateLocationLayout from '../../layouts/StateLocationLayout.astro';
+---
+
+<StateLocationLayout
+  title="HVAC Services in Southern New York | BAM"
+  description="Institutional HVAC restoration and IAQ services for the Southern Tier, Hudson Valley, and regional New York institutional sectors."
+  stateAbbrev="NY"
+  heroSubtitle="Operational Responsibility: Southern NY"
+  heroBody="Coordinated mechanical restoration and technical oversight for facilities in the Southern Tier, Hudson Valley, and regional New York institutional sectors."
+  governanceSubtitle="Southern Region Portfolio Management"
+  governanceBody="This documentation supports facility governance roles managing institutional portfolios across Southern New York's educational and industrial zones."
+  govCard1Title="Regional Facility Governance"
+  govCard1Body="Centralized management of university systems, healthcare networks, and industrial sites requiring cross-border consistency."
+  govCard2Title="Risk & Procurement Alignment"
+  govCard2Body="Decision-makers qualifying a single technical partner for high-stakes mechanical restoration in the Southern Tier and Hudson Valley regions."
+  scopeTitle="Operational Scope in Southern NY"
+  scopeBody="We coordinate specialized mechanical restoration and air hygiene services across education and manufacturing sectors in Southern New York."
+  scopeCards={[
+    { title: 'Mechanical Restoration', body: 'Refurbishment of chillers, cooling towers, and air handling units to recover thermal capacity and extend useful life.', tag: 'Asset Preservation' },
+    { title: 'Hygiene & IAQ', body: 'NADCA-aligned duct cleaning and ASHRAE-compliant ventilation assessments for regulated environments.', tag: 'Environmental Safety' },
+    { title: 'Compliance Testing', body: 'Fire damper inspections, specialized healthcare airflow verification, and audit-ready documentation.', tag: 'Regulatory Risk' },
+  ]}
+  facilityTypes={[
+    { title: 'Higher Education', desc: 'University campuses with summer maintenance coordination needs.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>' },
+    { title: 'Industrial Manufacturing', desc: 'Process cooling and uptime-critical mechanical maintenance.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>' },
+    { title: 'Healthcare Networks', desc: 'Regional hospital systems requiring ICRA protocols.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>' },
+    { title: 'Commercial Real Estate', desc: 'Office and mixed-use properties targeting improved efficiency.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>' },
+  ]}
+  geoTitle="Geographic Coverage & Regional Alignment"
+  geoBody="BAM maintains active field operations in the Southern Tier and Hudson Valley regions, with emphasis on cross-border portfolio coordination."
+  regions={['Southern Tier (Binghamton / Elmira)', 'Lower Hudson Valley', 'Catskills Institutional Zones', 'Cross-Border Industrial Corridors']}
+  mapLabel="Regional Territory"
+  mapQuery="Southern Tier, New York, USA"
+  mapZoom={8}
+  govPathTitle="Regional Program Governance"
+  execLinks={[
+    { label: 'Southern Tier', href: '/contact/' },
+    { label: 'Hudson Valley Zone', href: '/contact/' },
+  ]}
+  proofCards={[
+    { title: 'Vendor Approved', body: 'Qualified with major regional healthcare and education networks.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>' },
+    { title: 'NADCA & ASHRAE', body: 'Technical alignment with national air hygiene and ventilation standards.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>' },
+    { title: 'OSHA 30 Leads', body: 'Site safety leadership for occupied and high-risk institutional environments.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>' },
+    { title: 'Cross-Border Ready', body: 'Logistics coordination for multi-state portfolios spanning PA and NY.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>' },
+  ]}
+  ctaTitle="Confirm NY Portfolio Alignment"
+  ctaBody="Initiate the confirmation process to verify eligibility and coordinate routing for your Southern New York-based facility or regional portfolio."
+  ctaPhoneLabel="Regional Coordinator"
+/>

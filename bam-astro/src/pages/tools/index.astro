@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Tools & Calculators | BAM — Decision Support"
+  description="Interactive HVAC assessment tools for facility directors and engineers. IAQ Risk Score calculator and Restoration ROI Estimator."
+>
+
+<!-- Hero -->
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 40px 40px;"></div>
+  <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl">
+      <div class="inline-flex items-center gap-2 text-mint mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Tools & Calculators</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8 uppercase">
+        Decision Support<br/>
+        <span class="text-mint">Library</span>
+      </h1>
+      <p class="text-light-grey text-lg md:text-xl font-light leading-relaxed border-l-2 border-primary pl-8 opacity-90 max-w-2xl">
+        Institutional-grade assessment tools designed for facility directors, compliance officers, and procurement teams evaluating HVAC restoration strategies.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Tool Cards -->
+<section class="py-20 md:py-28 bg-offwhite">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+      <!-- IAQ Risk Score -->
+      <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10 flex flex-col">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-sm border border-light-grey/60 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-lg font-bold text-primary">IAQ Risk Score Tool</h3>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-mint/20 text-primary px-2 py-0.5 rounded-full">New</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-slate text-sm leading-relaxed mb-8 flex-grow">
+          Evaluate your facility's indoor air quality risk across five critical categories. Receive a weighted score, identify top risk drivers, and get actionable recommendations aligned with ASHRAE and NADCA standards.
+        </p>
+        <a href="/tools/iaq-risk-score/" class="inline-flex items-center justify-center w-full px-6 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors no-underline gap-2">
+          Launch Assessment
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- ROI Estimator -->
+      <div class="bg-white border border-light-grey/60 rounded-sm shadow-sm p-8 md:p-10 flex flex-col">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-12 rounded-sm border border-light-grey/60 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+          </div>
+          <h3 class="text-lg font-bold text-primary">Restoration Value Estimator</h3>
+        </div>
+        <p class="text-slate text-sm leading-relaxed mb-8 flex-grow">
+          Model the financial case for mechanical restoration versus replacement. Calculate potential energy savings, deferred capital costs, and simple payback periods based on ASHRAE degradation curves.
+        </p>
+        <a href="/tools/restoration-value-estimator/" class="inline-flex items-center justify-center w-full px-6 py-3.5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-colors no-underline gap-2">
+          Launch Estimator
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

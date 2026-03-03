@@ -1,0 +1,49 @@
+---
+import StateLocationLayout from '../../layouts/StateLocationLayout.astro';
+---
+
+<StateLocationLayout
+  title="HVAC Services in New Jersey | BAM"
+  description="Institutional HVAC restoration and IAQ services across New Jersey. Specialized support for pharmaceutical, healthcare, education, and corporate campus facilities."
+  stateAbbrev="NJ"
+  heroSubtitle="Operational Responsibility: NJ"
+  heroBody="Coordinated mechanical restoration and technical oversight for mission-critical facilities, pharmaceutical campuses, and multi-site portfolios across New Jersey."
+  governanceSubtitle="Garden State Portfolio Management"
+  governanceBody="This documentation supports facility governance roles managing multi-site environments or institutional portfolios across New Jersey's regulatory landscape."
+  govCard1Title="NJ Facility Governance"
+  govCard1Body="Centralized management of pharmaceutical manufacturing, higher education campuses, and healthcare networks."
+  govCard2Title="Risk & Procurement Alignment"
+  govCard2Body="Decision-makers qualifying a single technical partner for high-stakes mechanical restoration across New Jersey's industrial and clinical corridors."
+  scopeTitle="Operational Scope in New Jersey"
+  scopeBody="We coordinate specialized mechanical restoration and air hygiene services across industrial and commercial sectors throughout the Garden State."
+  scopeCards={[
+    { title: 'Mechanical Restoration', body: 'Refurbishment of chillers, cooling towers, and air handling units to recover thermal capacity and extend useful life.', tag: 'Asset Preservation' },
+    { title: 'Hygiene & IAQ', body: 'NADCA-aligned duct cleaning and ASHRAE-compliant ventilation assessments for regulated environments.', tag: 'Environmental Safety' },
+    { title: 'Compliance Testing', body: 'Fire damper inspections, specialized healthcare airflow verification, and audit-ready documentation.', tag: 'Regulatory Risk' },
+  ]}
+  facilityTypes={[
+    { title: 'Pharma & Life Sciences', desc: 'Laboratories and manufacturing sites requiring strict air change rates.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>' },
+    { title: 'Higher Education', desc: 'University systems managing seasonal maintenance windows and research facility IAQ.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>' },
+    { title: 'Corporate Campuses', desc: 'Large-scale office parks requiring tenant comfort and efficiency.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>' },
+    { title: 'Industrial Parks', desc: 'Manufacturing and cold storage facilities focused on process continuity.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>' },
+  ]}
+  geoTitle="Geographic Coverage & Regional Alignment"
+  geoBody="BAM maintains active field operations across all NJ counties with emphasis on pharmaceutical corridors, corporate campuses, and healthcare networks."
+  regions={['North Jersey (Pharma & Industrial Corridor)', 'Central Jersey (Corporate & Education Hubs)', 'South Jersey (Philadelphia Metro Alignment)', 'Coastal Institutional Facilities']}
+  mapLabel="Garden State Territory"
+  mapQuery="New Jersey, USA"
+  mapZoom={8}
+  govPathTitle="Statewide Program Governance"
+  execLinks={[
+    { label: 'South Jersey', href: '/locations/south-jersey/' },
+  ]}
+  proofCards={[
+    { title: 'Vendor Qualified', body: 'Registered status with major pharmaceutical and healthcare networks.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>' },
+    { title: 'NADCA & ASHRAE', body: 'Technical alignment with national air hygiene and ventilation standards.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>' },
+    { title: 'OSHA 30 Leads', body: 'Site safety leadership for occupied and high-risk institutional environments.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>' },
+    { title: 'Regulated Sites', body: 'Experience working within FDA/GMP validated manufacturing environments.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>' },
+  ]}
+  ctaTitle="Confirm NJ Portfolio Alignment"
+  ctaBody="Initiate the confirmation process to verify eligibility and coordinate routing for your New Jersey-based facility or regional portfolio."
+  ctaPhoneLabel="Statewide Coordinator"
+/>

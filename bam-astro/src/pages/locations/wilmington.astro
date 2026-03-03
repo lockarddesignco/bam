@@ -1,0 +1,43 @@
+---
+import MetroLocationLayout from '../../layouts/MetroLocationLayout.astro';
+---
+
+<MetroLocationLayout
+  title="HVAC Services in Wilmington | BAM"
+  description="Execution-focused mechanical restoration for Wilmington's corporate headquarters, chemical industry, and financial centers."
+  metroName="Wilmington"
+  heroBody="Execution-focused mechanical restoration for Wilmington's corporate headquarters, chemical industry, and financial centers."
+  ctaBadge="Local Crew Deployment"
+  whoServes="This operational hub is for Site Managers, Plant Engineers, and Local Facility Operators requiring physical execution within the Wilmington Metropolitan area."
+  scenarios={['Financial Center Critical Cooling', 'Chemical Plant Turnarounds', 'University Campus Maintenance', 'Audit Compliance Repairs']}
+  facilityTypes={['Corporate HQ Complexes', 'Industrial / Chemical Sites', 'Legal & Financial Bldgs', 'Higher Ed Institutions']}
+  govRedirectLabel="Go to DE State Governance"
+  govRedirectHref="/locations/delaware/"
+  workflowSteps={[
+    { step: '01', title: 'Intake & Dispatch', desc: 'Digital or phone request routes to the Wilmington field desk.' },
+    { step: '02', title: 'Site Scout', desc: 'Lead technician deploys for corporate and industrial access review.' },
+    { step: '03', title: 'Mobilization', desc: 'Crew arrival with equipment suited for corporate and chemical environments.' },
+    { step: '04', title: 'Closeout', desc: 'Work completed. Verification report generated for local files.' },
+  ]}
+  capabilitiesTitle="Wilmington Execution Capabilities"
+  capabilitiesBody="Field crews in this zone specialize in corporate mechanical systems and industrial chemical facility protocols."
+  capabilities={[
+    { title: 'Corporate Mechanical', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>', items: ['HQ cooling tower restoration', 'Data center HVAC hygiene', 'Tenant comfort improvements'] },
+    { title: 'Industrial Support', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>', items: ['Chemical plant safety protocols', 'Process cooling efficiency', 'Confined space entry'] },
+    { title: 'Local Compliance', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>', items: ['State environmental regs', 'Fire damper testing', 'Audit-ready documentation'] },
+  ]}
+  safetyTitle="Site Access & Safety Protocols"
+  safetyBody="Wilmington crews coordinate around corporate hours and industrial shifts with adherence to site-specific safety protocols."
+  safetyCards={[
+    { title: 'Flexible Scheduling', body: 'Work coordination around corporate hours and industrial shifts.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' },
+    { title: 'Industrial Safety', body: 'Adherence to site-specific safety protocols, including PPE and permitting.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>' },
+  ]}
+  serviceArea={[
+    { label: 'Primary Zone', value: 'Wilmington, Newark, New Castle' },
+    { label: 'Extended Zone', value: 'I-95 Industrial Corridor' },
+    { label: 'Lead Time', value: 'Site Scouts: 3-5 days. Emergency response: < 4 hours (contract only)' },
+  ]}
+  mapQuery="Wilmington, Delaware, USA"
+  ctaTitle="Initiate Wilmington Site Support"
+  ctaBody="Connect with the local field desk to schedule a walk-through or discuss specific site logistics."
+/>

@@ -1,0 +1,794 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import { siteConfig } from '../config/site.config';
+---
+
+<BaseLayout
+  title="About BAM | Building & Air Maintenance"
+  description="BAM is a specialized mechanical contractor focused on the restoration and long-term care of HVAC infrastructure in mission-critical facilities across the Mid-Atlantic."
+>
+
+<div class="bg-offwhite min-h-screen pt-32 pb-24">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
+
+    <!-- Shared Header -->
+    <div class="mb-12 border-l-4 border-primary pl-8">
+      <h1 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-2">Company Documentation</h1>
+      <p class="text-primary text-3xl md:text-4xl font-black tracking-tighter">
+        Institutional Stewardship & Governance
+      </p>
+    </div>
+
+    <div class="about-layout">
+
+      <!-- Sidebar Navigation -->
+      <aside class="about-sidebar">
+        <nav id="about-nav" class="about-nav-container">
+          <div class="about-nav-header">
+            <span class="text-[10px] font-bold text-slate uppercase tracking-widest">Navigation</span>
+          </div>
+
+          <button data-tab="hub" class="about-nav-btn active flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/></svg>
+              About BAM
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="company" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Our Company
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="method" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+              Our Method
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="compliance" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              Compliance
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="safety" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>
+              Safety
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="coverage" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Service Area
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="leadership" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Leadership
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="documentation" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+              Documentation
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <button data-tab="careers" class="about-nav-btn flex items-center justify-between px-4 py-3 text-[11px] font-bold uppercase tracking-widest transition-all text-left rounded-sm">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Careers
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-chevron text-mint"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          <div class="about-nav-cta">
+            <span class="text-[10px] font-bold uppercase tracking-widest block mb-2 opacity-70">Need a Site Visit?</span>
+            <a href="/contact/" class="text-xs font-bold underline underline-offset-4 decoration-mint hover:text-mint transition-colors no-underline">
+              Request Engineering Audit
+            </a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Content Panel -->
+      <main class="about-content">
+        <div class="bg-white border border-light-grey/60 shadow-sm rounded-sm" style="min-height:700px;">
+
+          <!-- TAB: Hub -->
+          <div id="panel-hub" class="about-panel p-10 md:p-16">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">About Building & Air Maintenance</h2>
+            <div class="text-slate space-y-8 font-light leading-relaxed">
+              <p class="text-xl">
+                Building & Air Maintenance (BAM) is a specialized mechanical contractor focused on the restoration and long-term care of HVAC infrastructure in mission-critical facilities.
+              </p>
+              <p>
+                We operate across the Mid-Atlantic region, providing technical services to hospitals, universities, government agencies, and industrial manufacturing sites. Our work is defined by a restoration-first approach designed to protect existing mechanical assets and ensure compliance with institutional air quality standards.
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+                <div class="p-6 bg-offwhite border border-light-grey/60 rounded-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                  <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-2">Compliance</h4>
+                  <p class="text-xs text-slate leading-relaxed">Standards-aligned execution for regulated environments.</p>
+                </div>
+                <div class="p-6 bg-offwhite border border-light-grey/60 rounded-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-4"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-2">Performance</h4>
+                  <p class="text-xs text-slate leading-relaxed">Documented thermal and airflow recovery metrics.</p>
+                </div>
+                <div class="p-6 bg-offwhite border border-light-grey/60 rounded-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mb-4"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>
+                  <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-2">Safety</h4>
+                  <p class="text-xs text-slate leading-relaxed">OSHA-30 leadership in occupied facilities.</p>
+                </div>
+              </div>
+
+              <section class="pt-12 border-t border-light-grey/60">
+                <h3 class="text-xl font-bold text-primary mb-6">See BAM in Action</h3>
+                <div class="rounded-xl overflow-hidden shadow-lg border border-light-grey/60 mb-10">
+                  <YouTubeEmbed videoId="eSpw4Bh5qFU" title="BAM — Kline Commercial" />
+                </div>
+
+                <h3 class="text-xl font-bold text-primary mb-4">Institutional Orientation</h3>
+                <p>
+                  The following documentation is provided to assist facility directors, compliance officers, and procurement teams in qualifying BAM for high-stakes mechanical projects.
+                </p>
+                <div class="mt-8 flex flex-col gap-4">
+                  <button data-tab="company" class="about-nav-btn flex items-center justify-between p-4 border border-light-grey/60 hover:border-primary hover:bg-offwhite transition-all group">
+                    <span class="text-sm font-bold text-primary uppercase tracking-widest">Review Our Company Philosophy</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </button>
+                  <button data-tab="method" class="about-nav-btn flex items-center justify-between p-4 border border-light-grey/60 hover:border-primary hover:bg-offwhite transition-all group">
+                    <span class="text-sm font-bold text-primary uppercase tracking-widest">Examine Our Delivery Method</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- TAB: Our Company -->
+          <div id="panel-company" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Our Company</h2>
+            <div class="space-y-8 text-slate">
+              <p class="text-lg leading-relaxed font-light">
+                BAM was founded to fill the gap between commodity mechanical contractors and large-scale engineering firms. We are an operating company focused on high-stakes execution.
+              </p>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">A Restoration-First Philosophy</h3>
+                <p class="leading-relaxed">
+                  Replacement is often unnecessary and highly disruptive. We prioritize the restoration of existing assets — chillers, AHUs, cooling towers, and duct systems. This approach recovers thermal capacity and extends asset lifecycles without the capital burden or operational downtime associated with full replacement.
+                </p>
+              </section>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">Institutional Contrast</h3>
+                <p class="leading-relaxed">
+                  Large firms often lack field-level accountability, while low-price contractors frequently fail on documentation and safety. BAM operates as a middle-tier specialist: we are small enough to ensure ownership-level oversight on every site, but large enough to meet the insurance and bonding requirements of major institutions.
+                </p>
+              </section>
+
+              <div class="pt-8 border-t border-light-grey/60">
+                <p class="text-sm font-bold text-primary uppercase tracking-widest mb-4">Key Operating Differentiators</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <li class="flex items-center gap-2 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    Performance-verified results
+                  </li>
+                  <li class="flex items-center gap-2 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    Restoration-focused capital protection
+                  </li>
+                  <li class="flex items-center gap-2 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    Institutional-grade reporting
+                  </li>
+                  <li class="flex items-center gap-2 text-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    Specialized critical-site crews
+                  </li>
+                </ul>
+              </div>
+
+              <div class="mt-8 bg-white p-8 md:p-10 border-l-4 border-primary rounded-r-sm shadow-sm">
+                <h4 class="font-bold text-primary text-xs uppercase tracking-widest mb-6">Operating Principles</h4>
+                <ul class="space-y-5">
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 bg-mint rounded-full mt-2 shrink-0"></span>
+                    <p class="text-sm text-slate"><span class="font-bold text-primary">Technical Accountability:</span> We do not perform work that cannot be verified through technical metrics.</p>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 bg-mint rounded-full mt-2 shrink-0"></span>
+                    <p class="text-sm text-slate"><span class="font-bold text-primary">Long-Term Stewardship:</span> We advise on the total lifecycle of the mechanical asset, not the immediate service event.</p>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 bg-mint rounded-full mt-2 shrink-0"></span>
+                    <p class="text-sm text-slate"><span class="font-bold text-primary">Zero Improvisation:</span> Work is performed according to predefined, standards-aligned SOPs.</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Our Method -->
+          <div id="panel-method" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Our Method</h2>
+            <div class="space-y-10 text-slate">
+              <p class="text-lg leading-relaxed font-light">
+                We follow a structured engagement process to ensure that work is predictable, containment is absolute, and documentation is audit-ready.
+              </p>
+
+              <div class="space-y-8">
+                <div class="flex gap-6 items-start">
+                  <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm">01</div>
+                  <div>
+                    <h4 class="font-bold text-primary text-lg mb-2">Technical Intake & Assessment</h4>
+                    <p class="text-sm leading-relaxed">We begin by gathering equipment-level data: system type, known performance issues, airflow constraints, and environmental sensitivities. On-site assessments are performed to establish technical baselines.</p>
+                  </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                  <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm">02</div>
+                  <div>
+                    <h4 class="font-bold text-primary text-lg mb-2">Compliance-Driven Scoping</h4>
+                    <p class="text-sm leading-relaxed">A defined scope of work is produced, detailing exact technical steps, required containment protocols (ICRA/PCRA), and expected performance outcomes. This scope becomes the governance document for the project.</p>
+                  </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                  <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm">03</div>
+                  <div>
+                    <h4 class="font-bold text-primary text-lg mb-2">Planned Execution</h4>
+                    <p class="text-sm leading-relaxed">Work is performed during scheduled windows to minimize operational impact. Technicians utilize specialized mechanical tools and non-corrosive chemical agents specific to the restoration task.</p>
+                  </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                  <div class="w-12 h-12 bg-primary text-white flex items-center justify-center shrink-0 font-bold text-lg rounded-sm">04</div>
+                  <div>
+                    <h4 class="font-bold text-primary text-lg mb-2">Verification & Reporting</h4>
+                    <p class="text-sm leading-relaxed">Deliverables are verified through post-project performance testing and photo-documentation. A full closeout package is provided to facility leadership for their records.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-6 bg-mint/10 border border-mint/30 rounded-sm">
+                <p class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-2">Documentation Standards</p>
+                <p class="text-sm leading-relaxed">Every verification package is structured to be suitable for presentation to internal stakeholders and external regulatory bodies (e.g., JCAHO, State Health Boards).</p>
+              </div>
+
+              <div class="pt-8 border-t border-light-grey/60">
+                <h4 class="font-bold text-primary text-lg mb-4">Occupied Facility Logistics</h4>
+                <p class="text-sm leading-relaxed">
+                  Working in live hospitals, schools, and industrial sites requires specialized logistics. We coordinate closely with facility managers on access control, debris management, and airflow containment to ensure that the surrounding environment remains unaffected by mechanical work.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Compliance -->
+          <div id="panel-compliance" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Standards & Compliance</h2>
+            <div class="space-y-8 text-slate">
+              <p class="text-lg leading-relaxed font-light">
+                Compliance is not an afterthought at BAM; it is the framework within which all work is performed.
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <section class="p-8 border border-light-grey/60 rounded-sm">
+                  <div class="flex items-center gap-3 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <h3 class="text-xl font-bold text-primary">NADCA Aligned</h3>
+                  </div>
+                  <p class="text-sm leading-relaxed">
+                    We perform air system cleaning and restoration in strict alignment with NADCA standards (ACR). This ensures that contaminants are removed — not just moved — using verified source-removal methods.
+                  </p>
+                </section>
+
+                <section class="p-8 border border-light-grey/60 rounded-sm">
+                  <div class="flex items-center gap-3 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <h3 class="text-xl font-bold text-primary">ASHRAE Support</h3>
+                  </div>
+                  <p class="text-sm leading-relaxed">
+                    Our restoration protocols support ASHRAE 62.1 (Ventilation for Acceptable Indoor Air Quality) and ASHRAE 188 (Legionellosis Risk Management) objectives.
+                  </p>
+                </section>
+              </div>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">Inspection Readiness</h3>
+                <p class="leading-relaxed">
+                  We understand the pressure of external inspections. Our reports are built to answer the questions inspectors ask: What was the condition? How was it corrected? How was cleanliness verified? We provide the technical proof required to satisfy oversight demands.
+                </p>
+              </section>
+
+              <div class="flex flex-wrap gap-4">
+                <span class="px-4 py-2 bg-offwhite border border-light-grey/60 text-[10px] font-bold uppercase tracking-widest text-slate rounded-sm">NADCA Certified</span>
+                <span class="px-4 py-2 bg-offwhite border border-light-grey/60 text-[10px] font-bold uppercase tracking-widest text-slate rounded-sm">EPA Universal</span>
+                <span class="px-4 py-2 bg-offwhite border border-light-grey/60 text-[10px] font-bold uppercase tracking-widest text-slate rounded-sm">OSHA 30</span>
+                <span class="px-4 py-2 bg-offwhite border border-light-grey/60 text-[10px] font-bold uppercase tracking-widest text-slate rounded-sm">ASHE Member</span>
+                <span class="px-4 py-2 bg-offwhite border border-light-grey/60 text-[10px] font-bold uppercase tracking-widest text-slate rounded-sm">Costars Vendor</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Safety -->
+          <div id="panel-safety" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Safety & Risk Management</h2>
+            <div class="space-y-8 text-slate">
+              <p class="text-lg leading-relaxed font-light">
+                For a facility manager, the greatest risk is an incident in a live, occupied environment. BAM is designed to protect both the facility and the manager's career.
+              </p>
+
+              <div class="space-y-6">
+                <div class="flex gap-4">
+                  <div class="mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-primary">ICRA and PCRA Compliance</h4>
+                    <p class="text-sm leading-relaxed">In healthcare settings, we follow strict Infection Control Risk Assessment (ICRA) protocols, including HEPA-filtered containment and negative air pressure monitoring.</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <div class="mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/><circle cx="16.5" cy="7.5" r=".5"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-primary">OSHA 30 Leadership</h4>
+                    <p class="text-sm leading-relaxed">Our field leads are OSHA 30-trained. We do not use untrained temporary labor. Every team member on your site understands fall protection, LOTO, and hazard communication.</p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <div class="mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-primary">Incident Prevention</h4>
+                    <p class="text-sm leading-relaxed">We utilize specialized, non-corrosive chemicals and low-disruption mechanical tools designed for use in sensitive areas like schools and hospitals.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-8 bg-dark text-white rounded-sm">
+                <h4 class="text-mint font-bold uppercase tracking-widest text-xs mb-4">Risk Mitigation Metrics</h4>
+                <ul class="space-y-3 text-sm opacity-90">
+                  <li class="flex items-start gap-2"><span class="text-mint mt-0.5">&#8226;</span> Full commercial general liability and workers' compensation coverage tailored for institutional sites.</li>
+                  <li class="flex items-start gap-2"><span class="text-mint mt-0.5">&#8226;</span> EMR Rating maintained below industry average for mechanical specialty contractors.</li>
+                  <li class="flex items-start gap-2"><span class="text-mint mt-0.5">&#8226;</span> Zero lost-time incidents in occupied clinical environments.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Service Area -->
+          <div id="panel-coverage" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Service Area & Coverage</h2>
+            <div class="space-y-8 text-slate">
+              <p class="text-lg leading-relaxed font-light">
+                BAM is a regional specialist. We focus our resources in the Mid-Atlantic to ensure rapid response and consistent quality control.
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <section>
+                  <h3 class="text-xl font-bold text-primary mb-4">Core Operating States</h3>
+                  <ul class="space-y-3">
+                    {siteConfig.locationStates.map(loc => (
+                      <li class="flex items-center gap-3 font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                        <a href={`/locations/${loc.slug}/`} class="text-primary hover:text-mint transition-colors no-underline">{loc.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section class="bg-offwhite p-8 border border-light-grey/60 rounded-sm">
+                  <h3 class="text-xl font-bold text-primary mb-4">Regional Logistics</h3>
+                  <p class="text-sm leading-relaxed">
+                    Headquartered in Pine Grove, PA, we are strategically positioned to support multi-site portfolios across the Northeast Corridor. Our teams are equipped for self-sustained operations on large campuses and industrial complexes.
+                  </p>
+                </section>
+              </div>
+
+              <div class="pt-12 border-t border-light-grey/60 text-center">
+                <p class="text-sm italic mb-6">Need support for a multi-state facility portfolio?</p>
+                <a href={`tel:${siteConfig.phoneRaw}`} class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-all no-underline">
+                  Speak with our Regional Coordinator
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Leadership -->
+          <div id="panel-leadership" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Leadership & Ownership</h2>
+            <div class="space-y-8 text-slate">
+              <p class="text-lg leading-relaxed font-light italic border-l-4 border-primary pl-6">
+                "In institutional environments, the distance between the decision-maker and the person performing the work must be as short as possible."
+              </p>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">Accountability and Stewardship</h3>
+                <p class="leading-relaxed">
+                  BAM is ownership-led. Our leadership team maintains a presence on projects involving mission-critical assets. We view our role not just as a service provider, but as a steward of your facility's mechanical health. When a project is defined, our ownership stands behind the scope, the safety plan, and the final verification report.
+                </p>
+              </section>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">Field Experience</h3>
+                <p class="leading-relaxed">
+                  Our leadership team comes from the field. This background informs our understanding of operational reality — knowing that a project in a surgical suite requires different containment than one in a warehouse, and ensuring those standards are never compromised for speed.
+                </p>
+              </section>
+
+              <div class="p-8 bg-offwhite border border-light-grey/60 rounded-sm">
+                <h4 class="font-bold text-primary mb-2 uppercase tracking-widest text-xs">Direct Access</h4>
+                <p class="text-sm leading-relaxed">
+                  Facility directors have direct access to BAM ownership. This ensures that technical discrepancies or scheduling adjustments are resolved with institutional authority and zero layers of bureaucracy.
+                </p>
+              </div>
+
+              <div class="bg-white p-8 md:p-10 border border-light-grey/60 rounded-sm italic text-slate text-base leading-relaxed">
+                "Our responsibility as owners is to ensure that your mechanical systems perform as engineered, your air is compliant, and your facility uptime is never compromised by our presence."
+                <div class="mt-4 font-bold text-primary not-italic text-sm">— BAM Ownership</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: Documentation -->
+          <div id="panel-documentation" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Technical Documentation & Reference</h2>
+            <div class="text-slate space-y-12 font-light leading-relaxed">
+              <p class="text-lg">
+                The following reference materials are provided to support facility directors, compliance officers, and procurement teams during operational planning and vendor evaluation.
+              </p>
+
+              <!-- Pilot Program -->
+              <section class="border-t border-light-grey/60 pt-10">
+                <div class="flex items-center gap-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                  <h3 class="text-xl font-bold text-primary">Pilot Program Overview</h3>
+                </div>
+                <div class="pl-9">
+                  <p class="mb-4">
+                    For large-scale portfolios or complex campuses, BAM offers a structured Pilot Program. This engagement model allows institutions to validate our technical execution and reporting standards on a single asset or limited scope before committing to a master service agreement.
+                  </p>
+                  <p class="mb-6">
+                    The pilot includes a full condition assessment, execution of the restoration scope, and a comprehensive closeout package containing before/after performance metrics.
+                  </p>
+                  <a href="/pilot-program/" class="flex items-center gap-2 text-sm font-bold text-primary uppercase tracking-widest hover:underline decoration-mint underline-offset-4 no-underline">
+                    Apply for the Pilot Program
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Energy Savings -->
+              <section class="border-t border-light-grey/60 pt-10">
+                <div class="flex items-center gap-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                  <h3 class="text-xl font-bold text-primary">Energy Savings Methodology</h3>
+                </div>
+                <div class="pl-9">
+                  <p class="mb-4">
+                    Mechanical restoration directly impacts energy consumption by recovering heat transfer efficiency. Our savings projections are based on ASHRAE degradation curves and manufacturer design specifications.
+                  </p>
+                  <p class="mb-6">
+                    This guide outlines the formulas used to calculate potential kWh reductions resulting from coil cleaning, tower fill restoration, and chiller tube brushing. It supports facilities teams in building financial justifications for maintenance budgets (OpEx) versus capital replacement (CapEx).
+                  </p>
+                  <a href="/contact/" class="flex items-center gap-2 text-sm font-bold text-primary uppercase tracking-widest hover:underline decoration-mint underline-offset-4 no-underline">
+                    Discuss Calculation Model
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Legionella Prevention -->
+              <section class="border-t border-light-grey/60 pt-10">
+                <div class="flex items-center gap-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+                  <h3 class="text-xl font-bold text-primary">Legionella Prevention Brief</h3>
+                </div>
+                <div class="pl-9">
+                  <p class="mb-4">
+                    Alignment with ASHRAE 188 (Legionellosis: Risk Management for Building Water Systems) is a critical component of our cooling tower protocols. This brief details the specific mechanical hygiene steps BAM performs to support a facility's broader Water Management Program (WMP).
+                  </p>
+                  <p class="mb-4">
+                    Key topics include physical biofilm removal, basin disinfection procedures, and the elimination of stagnant water zones within the tower structure.
+                  </p>
+                  <a href="/blog/mechanical-hygiene-legionella-prevention-cooling-towers/" class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-[#1e483b] transition-colors no-underline">
+                    Read the full article
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </section>
+
+              <!-- IAQ Technical Brief -->
+              <section class="border-t border-light-grey/60 pt-10">
+                <div class="flex items-center gap-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
+                  <h3 class="text-xl font-bold text-primary">IAQ Technical Standards</h3>
+                </div>
+                <div class="pl-9">
+                  <p class="mb-4">
+                    This document defines the parameters utilized during Indoor Air Quality assessments. We reference ASHRAE Standard 62.1 for ventilation rates and EPA guidelines for particulate matter.
+                  </p>
+                  <p class="mb-4">
+                    Testing protocols typically include monitoring for CO2, Temperature, Relative Humidity, VOCs, and PM2.5/PM10.
+                  </p>
+                  <a href="/blog/iaq-technical-standards-guide-ashrae-62-1-pm25/" class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-[#1e483b] transition-colors no-underline">
+                    Read the full article
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </section>
+
+              <!-- Thermal Imaging -->
+              <section class="border-t border-light-grey/60 pt-10">
+                <div class="flex items-center gap-3 mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                  <h3 class="text-xl font-bold text-primary">Thermal Imaging Applications</h3>
+                </div>
+                <div class="pl-9">
+                  <p class="mb-4">
+                    Thermography is a non-destructive testing method used to verify mechanical performance and identify anomalies. Typical findings include uneven coil heat transfer, bearing hotspots, and insulation failures.
+                  </p>
+                  <p>
+                    We utilize thermal imaging both as a diagnostic tool during the assessment phase and as a verification method during project closeout.
+                  </p>
+                </div>
+              </section>
+
+              <!-- Chiller Case -->
+              <section class="border-t border-light-grey/60 pt-10">
+                <div class="bg-primary/[0.04] border border-primary/10 rounded-md p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 class="text-lg font-bold text-primary mb-1">Need project documentation or a scope review?</h3>
+                    <p class="text-slate text-sm">We can walk you through our documentation standards and provide sample deliverables for your facility type.</p>
+                  </div>
+                  <a href="/contact/" class="inline-flex items-center gap-2 whitespace-nowrap px-5 py-2.5 bg-primary text-white font-bold text-sm tracking-wide rounded-sm hover:bg-primary/90 transition-colors no-underline flex-shrink-0">
+                    Get in Touch
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- TAB: Careers -->
+          <div id="panel-careers" class="about-panel p-10 md:p-16" style="display:none;">
+            <h2 class="text-3xl md:text-4xl font-black text-primary mb-8 tracking-tight">Careers at BAM</h2>
+            <div class="space-y-8 text-slate">
+              <p class="text-lg leading-relaxed font-light">
+                We do not hire "laborers." We develop specialists.
+              </p>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">The Craftsmanship Standard</h3>
+                <p class="leading-relaxed">
+                  Restoration work is precise. It requires an eye for detail and an understanding of mechanical theory. We look for individuals who take pride in the documentation and the technical recovery of a machine.
+                </p>
+              </section>
+
+              <section>
+                <h3 class="text-xl font-bold text-primary mb-4">Ongoing Training</h3>
+                <p class="leading-relaxed mb-6">
+                  Every BAM technician goes through a rigorous onboarding process. We invest in our people because they are the frontline of your facility's safety.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="p-4 border border-light-grey/60 text-xs font-bold text-primary uppercase tracking-widest rounded-sm">OSHA 10/30 Safety Training</div>
+                  <div class="p-4 border border-light-grey/60 text-xs font-bold text-primary uppercase tracking-widest rounded-sm">NADCA Technician Certification</div>
+                  <div class="p-4 border border-light-grey/60 text-xs font-bold text-primary uppercase tracking-widest rounded-sm">ICRA / PCRA Protocols</div>
+                  <div class="p-4 border border-light-grey/60 text-xs font-bold text-primary uppercase tracking-widest rounded-sm">Advanced Mechanical Restoration</div>
+                </div>
+              </section>
+
+              <div class="p-10 border-2 border-dashed border-light-grey text-center rounded-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary mx-auto mb-6 opacity-40"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                <h4 class="text-primary text-xl font-bold mb-4">Submit a Professional Inquiry</h4>
+                <p class="text-sm text-slate leading-relaxed mb-8 max-w-md mx-auto">We are always evaluating experienced mechanical technicians and project leads for our Mid-Atlantic field teams.</p>
+                <a href={`mailto:${siteConfig.email}`} class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-[#1e483b] transition-all no-underline">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  Email Career Inquiry
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Layout: mobile stacked, desktop sidebar + content */
+  .about-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  @media (min-width: 768px) {
+    .about-layout {
+      flex-direction: row;
+      gap: 2.5rem;
+    }
+  }
+
+  /* Sidebar */
+  .about-sidebar {
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) {
+    .about-sidebar {
+      width: 260px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .about-sidebar {
+      width: 280px;
+    }
+  }
+
+  /* Nav container: horizontal scroll on mobile, vertical sticky on desktop */
+  .about-nav-container {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background: white;
+    border: 1px solid rgba(215, 221, 218, 0.6);
+    padding: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    border-radius: 2px;
+  }
+  .about-nav-container::-webkit-scrollbar { display: none; }
+
+  @media (min-width: 768px) {
+    .about-nav-container {
+      flex-direction: column;
+      gap: 4px;
+      overflow-x: visible;
+      position: sticky;
+      top: 8rem;
+    }
+  }
+
+  .about-nav-header {
+    display: none;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(215, 221, 218, 0.6);
+    margin-bottom: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .about-nav-header { display: block; }
+  }
+
+  .about-nav-cta {
+    display: none;
+    margin-top: 0.5rem;
+    padding: 1.25rem;
+    background: #265A4A;
+    color: white;
+    border-radius: 2px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .about-nav-cta { display: block; }
+  }
+
+  /* Content panel */
+  .about-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Nav buttons */
+  #about-nav .about-nav-btn {
+    color: #5E7A86;
+    cursor: pointer;
+    background: none;
+    border: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  #about-nav .about-nav-btn:hover {
+    background-color: #F2F6F5;
+    color: #265A4A;
+  }
+  #about-nav .about-nav-btn.active {
+    background-color: #265A4A;
+    color: white;
+  }
+  #about-nav .about-nav-btn .nav-icon {
+    opacity: 0.6;
+  }
+  #about-nav .about-nav-btn.active .nav-icon {
+    opacity: 1;
+    color: #A7D7C5;
+  }
+  #about-nav .about-nav-btn .nav-chevron {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    #about-nav .about-nav-btn.active .nav-chevron {
+      display: block;
+    }
+  }
+
+  /* Panel animation */
+  .about-panel {
+    animation: fadeSlideIn 0.4s ease-out;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script is:inline>
+  (function initAboutNav() {
+    var navButtons = document.querySelectorAll('.about-nav-btn');
+    var panels = document.querySelectorAll('.about-panel');
+
+    function switchTab(tabId) {
+      for (var i = 0; i < panels.length; i++) {
+        panels[i].style.display = 'none';
+      }
+      var target = document.getElementById('panel-' + tabId);
+      if (target) {
+        target.style.display = 'block';
+      }
+
+      var sidebarBtns = document.querySelectorAll('#about-nav .about-nav-btn');
+      for (var j = 0; j < sidebarBtns.length; j++) {
+        if (sidebarBtns[j].getAttribute('data-tab') === tabId) {
+          sidebarBtns[j].classList.add('active');
+        } else {
+          sidebarBtns[j].classList.remove('active');
+        }
+      }
+
+      history.replaceState(null, '', '#' + tabId);
+    }
+
+    for (var k = 0; k < navButtons.length; k++) {
+      navButtons[k].addEventListener('click', function() {
+        var tab = this.getAttribute('data-tab');
+        if (tab) switchTab(tab);
+      });
+    }
+
+    var hash = window.location.hash.replace('#', '');
+    var validTabs = ['hub','company','method','compliance','safety','coverage','leadership','documentation','careers'];
+    if (hash && validTabs.indexOf(hash) !== -1) {
+      switchTab(hash);
+    } else {
+      switchTab('hub');
+    }
+  })();
+</script>
+
+</BaseLayout>

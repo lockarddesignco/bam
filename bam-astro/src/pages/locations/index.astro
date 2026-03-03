@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site.config';
+
+const stateCards = [
+  { title: 'Pennsylvania', slug: 'pennsylvania', desc: 'Statewide Institutional Service', detail: 'Best for multi-site portfolios and statewide mechanical restoration agreements across PA.' },
+  { title: 'New Jersey', slug: 'new-jersey', desc: 'NJ Compliance Support', detail: 'Review state-level HVAC restoration eligibility for facility portfolios across all NJ counties.' },
+  { title: 'Maryland', slug: 'maryland', desc: 'MD Territory Capabilities', detail: 'Regional support and documentation for Maryland-based institutional site networks.' },
+  { title: 'Delaware', slug: 'delaware', desc: 'Statewide Coverage Area', detail: 'Full-state coverage verification for multi-site Delaware medical and educational campuses.' },
+  { title: 'Southern New York', slug: 'southern-new-york', desc: 'NY Regional Eligibility', detail: 'Coverage validation for southern counties and regional New York facility portfolios.' },
+];
+
+const metroCards = [
+  { title: 'Philadelphia', slug: 'philadelphia', desc: 'Urban Operational Planning', detail: 'Best for single-area or region-specific facilities in Center City and Greater Philadelphia.' },
+  { title: 'Baltimore', slug: 'baltimore', desc: 'Baltimore Metro Restoration', detail: 'Area-specific restoration details for Baltimore municipal, industrial, and single-site facilities.' },
+  { title: 'Wilmington', slug: 'wilmington', desc: 'Wilmington Service Specs', detail: 'Single-area coverage details for Wilmington-based labs and managed office complexes.' },
+  { title: 'South Jersey', slug: 'south-jersey', desc: 'Regional Industrial Zones', detail: 'Operational planning and coverage validation for specific South Jersey regional sites.' },
+  { title: 'Harrisburg / York', slug: 'harrisburg-york', desc: 'Capital Region Services', detail: 'Metro-specific support for single-area Central PA government and industrial corridors.' },
+];
+
+const facilityTypes = [
+  'Acute Care Hospitals',
+  'K-12 School Districts',
+  'University Campuses',
+  'Secure Govt Facilities',
+  'Process Industrial Sites',
+  'Managed Office Portfolios',
+];
+---
+
+<BaseLayout
+  title="Service Coverage | BAM — Building & Air Maintenance"
+  description="Institutional HVAC service coverage across PA, NJ, MD, DE, and Southern NY. Validate regional eligibility for specialized mechanical restoration and IAQ services."
+>
+
+<!-- Hero -->
+<section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">
+  <div
+    class="absolute inset-0 opacity-[0.03] pointer-events-none"
+    style="background-image: linear-gradient(#A7D7C5 1px, transparent 1px), linear-gradient(90deg, #A7D7C5 1px, transparent 1px); background-size: 40px 40px;"
+  ></div>
+
+  <div class="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl">
+      <div class="inline-flex items-center gap-2 text-mint mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em]">Regional Territory Validation</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter mb-8 uppercase">
+        Institutional HVAC<br/>
+        <span class="text-mint">Service Coverage</span>
+      </h1>
+      <p class="text-light-grey text-lg md:text-xl font-light leading-relaxed border-l-2 border-primary pl-8 opacity-90 max-w-2xl mb-6">
+        Providing regional mechanical restoration and indoor air quality services for multi-site portfolios and mission-critical facilities across the Mid-Atlantic.
+      </p>
+      <p class="text-mint text-sm font-bold uppercase tracking-widest opacity-80">
+        Pre-engagement validation for institutional facilities and procurement teams.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Validation for Facility Leadership -->
+<section class="py-20 md:py-28 bg-white border-b border-light-grey/40">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <div class="lg:col-span-4">
+        <h2 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-4">Service Eligibility</h2>
+        <h3 class="text-3xl md:text-4xl font-black text-primary leading-[0.95] uppercase tracking-tight">Validation for<br/>Facility Leadership</h3>
+      </div>
+      <div class="lg:col-span-8">
+        <p class="text-slate text-lg leading-relaxed mb-8">
+          This hub assists leadership in confirming regional eligibility prior to procurement review, internal budget approval, or site-specific engagement. It is designed to ensure that specialized mechanical resources are correctly aligned with your facility's location and management structure.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="p-6 bg-offwhite border border-light-grey/60 rounded-sm">
+            <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-2">Facility Scope</h4>
+            <p class="text-xs text-slate leading-relaxed">Decision-makers overseeing hospitals, university campuses, government complexes, and industrial manufacturing sites.</p>
+          </div>
+          <div class="p-6 bg-offwhite border border-light-grey/60 rounded-sm">
+            <h4 class="font-bold text-primary text-sm uppercase tracking-widest mb-2">Decision Support</h4>
+            <p class="text-xs text-slate leading-relaxed">Use this section to verify that your specific site or regional portfolio falls within our specialized field service territory before initiating technical intake.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Coverage Infrastructure -->
+<section class="py-20 md:py-24 bg-offwhite">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl md:text-4xl font-black text-primary mb-6 uppercase tracking-tight">Service Coverage Infrastructure</h2>
+      <p class="text-slate text-lg font-light leading-relaxed mb-10">
+        BAM maintains a dual-layered coverage model to reduce operational risk by aligning regional technical teams with specific facility constraints. Buyers should select a path based on their organizational reporting structure and site density.
+      </p>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+          <div>
+            <p class="text-sm font-bold text-primary uppercase tracking-widest">State-Level Coverage Path</p>
+            <p class="text-sm text-slate">Select this path for administrative decision-making involving statewide portfolios, multi-county agreements, or facilities located outside major metropolitan hubs.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-mint shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+          <div>
+            <p class="text-sm font-bold text-primary uppercase tracking-widest">Metro-Level Coverage Path</p>
+            <p class="text-sm text-slate">Select this path for operational planning at single, region-specific facilities requiring specialized coordination within high-density urban environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Service Regions Grid -->
+<section class="py-20 md:py-28 bg-white">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+
+    <!-- State Level -->
+    <div class="mb-20">
+      <h3 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-8 border-b border-light-grey/40 pb-4">Statewide & Multi-Site Portfolios</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {stateCards.map(state => (
+          <a href={`/locations/${state.slug}/`} class="group p-8 border border-light-grey/60 hover:border-primary/40 transition-all bg-white rounded-sm no-underline">
+            <h4 class="text-xl font-bold text-primary mb-2">{state.title}</h4>
+            <p class="text-[10px] font-bold text-mint uppercase tracking-widest mb-4">{state.desc}</p>
+            <p class="text-sm text-slate mb-6 leading-relaxed">{state.detail}</p>
+            <div class="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
+              View Statewide Details
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Metro Level -->
+    <div>
+      <h3 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-8 border-b border-light-grey/40 pb-4">Metro-Specific & Single-Area Facilities</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {metroCards.map(metro => (
+          <a href={`/locations/${metro.slug}/`} class="group p-8 border border-light-grey/60 hover:border-primary/40 transition-all bg-white rounded-sm no-underline">
+            <h4 class="text-lg font-bold text-primary mb-2">{metro.title}</h4>
+            <p class="text-[10px] font-bold text-mint uppercase tracking-widest mb-4">{metro.desc}</p>
+            <p class="text-sm text-slate mb-6 leading-relaxed">{metro.detail}</p>
+            <div class="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
+              View Metro Details
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Facility Types -->
+<section class="py-20 md:py-24 bg-offwhite border-y border-light-grey/40">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <h3 class="text-xs font-bold text-mint uppercase tracking-[0.3em] mb-12 text-center">Institutional Facility Support</h3>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      {facilityTypes.map(facility => (
+        <div class="p-4 bg-white border border-light-grey/60 text-center rounded-sm">
+          <span class="text-[10px] font-bold text-slate uppercase tracking-widest">{facility}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Compliance Block -->
+<section class="py-20 md:py-28 bg-white">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="bg-dark text-white p-12 lg:p-20 relative overflow-hidden rounded-sm">
+      <div class="absolute top-0 right-0 p-8 opacity-10">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div class="relative z-10 max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-black mb-8 uppercase tracking-tight">Clinical & Regulated<br/>Environment Compliance</h2>
+        <p class="text-light-grey text-lg font-light leading-relaxed mb-8">
+          BAM work is primarily performed inside active, occupied, and regulated environments. We understand that mechanical restoration must be executed with a precision that protects facility uptime and air hygiene.
+        </p>
+        <p class="text-light-grey text-lg font-light leading-relaxed">
+          This hub serves as a critical navigation tool to reduce risk before engagement begins. By ensuring you are connected with the correct specialized regional team, we can maintain the documentation and shift-coordination standards required by the Joint Commission and state health departments.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Guidance -->
+<section class="py-20 md:py-24 bg-offwhite">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
+      <div>
+        <h3 class="text-2xl font-bold text-primary mb-6 uppercase tracking-tight">Determining Correct Pathing</h3>
+        <p class="text-slate leading-relaxed mb-6">If you are unsure which coverage page applies, prioritize the path that aligns with your management structure. For regional portfolios covering multiple counties, the State-Level pages are the recommended starting point for pre-engagement validation.</p>
+        <p class="text-slate leading-relaxed">After selecting a location, you will be presented with regional contact information and technician availability specifics for that specific zone.</p>
+      </div>
+      <div class="space-y-4">
+        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="p-6 bg-white border border-light-grey/60 flex items-center justify-between group rounded-sm no-underline hover:border-primary/40 transition-colors">
+          <span class="text-xs font-bold text-primary uppercase tracking-widest">Return to Coverage Grid</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="/contact/" class="p-6 bg-white border border-light-grey/60 flex items-center justify-between group rounded-sm no-underline hover:border-primary/40 transition-colors">
+          <span class="text-xs font-bold text-primary uppercase tracking-widest">Validate Coverage for Specific Site</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mint group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 md:py-28 bg-dark text-center border-t border-primary/20">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight uppercase">Submit a Technical<br/>Coverage Inquiry</h2>
+    <p class="text-light-grey text-lg mb-12 font-light max-w-2xl mx-auto opacity-90">
+      Confirm coverage eligibility and regional routing to ensure alignment with your facility standards before beginning the assessment process.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-8">
+      <a href="/contact/" class="inline-flex items-center justify-center px-10 py-4 bg-white text-primary font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-mint transition-colors no-underline">
+        Request Service Verification
+      </a>
+      <div class="flex flex-col items-start text-left">
+        <span class="text-[10px] text-mint uppercase font-bold tracking-widest mb-1 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Regional Coordinator
+        </span>
+        <a href={`tel:${siteConfig.phoneRaw}`} class="text-xl font-bold text-white no-underline hover:text-mint transition-colors">{siteConfig.phone}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

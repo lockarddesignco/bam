@@ -1,0 +1,14 @@
+---
+description: Defines the active project scope — all work targets the Astro site in bam-astro/
+alwaysApply: true
+---
+
+# Project Scope
+
+The active project is the **Astro site** located in `bam-astro/`.
+
+- All file reads, edits, and searches should default to `bam-astro/` unless explicitly told otherwise.
+- The root-level Vite/React app (root `package.json`, `src/`, `index.html`) is **legacy/archived** — do not modify it or reference it.
+- Dev server: `npm run dev` from `bam-astro/` → `localhost:4321`
+- Build: `npm run build` from `bam-astro/`
+- Tech stack: Astro 5, Tailwind CSS 4, TypeScript
