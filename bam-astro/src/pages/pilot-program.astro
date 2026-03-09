@@ -204,7 +204,7 @@ import { siteConfig } from '../config/site.config';
               </div>
               <div class="space-y-1.5">
                 <label for="pilot-title" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Title / Role *</label>
-                <input type="text" id="pilot-title" name="title" placeholder="Director of Facilities" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                <input type="text" id="pilot-title" name="job_title" placeholder="Director of Facilities" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
               </div>
             </div>
 
@@ -222,17 +222,17 @@ import { siteConfig } from '../config/site.config';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div class="space-y-1.5">
                 <label for="pilot-org" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Organization / Facility *</label>
-                <input type="text" id="pilot-org" name="organization" placeholder="Memorial Regional Hospital" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                <input type="text" id="pilot-org" name="companyName" placeholder="Memorial Regional Hospital" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
               </div>
               <div class="space-y-1.5">
                 <label for="pilot-location" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Location (City, State) *</label>
-                <input type="text" id="pilot-location" name="location" placeholder="Philadelphia, PA" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                <input type="text" id="pilot-location" name="facility_location" placeholder="Philadelphia, PA" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
               </div>
             </div>
 
             <div class="space-y-1.5">
               <label for="pilot-facility-type" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Type *</label>
-              <select id="pilot-facility-type" name="facility-type" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
+              <select id="pilot-facility-type" name="facility_type" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all appearance-none cursor-pointer">
                 <option value="">Select facility type</option>
                 <option value="healthcare">Healthcare / Hospital</option>
                 <option value="education">Education (K-12 / Higher Ed)</option>
@@ -250,7 +250,7 @@ import { siteConfig } from '../config/site.config';
 
             <div class="space-y-1.5">
               <label for="pilot-sqft" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Approximate Square Footage</label>
-              <input type="text" id="pilot-sqft" name="square-footage" placeholder="e.g. 250,000 sq ft" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+              <input type="text" id="pilot-sqft" name="square_footage" placeholder="e.g. 250,000 sq ft" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
             </div>
 
             <div class="space-y-3">
@@ -274,7 +274,7 @@ import { siteConfig } from '../config/site.config';
 
             <div class="space-y-1.5">
               <label for="pilot-description" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Tell Us About Your Facility & Goals</label>
-              <textarea id="pilot-description" name="description" rows="5" placeholder="Describe your facility, the number of major HVAC systems, any known performance issues, and what you're hoping to evaluate through the pilot..." class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA] resize-none"></textarea>
+              <textarea id="pilot-description" name="describe_your_needs" rows="5" placeholder="Describe your facility, the number of major HVAC systems, any known performance issues, and what you're hoping to evaluate through the pilot..." class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA] resize-none"></textarea>
             </div>
 
             <div class="space-y-1.5">

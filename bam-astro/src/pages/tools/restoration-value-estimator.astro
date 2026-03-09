@@ -318,9 +318,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
 
         <!-- Hidden calculator context -->
-        <input type="hidden" name="calculator-facility-type" id="lead-facility-type" />
-        <input type="hidden" name="calculator-asset-focus" id="lead-asset-focus" />
-        <input type="hidden" name="calculator-estimated-savings" id="lead-estimated-savings" />
+        <input type="hidden" name="calculator_facility_type" id="lead-facility-type" />
+        <input type="hidden" name="calculator_asset_focus" id="lead-asset-focus" />
+        <input type="hidden" name="calculator_estimated_savings" id="lead-estimated-savings" />
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="space-y-1.5">
@@ -340,18 +340,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
           <div class="space-y-1.5">
             <label for="lead-title" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Job Title</label>
-            <input type="text" id="lead-title" name="title" placeholder="Director of Facilities" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+            <input type="text" id="lead-title" name="job_title" placeholder="Director of Facilities" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="space-y-1.5">
             <label for="lead-company" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility / Company Name</label>
-            <input type="text" id="lead-company" name="company" placeholder="Memorial Regional Hospital" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+            <input type="text" id="lead-company" name="companyName" placeholder="Memorial Regional Hospital" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
           </div>
           <div class="space-y-1.5">
             <label for="lead-location" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Location</label>
-            <input type="text" id="lead-location" name="location" placeholder="Philadelphia, PA" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+            <input type="text" id="lead-location" name="facility_location" placeholder="Philadelphia, PA" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
           </div>
         </div>
 

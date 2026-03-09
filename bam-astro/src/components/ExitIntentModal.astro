@@ -66,7 +66,7 @@ const classifications = [
           <label for="ei-name" class="text-[10px] font-semibold uppercase tracking-widest text-slate">Full Name *</label>
           <input
             id="ei-name"
-            name="authorizing_official_name"
+            name="name"
             type="text"
             required
             placeholder="John Smith"
@@ -78,7 +78,7 @@ const classifications = [
           <label for="ei-title" class="text-[10px] font-semibold uppercase tracking-widest text-slate">Title / Role *</label>
           <input
             id="ei-title"
-            name="institutional_title"
+            name="job_title"
             type="text"
             required
             placeholder="Director of Facilities"
@@ -90,7 +90,7 @@ const classifications = [
           <label for="ei-facility" class="text-[10px] font-semibold uppercase tracking-widest text-slate">Organization / Facility *</label>
           <input
             id="ei-facility"
-            name="facility_name"
+            name="companyName"
             type="text"
             required
             placeholder="Memorial Regional Hospital"
@@ -102,7 +102,7 @@ const classifications = [
           <label for="ei-classification" class="text-[10px] font-semibold uppercase tracking-widest text-slate">Facility Type *</label>
           <select
             id="ei-classification"
-            name="facility_classification"
+            name="facility_type"
             required
             class="w-full rounded border border-light-grey bg-ice px-4 py-3 text-sm text-dark focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20"
           >
@@ -117,7 +117,7 @@ const classifications = [
           <label for="ei-email" class="text-[10px] font-semibold uppercase tracking-widest text-slate">Email Address *</label>
           <input
             id="ei-email"
-            name="institutional_email"
+            name="email"
             type="email"
             required
             placeholder="name@facility-domain.gov"
@@ -141,7 +141,7 @@ const classifications = [
         <label for="ei-deficiencies" class="text-[10px] font-semibold uppercase tracking-widest text-slate">Brief Description *</label>
         <textarea
           id="ei-deficiencies"
-          name="mechanical_deficiencies"
+          name="describe_your_needs"
           rows="2"
           required
           placeholder="Current HVAC issues, compliance concerns, or scope needed."

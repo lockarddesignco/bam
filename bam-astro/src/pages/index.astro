@@ -675,34 +675,54 @@ const faqSchema = {
               <input type="hidden" name="form-name" value="site-visit" />
               <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-1">
-                  <label for="official-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Name & Title</label>
-                  <input type="text" id="official-name" name="official-name" placeholder="e.g. John Smith, Director of Facilities" required class="w-full bg-white border border-light-grey rounded text-dark px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder-[#8BA1AA]" />
+              <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label for="sv-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Full Name *</label>
+                    <input type="text" id="sv-name" name="name" placeholder="John Smith" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label for="sv-title" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Title / Role</label>
+                    <input type="text" id="sv-title" name="job_title" placeholder="Director of Facilities" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                  </div>
                 </div>
-                <div class="space-y-1">
-                  <label for="facility-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Name</label>
-                  <input type="text" id="facility-name" name="facility-name" placeholder="e.g. Memorial Regional Hospital" required class="w-full bg-white border border-light-grey rounded text-dark px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder-[#8BA1AA]" />
-                </div>
-                <div class="space-y-1">
-                  <label for="square-footage" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Approximate Square Footage</label>
-                  <input type="text" id="square-footage" name="square-footage" placeholder="e.g. 250,000 sq ft" class="w-full bg-white border border-light-grey rounded text-dark px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder-[#8BA1AA]" />
-                </div>
-                <div class="space-y-1">
-                  <label for="hvac-units" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Number of HVAC Units</label>
-                  <input type="text" id="hvac-units" name="hvac-units" placeholder="e.g. 12 AHUs, 3 chillers" class="w-full bg-white border border-light-grey rounded text-dark px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder-[#8BA1AA]" />
-                </div>
-                <div class="space-y-1">
-                  <label for="time-in-role" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Length of Time in Your Current Role</label>
-                  <input type="text" id="time-in-role" name="time-in-role" placeholder="e.g. 5 years" class="w-full bg-white border border-light-grey rounded text-dark px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder-[#8BA1AA]" />
-                </div>
-              </div>
 
-              <div class="mt-5 space-y-1">
-                <label for="summary" class="text-slate text-[10px] font-semibold uppercase tracking-widest">
-                  Known Issues / Reason for Contact
-                </label>
-                <textarea id="summary" name="summary" rows="4" placeholder="Describe your current HVAC challenges, compliance concerns, or equipment issues..." class="w-full bg-white border border-light-grey rounded text-dark px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors placeholder-[#8BA1AA] resize-none"></textarea>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label for="sv-email" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Email Address *</label>
+                    <input type="email" id="sv-email" name="email" placeholder="john@facility.org" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label for="sv-phone" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Phone Number</label>
+                    <input type="tel" id="sv-phone" name="phone" placeholder="(555) 123-4567" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                  </div>
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="facility-name" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Facility Name *</label>
+                  <input type="text" id="facility-name" name="companyName" placeholder="e.g. Memorial Regional Hospital" required class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div class="space-y-1.5">
+                    <label for="square-footage" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Approximate Square Footage</label>
+                    <input type="text" id="square-footage" name="square_footage" placeholder="e.g. 250,000 sq ft" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                  </div>
+                  <div class="space-y-1.5">
+                    <label for="hvac-units" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Number of HVAC Units</label>
+                    <input type="text" id="hvac-units" name="hvac_units" placeholder="e.g. 12 AHUs, 3 chillers" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                  </div>
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="time-in-role" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Length of Time in Your Current Role</label>
+                  <input type="text" id="time-in-role" name="time_in_role" placeholder="e.g. 5 years" class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA]" />
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="summary" class="text-slate text-[10px] font-semibold uppercase tracking-widest">Known Issues / Reason for Contact</label>
+                  <textarea id="summary" name="summary" rows="4" placeholder="Describe your current HVAC challenges, compliance concerns, or equipment issues..." class="w-full bg-ice border border-light-grey rounded text-dark px-4 py-3.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder-[#8BA1AA] resize-none"></textarea>
+                </div>
               </div>
 
               <div class="mt-6">
