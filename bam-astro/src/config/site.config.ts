@@ -12,7 +12,7 @@ export const siteConfig = {
 
   title: 'BAM | Building & Air Maintenance — Commercial HVAC Restoration',
   description:
-    'Specialized HVAC restoration, indoor air quality, and compliance-focused mechanical services for commercial and institutional facilities. Serving PA, NJ, MD, DE, and Southern NY.',
+    'Commercial HVAC restoration, IAQ, and compliance-focused mechanical services for institutional facilities in PA, NJ, MD, DE, and Southern NY.',
   ogImage: '/bam-logo-v3.svg',
 
   mainAddress: {
