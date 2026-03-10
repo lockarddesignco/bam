@@ -827,6 +827,8 @@ const homeFaqs = [
     if (!ctx) return;
 
     const CONNECTION_DISTANCE = gridSize * 5;
+    let isVisible = false;
+    let rafId = 0;
 
     interface Dot {
       x: number; y: number; life: number; maxLife: number; radius: number; alpha: number;
@@ -855,6 +857,7 @@ const homeFaqs = [
     }
 
     function draw(now: number) {
+      if (!isVisible) return;
       ctx!.clearRect(0, 0, canvas.width, canvas.height);
       spawnDot(now);
 
@@ -867,10 +870,7 @@ const homeFaqs = [
         const alpha = progress < 0.3 ? progress / 0.3 : 1 - ((progress - 0.3) / 0.7);
         d.alpha = alpha;
 
-        const grad = ctx!.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.radius * 6);
-        grad.addColorStop(0, `rgba(167, 215, 197, ${alpha * 0.35})`);
-        grad.addColorStop(1, 'rgba(167, 215, 197, 0)');
-        ctx!.fillStyle = grad;
+        ctx!.fillStyle = `rgba(167, 215, 197, ${alpha * 0.25})`;
         ctx!.beginPath();
         ctx!.arc(d.x, d.y, d.radius * 6, 0, Math.PI * 2);
         ctx!.fill();
@@ -895,9 +895,15 @@ const homeFaqs = [
           }
         }
       }
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
-    requestAnimationFrame(draw);
+
+    // Only run when canvas is in viewport
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && !rafId) rafId = requestAnimationFrame(draw);
+    }, { threshold: 0 });
+    io.observe(canvas.parentElement || canvas);
   }
 
   initGridPulse('grid-pulse-canvas', 48, 6, 800);
@@ -913,9 +919,11 @@ const homeFaqs = [
     const cardCanvases = grid.querySelectorAll<HTMLCanvasElement>('.wave-card-bg');
     if (!cardCanvases.length) return;
 
-    const STEP = 5;
+    const STEP = 10;
     const offscreen = document.createElement('canvas');
     const offCtx = offscreen.getContext('2d')!;
+    let isVisible = false;
+    let rafId = 0;
 
     interface CardInfo {
       canvas: HTMLCanvasElement;
@@ -957,6 +965,7 @@ const homeFaqs = [
     }
 
     function draw(t: number) {
+      if (!isVisible) return;
       const gw = offscreen.width;
       const gh = offscreen.height;
       offCtx.clearRect(0, 0, gw, gh);
@@ -982,10 +991,15 @@ const homeFaqs = [
         );
       }
 
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
 
-    requestAnimationFrame(draw);
+    // Only run when services section is in viewport
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && !rafId) rafId = requestAnimationFrame(draw);
+    }, { threshold: 0 });
+    io.observe(grid);
   })();
 
   // BAM Method — serpentine path + scroll activation
@@ -1140,11 +1154,26 @@ const homeFaqs = [
     let smoothStart = 0;
     let smoothStartTime = 0;
     const SMOOTH_DURATION = 400;
+    let isVisible = false;
+    let rafId = 0;
+
+    // Cached wrapper geometry — avoid getBoundingClientRect every frame
+    let cachedWrapperLeft = 0;
+    let cachedWrapperWidth = 0;
+    let cachedCardWidth = 0;
+
+    function cacheGeometry() {
+      const wr = wrapper!.getBoundingClientRect();
+      cachedWrapperLeft = wr.left;
+      cachedWrapperWidth = wr.width;
+      cachedCardWidth = cards[0] ? cards[0].offsetWidth : 0;
+    }
+    cacheGeometry();
+    window.addEventListener('resize', cacheGeometry);
 
     function getOneSetWidth() {
-      const card = cards[0];
-      if (!card) return 0;
-      return ORIGINAL_COUNT * (card.offsetWidth + CARD_GAP);
+      if (!cachedCardWidth) return 0;
+      return ORIGINAL_COUNT * (cachedCardWidth + CARD_GAP);
     }
 
     function wrapOffset() {
@@ -1167,18 +1196,21 @@ const homeFaqs = [
     }
 
     function updateCardPerspective() {
-      const wrapperRect = wrapper!.getBoundingClientRect();
-      const center = wrapperRect.left + wrapperRect.width / 2;
-      const halfW = wrapperRect.width / 2;
+      const center = cachedWrapperLeft + cachedWrapperWidth / 2;
+      const halfW = cachedWrapperWidth / 2;
+      const cw = cachedCardWidth + CARD_GAP;
+      // Track left edge in viewport = wrapper left - offset
+      const trackLeft = cachedWrapperLeft - offset;
 
-      cards.forEach((card) => {
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.left + cardRect.width / 2;
+      for (let i = 0; i < totalCards; i++) {
+        const card = cards[i];
+        const cardLeft = trackLeft + i * cw;
+        const cardRight = cardLeft + cachedCardWidth;
 
-        if (cardRect.right < wrapperRect.left - 400 || cardRect.left > wrapperRect.right + 400) {
-          return;
-        }
+        // Skip cards far off-screen
+        if (cardRight < cachedWrapperLeft - 400 || cardLeft > cachedWrapperLeft + cachedWrapperWidth + 400) continue;
 
+        const cardCenter = cardLeft + cachedCardWidth / 2;
         const dist = (cardCenter - center) / halfW;
         const c = Math.max(-1, Math.min(1, dist));
 
@@ -1188,7 +1220,7 @@ const homeFaqs = [
 
         card.style.transform = `perspective(1200px) rotateY(${rotateY}deg) scale(${scale})`;
         card.style.opacity = `${alpha}`;
-      });
+      }
     }
 
     // Start at the middle set so we can scroll both directions
@@ -1196,6 +1228,7 @@ const homeFaqs = [
     applyTransform();
 
     function frame() {
+      if (!isVisible) return;
       if (smoothTarget !== null) {
         const elapsed = performance.now() - smoothStartTime;
         const t = Math.min(elapsed / SMOOTH_DURATION, 1);
@@ -1210,9 +1243,18 @@ const homeFaqs = [
       applyTransform();
       updateProgress();
       updateCardPerspective();
-      requestAnimationFrame(frame);
+      rafId = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+
+    // Only run when carousel is in viewport
+    const io = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        cacheGeometry();
+        if (!rafId) rafId = requestAnimationFrame(frame);
+      }
+    }, { threshold: 0 });
+    io.observe(wrapper);
 
     function pauseAuto(ms: number) {
       autoScrollPaused = true;
