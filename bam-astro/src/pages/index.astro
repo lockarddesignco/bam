@@ -519,21 +519,17 @@ const homeFaqs = [
             >
               <div class="relative h-[200px] w-full overflow-hidden bg-light-grey">
                 {post.data.video ? (
-                  isClone ? (
-                    <div class="absolute inset-0 w-full h-full bg-dark/50"></div>
-                  ) : (
                     <video
                       src={post.data.video}
                       autoplay
                       muted
                       loop
                       playsinline
-                      preload="metadata"
+                      preload={isClone ? "none" : "metadata"}
                       class="absolute inset-0 w-full h-full object-cover"
                       style="transform: scaleX(1.24) scaleY(1.08); transform-origin: center center;"
                       draggable="false"
                     />
-                  )
                 ) : post.data.image ? (
                   <img
                     src={post.data.image}
