@@ -1,4 +1,4 @@
-// Netlify Serverless Function: submission-created.js
+// Netlify Serverless Function: submission-created
 // Triggers automatically on every Netlify form submission.
 // Upserts contact in GHL, applies tags, creates opportunity in pipeline.
 
@@ -10,8 +10,8 @@ const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID || "edRx0be5SWTKBSn4YphV";
 const PIPELINE_ID = "MWdPozWuyhZcDBT4Qysy"; // BAM New Lead Pipeline
 const STAGE_NEW_LEAD = "8a350dc7-937e-4dbf-9d1c-63e01be367a8";
 
-// Custom Field IDs (GHL field key → GHL field ID)
-const CUSTOM_FIELD_IDS = {
+// Custom Field IDs (GHL field key to GHL field ID)
+const CUSTOM_FIELD_IDS: Record<string, string> = {
   job_title: "NZPfjnw1pBDtP6yhu4lt",
   facility_type: "NfkeL2I68RJxAkfDTtr7",
   inquiry_type: "Vwh68cHCKaPQTRud4q6Z",
@@ -29,14 +29,14 @@ const CUSTOM_FIELD_IDS = {
   calculator_estimated_savings: "kKb3rnGWH8NAL6TzzAvw",
 };
 
-// GHL User IDs (assign all leads to both)
+// GHL User IDs
 const OWNER_IDS = {
   travis: "E8JF1A5dT945voLWuiWN",
   britney: "nWj4P1zeFxTuGxXS8Hwa",
 };
 
 // Tag mapping by form name
-const FORM_TAGS = {
+const FORM_TAGS: Record<string, string[]> = {
   contact: ["website", "form:contact"],
   "pilot-program": ["website", "form:pilot-program"],
   "site-visit": ["website", "form:site-visit"],
@@ -44,43 +44,38 @@ const FORM_TAGS = {
   "exit-intent-intake": ["website", "form:exit-intent"],
 };
 
-// Standard GHL fields — these go at the top level of the upsert payload
-const STANDARD_FIELDS = new Set([
-  "name",
-  "firstName",
-  "lastName",
-  "email",
-  "phone",
-  "companyName",
-]);
+// Helpers
 
-// ─── Helpers ───────────────────────────────────────────────
-
-function splitName(fullName) {
+function splitName(fullName: string) {
   if (!fullName) return { firstName: "", lastName: "" };
   const trimmed = fullName.trim();
   const parts = trimmed.split(/\s+/);
   if (parts.length === 1) return { firstName: parts[0], lastName: "" };
-  const firstName = parts[0];
-  const lastName = parts.slice(1).join(" ");
-  return { firstName, lastName };
+  return { firstName: parts[0], lastName: parts.slice(1).join(" ") };
 }
 
-function formatPhone(phone) {
+function formatPhone(phone: string) {
   if (!phone) return "";
-  // Strip everything except digits and leading +
   const cleaned = phone.replace(/[^\d+]/g, "");
-  // If it's 10 digits (US), prepend +1
   if (/^\d{10}$/.test(cleaned)) return `+1${cleaned}`;
-  // If it starts with 1 and is 11 digits, prepend +
   if (/^1\d{10}$/.test(cleaned)) return `+${cleaned}`;
-  // Otherwise return as-is
   return cleaned;
 }
 
-async function ghlRequest(endpoint, method, body) {
+function formatFormName(formName: string) {
+  const names: Record<string, string> = {
+    contact: "Contact Inquiry",
+    "pilot-program": "Pilot Program",
+    "site-visit": "Site Visit Request",
+    "roi-validation": "ROI Validation",
+    "exit-intent-intake": "Exit Intent",
+  };
+  return names[formName] || formName;
+}
+
+async function ghlRequest(endpoint: string, method: string, body?: object) {
   const url = `${GHL_API_BASE}${endpoint}`;
-  const options = {
+  const options: RequestInit = {
     method,
     headers: {
       Authorization: `Bearer ${GHL_TOKEN}`,
@@ -101,15 +96,16 @@ async function ghlRequest(endpoint, method, body) {
   return { status: response.status, data };
 }
 
-// ─── Main Handler ──────────────────────────────────────────
+// Main Handler - Netlify Functions v2 API
 
-exports.handler = async function (event) {
+export default async (req: Request) => {
   try {
-    const payload = JSON.parse(event.body).payload;
+    const body = await req.json();
+    const payload = body.payload;
 
     if (!payload) {
-      console.log("No payload found in event body");
-      return { statusCode: 400, body: "No payload" };
+      console.log("No payload found in request body");
+      return new Response("No payload", { status: 400 });
     }
 
     const formName = payload.form_name || payload.data?.["form-name"] || "unknown";
@@ -121,24 +117,22 @@ exports.handler = async function (event) {
     // Skip honeypot submissions
     if (formData["bot-field"]) {
       console.log("Bot submission detected, skipping");
-      return { statusCode: 200, body: "OK" };
+      return new Response("OK", { status: 200 });
     }
 
-    // ── Build contact payload ──
-
+    // Build contact payload
     const { firstName, lastName } = splitName(formData.name);
     const email = formData.email || "";
     const phone = formatPhone(formData.phone || "");
     const companyName = formData.companyName || "";
 
-    // GHL upsert requires email or phone as a dedup key.
     if (!email && !phone) {
-      console.log("No email or phone provided — cannot create contact");
-      return { statusCode: 200, body: "No email or phone, skipped" };
+      console.log("No email or phone provided, cannot create contact");
+      return new Response("No email or phone, skipped", { status: 200 });
     }
 
     // Build custom fields array
-    const customFields = [];
+    const customFields: { id: string; field_value: string }[] = [];
     for (const [fieldKey, fieldId] of Object.entries(CUSTOM_FIELD_IDS)) {
       const value = formData[fieldKey];
       if (value !== undefined && value !== "" && value !== null) {
@@ -146,11 +140,9 @@ exports.handler = async function (event) {
       }
     }
 
-    // Build tags
     const tags = FORM_TAGS[formName] || ["website"];
 
-    // Contact upsert payload
-    const contactPayload = {
+    const contactPayload: Record<string, unknown> = {
       locationId: GHL_LOCATION_ID,
       firstName,
       lastName,
@@ -160,7 +152,7 @@ exports.handler = async function (event) {
       tags,
       source: "website",
       customFields,
-      assignedTo: OWNER_IDS.travis, // Primary owner — Britney added as follower via GHL workflow
+      assignedTo: OWNER_IDS.travis,
     };
 
     // Remove empty standard fields
@@ -174,32 +166,30 @@ exports.handler = async function (event) {
 
     console.log("Upserting contact:", JSON.stringify(contactPayload, null, 2));
 
-    // ── Upsert contact ──
-
+    // Upsert contact
     const contactResult = await ghlRequest("/contacts/upsert", "POST", contactPayload);
 
     if (contactResult.status !== 200 && contactResult.status !== 201) {
       console.error("Contact upsert failed:", JSON.stringify(contactResult.data));
-      return { statusCode: 500, body: "Contact upsert failed" };
+      return new Response("Contact upsert failed", { status: 500 });
     }
 
     const contactId = contactResult.data.contact?.id;
     const isNew = contactResult.data.new || false;
     console.log(`Contact ${isNew ? "created" : "updated"}: ${contactId}`);
 
-    // ── Create opportunity ──
-
+    // Create opportunity
     if (contactId) {
       const opportunityName = `${firstName} ${lastName}`.trim() || formData.name || "New Lead";
 
       const oppPayload = {
         pipelineId: PIPELINE_ID,
         locationId: GHL_LOCATION_ID,
-        name: `${opportunityName} — ${formatFormName(formName)}`,
+        name: `${opportunityName} - ${formatFormName(formName)}`,
         pipelineStageId: STAGE_NEW_LEAD,
         status: "open",
         contactId,
-        assignedTo: OWNER_IDS.travis, // Primary owner — Britney added as follower via GHL workflow
+        assignedTo: OWNER_IDS.travis,
       };
 
       console.log("Creating opportunity:", JSON.stringify(oppPayload, null, 2));
@@ -210,34 +200,16 @@ exports.handler = async function (event) {
         console.log(`Opportunity created: ${oppResult.data.opportunity?.id}`);
       } else {
         console.error("Opportunity creation failed:", JSON.stringify(oppResult.data));
-        // Don't fail the whole function — contact was already created
       }
     }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "Success",
-        contactId,
-        isNew,
-        form: formName,
-      }),
-    };
-  } catch (error) {
-    console.error("Function error:", error.message, error.stack);
-    return { statusCode: 500, body: `Error: ${error.message}` };
+    return new Response(
+      JSON.stringify({ message: "Success", contactId, isNew, form: formName }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : "Unknown error";
+    console.error("Function error:", msg);
+    return new Response(`Error: ${msg}`, { status: 500 });
   }
 };
-
-// ─── Utility ───────────────────────────────────────────────
-
-function formatFormName(formName) {
-  const names = {
-    contact: "Contact Inquiry",
-    "pilot-program": "Pilot Program",
-    "site-visit": "Site Visit Request",
-    "roi-validation": "ROI Validation",
-    "exit-intent-intake": "Exit Intent",
-  };
-  return names[formName] || formName;
-}
