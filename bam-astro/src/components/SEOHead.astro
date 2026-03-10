@@ -22,6 +22,7 @@ interface Props {
     description: string;
   };
   faqData?: Array<{ question: string; answer: string }>;
+  noindex?: boolean;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   locationData,
   serviceData,
   faqData,
+  noindex = false,
 } = Astro.props;
 
 const sameAsLinks = [
@@ -203,6 +205,7 @@ const schema = {
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.buildingandair.com/sitemap-index.xml
+Sitemap: https://buildingandair.com/sitemap-index.xml
