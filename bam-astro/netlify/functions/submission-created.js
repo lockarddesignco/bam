@@ -103,7 +103,7 @@ async function ghlRequest(endpoint, method, body) {
 
 // ─── Main Handler ──────────────────────────────────────────
 
-exports.handler = async function (event) {
+export async function handler(event) {
   try {
     const payload = JSON.parse(event.body).payload;
 
