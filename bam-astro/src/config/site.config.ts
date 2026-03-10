@@ -13,7 +13,7 @@ export const siteConfig = {
   title: 'BAM | Building & Air Maintenance — Commercial HVAC Restoration',
   description:
     'Commercial HVAC restoration, IAQ, and compliance-focused mechanical services for institutional facilities in PA, NJ, MD, DE, and Southern NY.',
-  ogImage: '/bam-logo-v3.svg',
+  ogImage: '/bam-logo.webp',
 
   mainAddress: {
     street: '196 Dadburnhams Road',
@@ -92,11 +92,11 @@ export const siteConfig = {
 
   /** Accreditations & trust signals */
   accreditations: [
-    { name: 'NADCA Certified', logo: '/accreditations/nadca.png' },
-    { name: 'OSHA Compliant', logo: '/accreditations/osha.png' },
-    { name: 'PA COSTARS Vendor', logo: '/accreditations/costars.png' },
-    { name: 'EPA Certified', logo: '/accreditations/epa.png' },
-    { name: 'Schuylkill County Chamber', logo: '/accreditations/schuylkill-chamber.png' },
+    { name: 'NADCA Certified', logo: '/accreditations/nadca.webp' },
+    { name: 'OSHA Compliant', logo: '/accreditations/osha.webp' },
+    { name: 'PA COSTARS Vendor', logo: '/accreditations/costars.webp' },
+    { name: 'EPA Certified', logo: '/accreditations/epa.webp' },
+    { name: 'Schuylkill County Chamber', logo: '/accreditations/schuylkill-chamber.webp' },
   ],
 
   /** Super pixel / lead-gen tools */
