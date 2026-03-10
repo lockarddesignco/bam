@@ -10,7 +10,7 @@ export default defineConfig({
   trailingSlash: 'always',
 
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
 
   integrations: [
