@@ -5,6 +5,13 @@ import { siteConfig } from '../config/site.config';
 interface Props {
   title: string;
   description: string;
+  locationData?: {
+    city: string;
+    state: string;
+    zip: string;
+    lat: number;
+    lng: number;
+  };
   stateAbbrev: string;
   heroSubtitle: string;
   heroBody: string;
@@ -35,7 +42,7 @@ interface Props {
 const props = Astro.props;
 ---
 
-<BaseLayout title={props.title} description={props.description}>
+<BaseLayout title={props.title} description={props.description} locationData={props.locationData}>
 
 <!-- Hero -->
 <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">
