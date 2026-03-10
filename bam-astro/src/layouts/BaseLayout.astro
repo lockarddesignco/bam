@@ -37,6 +37,15 @@ const props = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XTWR3JMEFN"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XTWR3JMEFN');
+    </script>
+
     <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
     <SEOHead {...props} />
   </head>
