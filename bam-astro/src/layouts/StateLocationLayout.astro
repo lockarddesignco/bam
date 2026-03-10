@@ -42,7 +42,15 @@ interface Props {
 const props = Astro.props;
 ---
 
-<BaseLayout title={props.title} description={props.description} locationData={props.locationData}>
+<BaseLayout
+  title={props.title}
+  description={props.description}
+  locationData={props.locationData}
+  breadcrumbs={[
+    { name: 'Locations', url: '/locations/' },
+    { name: props.title, url: Astro.url.pathname },
+  ]}
+>
 
 <!-- Hero -->
 <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-dark overflow-hidden">

@@ -9,6 +9,7 @@ const allPosts = (await getCollection('blog'))
 <BaseLayout
   title="Blog | BAM — Institutional HVAC Insights"
   description="Expert insights on HVAC restoration, IAQ compliance, energy optimization, and mechanical system maintenance for institutional facilities."
+  breadcrumbs={[{ name: 'Blog', url: '/blog/' }]}
 >
   <section class="relative py-20 md:py-28 bg-dark overflow-hidden">
     <div class="absolute inset-0 opacity-[0.05] site-grid-dark"></div>

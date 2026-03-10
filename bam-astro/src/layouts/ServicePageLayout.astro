@@ -39,6 +39,7 @@ interface Props {
 
 const {
   title,
+  slug,
   category,
   shortDescription,
   diagnostics,
@@ -55,6 +56,10 @@ const categoryLabel = category === 'core' ? 'Core Service' : 'Specialty Service'
   description={shortDescription}
   serviceData={{ name: title, description: shortDescription }}
   faqData={faq}
+  breadcrumbs={[
+    { name: 'Services', url: '/services/' },
+    { name: title, url: `/services/${slug}/` },
+  ]}
 >
 
   <!-- ════════════════════ HERO ════════════════════ -->

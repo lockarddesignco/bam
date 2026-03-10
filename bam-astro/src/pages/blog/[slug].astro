@@ -27,6 +27,14 @@ const relatedServices = siteConfig.services.slice(0, 4);
   description={post.data.description}
   image={post.data.image}
   type="article"
+  articleData={{
+    datePublished: post.data.date.toISOString(),
+    author: post.data.author || 'BAM Technical Team',
+  }}
+  breadcrumbs={[
+    { name: 'Blog', url: '/blog/' },
+    { name: post.data.title, url: `/blog/${post.slug}/` },
+  ]}
 >
   <article>
     <!-- ═══════ HERO ═══════ -->

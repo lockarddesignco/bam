@@ -29,6 +29,13 @@ interface Props {
     description: string;
   };
   faqData?: Array<{ question: string; answer: string }>;
+  articleData?: {
+    datePublished: string;
+    dateModified?: string;
+    author: string;
+    section?: string;
+  };
+  breadcrumbs?: Array<{ name: string; url: string }>;
   noindex?: boolean;
   preloadImages?: string[];
 }
